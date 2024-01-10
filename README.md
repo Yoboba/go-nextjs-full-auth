@@ -1,2 +1,2 @@
-# GO-NextJS-AuthSystem
+# CompleteAuth-GO-Nextjs
  
