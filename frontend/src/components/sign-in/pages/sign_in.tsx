@@ -92,7 +92,7 @@ export default function SignIn() {
                         <div className="h-1"/>
                         
                         {/* submit button */}
-                        <Button type="submit" className="w-full text-white rounded-lg bg-gradient-to-r from-violet-300 to-pink-300 hover:translate-y-[-3px] transition-all duration-200">Sign in</Button>
+                        <Button type="submit" className="w-full text-white rounded-lg bg-gradient-to-r from-violet-300 to-pink-300 hover:translate-y-[-3px] active:translate-y-[1px] transition-all duration-200">Sign in</Button>
                     </form>
                 </Form>
 
@@ -101,12 +101,12 @@ export default function SignIn() {
 
                 {/* google , github */}
                 <section className="justify-center items-start gap-5 inline-flex">
-                    <div className="w-[171.50px] h-10 relative cursor-pointer hover:translate-y-[-3px] transition-all duration-200">
+                    <div className="w-[171.50px] h-10 relative cursor-pointer hover:translate-y-[-3px] active:translate-y-[1px] transition-all duration-200">
                         <div className="w-[171.50px] h-10 left-0 top-0 absolute bg-fuchsia-50 rounded-lg" />
                         <IconBrandGoogleFilled className="w-[25.57px] h-6 left-[6.50px] top-[8.98px] absolute text-fuchsia-800 " />
                         <div className="w-[129px] h-[18px] left-[35.50px] top-[10.98px] absolute text-center"><span className="text-fuchsia-800 text-xs font-medium">continue with </span><span className="text-fuchsia-800 text-xs font-bold">Google</span></div>
                     </div>
-                    <div className="w-[171.50px] h-10 relative cursor-pointer hover:translate-y-[-3px] transition-all duration-200">
+                    <div className="w-[171.50px] h-10 relative cursor-pointer hover:translate-y-[-3px] active:translate-y-[1px] transition-all duration-200">
                         <div className="w-[171.50px] h-10 left-0 top-0 absolute bg-zinc-100 rounded-lg" />
                         <div className="w-[131px] h-[18px] left-[34px] top-[10.98px] absolute text-center"><span className="text-black text-xs font-medium ">continue with </span><span className="text-black text-xs font-bold">Github</span></div>
                         <IconBrandGithubFilled className="w-6 h-[24.07px] left-[7px] top-[7.98px] absolute" />
