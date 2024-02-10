@@ -20,13 +20,13 @@ export default function SignUpForm() {
     const { form, onSubmit } = useSignUpForm()
 
     return (
-        <div>
-            <div className="flex w-full h-full rounded-2xl flex-col justify-start items-center gap-4">
+        <>
+            <div className="flex w-full h-full rounded-2xl flex-col justify-center items-center gap-4">
                 <div className="text-neutral-700 text-[32px] font-semibold">Sign Up</div>
                 
                 {/* form */}
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-2 w-full h-full">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-2 w-full">
                         {/* fullname input */}
                         <FormField control={form.control} name="fullname" render={({ field }) => (
                             <FormItem>
@@ -94,7 +94,6 @@ export default function SignUpForm() {
                                         </FormLabel>
                                         <FormDescription className="text-[10px] text-muted-foreground underline cursor-pointer">
                                             You agree to our Terms of Service and Privacy Policy.
-                                        <Link href="/examples/forms">mobile settings</Link> page.
                                         </FormDescription>
                                     </div>
                                 </FormItem>
@@ -112,7 +111,7 @@ export default function SignUpForm() {
                 </Form>
 
                 {/* line */}
-                <div className="w-full h-[1px] rounded-sm  bg-slate-500"></div>
+                <div className=" w-full h-[1px] rounded-sm  bg-slate-500"></div>
 
                 {/* google , github */}
                 <section className="justify-center items-start gap-5 inline-flex">
@@ -128,11 +127,13 @@ export default function SignUpForm() {
                     </div>
                 </section>
 
-                <Link href={`${pages.SIGN_IN}`}><Button variant='ghost' className="inline-flex items-center gap-2 text-[#949494] font-medium hover:bg-transparent">
-                    <IconArrowBackUp/>
-                    Back to sign in
-                </Button></Link>
+                <Link href={`${pages.SIGN_IN}`}>
+                    <Button variant='ghost' className="inline-flex items-center gap-2 text-[#949494] font-medium hover:bg-transparent">
+                        <IconArrowBackUp/>
+                        Back to sign in
+                    </Button>
+                </Link>
             </div>
-        </div>
+        </>
     )
 }
