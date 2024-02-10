@@ -1,41 +1,20 @@
 "use client"
-import { ChangeEvent, useState } from "react";
+import Link from "next/link";
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
-    FormLabel,
-    FormMessage,
   } from "@/components/ui/form"
-import { IconMailFilled,IconLockSquareRoundedFilled, IconBrandGoogleFilled, IconBrandGithubFilled } from '@tabler/icons-react';
+  import { IconMailFilled,IconLockSquareRoundedFilled, IconBrandGoogleFilled, IconBrandGithubFilled } from '@tabler/icons-react';
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
+import { useSignInForm } from "../configs/configs";
+import { pages } from "../constants/constants";
 
-const formSchema = z.object({
-    email: z.string().min(2).max(50),
-    password: z.string().min(2).max(50),
-  })
-
-export default function SignIn() {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-          email: "",
-          password: ""
-        },
-    })
-
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
-    }
-
-
+export default function SignInForm() {
+    const {form, onSubmit} = useSignInForm();
     return (
         <div>
             <div className="flex w-full h-full rounded-2xl flex-col justify-start items-center gap-4">
@@ -47,18 +26,12 @@ export default function SignIn() {
                         {/* email input */}
                         <FormField control={form.control} name="email" render={({ field }) => (
                             <FormItem>
-                            {/* <FormLabel>Username</FormLabel> */}
                                 <FormControl>
                                     <div className="relative">
-                                        <Input placeholder="Email" className="w-full" {...field}/>
+                                        <Input placeholder="Email" className="w-full" autoComplete="email" {...field}/>
                                         <IconMailFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
-                                    {/* <Input placeholder="Email" {...field} /> */}
                                 </FormControl>
-                                {/* <FormDescription>
-                                    This your public display name.
-                                </FormDescription> */}
-                                {/* <FormMessage /> */}
                             </FormItem>
 
                         )}
@@ -66,17 +39,12 @@ export default function SignIn() {
                         {/* password input */}
                         <FormField control={form.control} name="password" render={({ field }) => (
                             <FormItem>
-                            {/* <FormLabel>Username</FormLabel> */}
                                 <FormControl>
                                     <div className="relative">
-                                        <Input type="password" placeholder="Password" className="w-full" {...field}/>
+                                        <Input type="password" placeholder="Password" autoComplete="current-password" className="w-full" {...field}/>
                                         <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
-                                {/* <FormDescription>
-                                    This your public display name.
-                                </FormDescription> */}
-                                {/* <FormMessage /> */}
                             </FormItem>
 
                         )}
@@ -84,8 +52,8 @@ export default function SignIn() {
                         
                         {/* forgot password and register */}
                         <div className=" flex justify-between item-center w-full h-fit">
-                            <a href="www.google.com" className=" text-blue-500 text-xs font-medium hover:underline">forgot password ?</a>
-                            <div className="text-neutral-400 text-xs font-medium">don’t have an account ? <a href="www.google.com" className="text-blue-500 text-xs font-medium hover:underline">Sign up</a></div>
+                            <Link href={`${pages.FORGOT_PASSWORD}`} className=" text-blue-500 text-xs font-medium hover:underline">forgot password ?</Link>
+                            <div className="text-neutral-400 text-xs font-medium">don’t have an account ? <Link href={`${pages.SIGN_UP}`} className="text-blue-500 text-xs font-medium hover:underline">Sign up</Link></div>
                         </div>
                         
                         {/* gap */}
