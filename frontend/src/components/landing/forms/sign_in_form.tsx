@@ -14,10 +14,10 @@ import { useSignInForm } from "../configs/configs";
 import { pages } from "../constants/constants";
 
 export default function SignInForm() {
-    const {form, onSubmit} = useSignInForm();
+    const {form, onSubmit} = useSignInForm()
     return (
-        <div>
-            <div className="flex w-full h-full rounded-2xl flex-col justify-start items-center gap-4">
+        <>
+            <div className="flex w-full h-full rounded-2xl flex-col justify-center items-center gap-4">
                 <div className="text-neutral-700 text-[32px] font-semibold">Sign in</div>
                 
                 {/* form */}
@@ -60,7 +60,7 @@ export default function SignInForm() {
                         <div className="h-1"/>
                         
                         {/* submit button */}
-                        <Button type="submit" className="w-full text-white rounded-lg bg-gradient-to-r from-violet-300 to-pink-300 hover:translate-y-[-3px] active:translate-y-[1px] transition-all duration-200">Sign in</Button>
+                        <Button type="submit" className="w-full text-white text-md rounded-lg bg-gradient-to-r from-violet-300 to-pink-300 hover:translate-y-[-3px] active:translate-y-[1px] transition-all duration-200">Sign in</Button>
                     </form>
                 </Form>
 
@@ -81,6 +81,6 @@ export default function SignInForm() {
                     </div>
                 </section>
             </div>
-        </div>
+        </>
     )
 }
