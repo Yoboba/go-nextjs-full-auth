@@ -44,11 +44,11 @@ export default function SetNewPasswordForm() {
                         />
                         
                         {/* new confirm password */}
-                        <FormField control={form.control} name="password" render={({ field }) => (
+                        <FormField control={form.control} name="confirmPassword" render={({ field }) => (
                             <FormItem>
                                 <FormControl>
                                     <div className="relative">
-                                        <Input placeholder="New password" className="w-full" autoComplete="password" {...field}/>
+                                        <Input placeholder="Confirm new password" className="w-full" autoComplete="password" {...field}/>
                                         <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
