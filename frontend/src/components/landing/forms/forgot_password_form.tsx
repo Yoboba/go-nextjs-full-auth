@@ -7,6 +7,7 @@ import {
     FormControl,
     FormField,
     FormItem,
+    FormMessage,
   } from "@/components/ui/form"
   import { IconMailFilled, IconArrowBackUp, IconCircleKeyFilled } from '@tabler/icons-react';
 
@@ -36,8 +37,8 @@ export default function ForgotPasswordForm() {
                                         <IconMailFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
+                                <FormMessage className="text-red-500 text-[10px]"/>
                             </FormItem>
-
                         )}
                         />
                         

@@ -8,7 +8,7 @@ export function useCheckYourEmailForm() {
     const router = useRouter();
     // form schema
     const checkYourEmailFormSchema = z.object({
-        code: z.string().min(2).max(10),
+        code: z.string().min(2, {message : "Code should be at least 2 characters"}).max(10, {message : "Code should be less than 10 characters"}),
     })
     
     // main form config

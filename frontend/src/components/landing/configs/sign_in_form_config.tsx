@@ -5,8 +5,8 @@ import * as z from "zod"
 export function useSignInForm() {
     // form schema
     const signInFormSchema = z.object({
-        email: z.string().min(2).max(50),
-        password: z.string().min(2).max(50),
+        email: z.string().email(),
+        password: z.string().min(2, {message: "Password should be at least 2 characters"}).max(15, {message: "Password should be less than 15 characters"}),
     })
     
     // main form config

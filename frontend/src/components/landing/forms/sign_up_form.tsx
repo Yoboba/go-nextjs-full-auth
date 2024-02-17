@@ -9,6 +9,7 @@ import {
     FormField,
     FormItem,
     FormLabel,
+    FormMessage,
   } from "@/components/ui/form"
 
 import { useSignUpForm } from "../configs/configs";
@@ -36,6 +37,7 @@ export default function SignUpForm() {
                                         <IconUserFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
+                                <FormMessage className="text-red-500 text-[10px]"/>
                             </FormItem>
                         )}
                         />
@@ -48,6 +50,7 @@ export default function SignUpForm() {
                                         <IconMailFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
+                                <FormMessage className="text-red-500 text-[10px]"/>
                             </FormItem>
                         )}
                         />
@@ -60,6 +63,7 @@ export default function SignUpForm() {
                                         <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
+                                <FormMessage className="text-red-500 text-[10px]"/>
                             </FormItem>
                         )}
                         />
@@ -73,6 +77,7 @@ export default function SignUpForm() {
                                         <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
+                                <FormMessage className="text-red-500 text-[10px]"/>
                             </FormItem>
                         )}
                         />
@@ -95,6 +100,7 @@ export default function SignUpForm() {
                                         <FormDescription className="text-[10px] text-muted-foreground underline cursor-pointer">
                                             You agree to our Terms of Service and Privacy Policy.
                                         </FormDescription>
+                                        <FormMessage className="text-red-500 text-[10px] pt-1"/>
                                     </div>
                                 </FormItem>
                             )}

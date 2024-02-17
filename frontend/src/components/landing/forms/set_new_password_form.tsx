@@ -7,6 +7,7 @@ import {
     FormControl,
     FormField,
     FormItem,
+    FormMessage,
   } from "@/components/ui/form"
   import { IconLockSquareRoundedFilled, IconArrowBackUp, IconPassword } from '@tabler/icons-react';
 
@@ -34,10 +35,11 @@ export default function SetNewPasswordForm() {
                             <FormItem>
                                 <FormControl>
                                     <div className="relative">
-                                        <Input placeholder="New password" className="w-full" autoComplete="password" {...field}/>
+                                        <Input type="password" placeholder="New password" className="w-full" autoComplete="password" {...field}/>
                                         <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
+                                <FormMessage className="text-red-500 text-[10px]"/>
                             </FormItem>
 
                         )}
@@ -48,10 +50,11 @@ export default function SetNewPasswordForm() {
                             <FormItem>
                                 <FormControl>
                                     <div className="relative">
-                                        <Input placeholder="Confirm new password" className="w-full" autoComplete="password" {...field}/>
+                                        <Input type="password" placeholder="Confirm new password" className="w-full" autoComplete="password" {...field}/>
                                         <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
+                                <FormMessage className="text-red-500 text-[10px]"/>
                             </FormItem>
 
                         )}

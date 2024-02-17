@@ -5,9 +5,9 @@ export function useSetNewPasswordForm() {
 
     // form schema
     const setNewPasswordFormSchema = z.object({
-        password: z.string().min(2).max(50),
-        confirmPassword :  z.string().min(2).max(50),
-    })
+        password: z.string().min(2, {message : "Password should be at least 2 characters"}).max(15, {message : "Password should be less than 50 characters"}),
+        confirmPassword :  z.string(),
+    }).refine((data) => data.password === data.confirmPassword, {message : "Passwords do not match", path : ["confirmPassword"]})
     
     // main form config
     const form = useForm<z.infer<typeof setNewPasswordFormSchema>>({

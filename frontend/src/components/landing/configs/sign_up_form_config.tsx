@@ -5,11 +5,14 @@ import * as z from "zod"
 export function useSignUpForm() {    
     // form schema
     const signUpformSchema = z.object({
-        fullname: z.string().min(2).max(50),
-        email: z.string().min(2).max(50),
-        password: z.string().min(2).max(50),
-        confirmPassword: z.string().min(2).max(50),
-        term: z.boolean().default(false).optional(),
+        fullname: z.string().min(5, {message : "Fullname should be at least 5 characters"}).max(50, {message : "Fullname should be less than 50 characters"}),
+        email: z.string().email(),
+        password: z.string().min(2, {message : "Password should be at least 2 characters"}).max(15, {message : "Password should be less than 15 characters"}),
+        confirmPassword: z.string(),
+        term: z.boolean().default(false).refine((data) => data === true, {message : "Please accept terms and conditions"}),
+    }).refine((data) => data.password === data.confirmPassword, {
+        message: "Passwords do not match",
+        path: ["confirmPassword"],
     })
     
     // main form config
