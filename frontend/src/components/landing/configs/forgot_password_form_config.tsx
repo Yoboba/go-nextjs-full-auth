@@ -9,7 +9,7 @@ export function useForgotPasswordForm() {
     const router = useRouter();
     // form schema
     const forgotPasswordFormSchema = z.object({
-        email: z.string().email({message : "Invalid email"}),
+        email: z.string().email({message : "Invalid Email"}),
     })
     
     // main form config
