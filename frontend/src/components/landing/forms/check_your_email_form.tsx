@@ -43,7 +43,7 @@ export default function CheckYourEmailForm() {
                                 <FormControl>
                                     <div className="relative">
                                         <Input placeholder="Enter code here" className="w-full" autoComplete="secret-code" {...field}/>
-                                        <IconZoomCheckFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
+                                        <IconZoomCheckFilled className="absolute w-12 h-[40px] p-2 m-1 bg-gradient-to-l from-white from-70% to-transparent right-0 top-0 text-[#9F9F9F] rounded-tr-md rounded-br-md"/>
                                     </div>
                                 </FormControl>
                                 {!code && (

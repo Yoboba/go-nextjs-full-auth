@@ -46,7 +46,7 @@ export default function SetNewPasswordForm() {
                                 <FormControl>
                                     <div className="relative">
                                         <Input type="password" placeholder="New password" className="w-full" autoComplete="password" {...field}/>
-                                        <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
+                                        <IconLockSquareRoundedFilled className="absolute w-12 h-[40px] p-2 m-1 bg-gradient-to-l from-white from-70% to-transparent right-0 top-0 text-[#9F9F9F] rounded-tr-md rounded-br-md"/>
                                     </div>
                                 </FormControl>
                                 {!password && (
@@ -65,7 +65,7 @@ export default function SetNewPasswordForm() {
                                 <FormControl>
                                     <div className="relative">
                                         <Input type="password" placeholder="Confirm new password" className="w-full" autoComplete="password" {...field}/>
-                                        <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
+                                        <IconLockSquareRoundedFilled className="absolute w-12 h-[40px] p-2 m-1 bg-gradient-to-l from-white from-70% to-transparent right-0 top-0 text-[#9F9F9F] rounded-tr-md rounded-br-md]"/>
                                     </div>
                                 </FormControl>
                                 {!confirmPassword && (

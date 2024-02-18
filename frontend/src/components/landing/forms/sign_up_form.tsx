@@ -20,12 +20,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { setFips } from "crypto";
 export default function SignUpForm() {
-    // const [fullname, setFullname] = useState(true);
-    // const [email, setEmail] = useState(true);
-    // const [password, setPassword] = useState(true);
-    // const [confirmPassword, setConfirmPassword] = useState(true);
-    // const [terms, setTerms] = useState(true);
-
     const [info, setInfo] = useState({
         fullname : true,
         email : true,
@@ -60,7 +54,7 @@ export default function SignUpForm() {
                                 <FormControl>
                                     <div className="relative">
                                         <Input placeholder="Full name" className="w-full" autoComplete="fullname" {...field}/>
-                                        <IconUserFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
+                                        <IconUserFilled className="absolute w-12 h-[40px] p-2 m-1 bg-gradient-to-l from-white from-70% to-transparent right-0 top-0 text-[#9F9F9F] rounded-tr-md rounded-br-md]"/>
                                     </div>
                                 </FormControl>
                                 {!info.fullname && (
@@ -77,7 +71,7 @@ export default function SignUpForm() {
                                 <FormControl>
                                     <div className="relative">
                                         <Input placeholder="Email" className="w-full" autoComplete="email" {...field}/>
-                                        <IconMailFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
+                                        <IconMailFilled className="absolute w-12 h-[40px] p-2 m-1 bg-gradient-to-l from-white from-70% to-transparent right-0 top-0 text-[#9F9F9F] rounded-tr-md rounded-br-md"/>
                                     </div>
                                 </FormControl>
                                 {!info.email && (
@@ -94,7 +88,7 @@ export default function SignUpForm() {
                                 <FormControl>
                                     <div className="relative">
                                         <Input type="password" placeholder="Password" autoComplete="current-password" className="w-full" {...field}/>
-                                        <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
+                                        <IconLockSquareRoundedFilled className="absolute w-12 h-[40px] p-2 m-1 bg-gradient-to-l from-white from-70% to-transparent right-0 top-0 text-[#9F9F9F] rounded-tr-md rounded-br-md"/>
                                     </div>
                                 </FormControl>
                                 {!info.password && (
@@ -112,7 +106,7 @@ export default function SignUpForm() {
                                 <FormControl>
                                     <div className="relative">
                                         <Input type="password" placeholder="Confirm your password" autoComplete="confirmed-password" className="w-full" {...field}/>
-                                        <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
+                                        <IconLockSquareRoundedFilled className="absolute w-12 h-[40px] p-2 m-1 bg-gradient-to-l from-white from-70% to-transparent right-0 top-0 text-[#9F9F9F] rounded-tr-md rounded-br-md"/>
                                     </div>
                                 </FormControl>
                                 {!info.confirmPassword && (

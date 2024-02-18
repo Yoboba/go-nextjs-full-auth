@@ -42,7 +42,7 @@ export default function SignInForm() {
                                 <FormControl>
                                     <div className="relative">
                                         <Input placeholder="Email" className="w-full" autoComplete="email" {...field}/>
-                                        <IconMailFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
+                                        <IconMailFilled className="absolute w-12 h-[40px] p-2 m-1 bg-gradient-to-l from-white from-70% to-transparent right-0 top-0 text-[#9F9F9F] rounded-tr-md rounded-br-md" />
                                     </div>
                                 </FormControl>
                                 {!email && (
@@ -60,7 +60,7 @@ export default function SignInForm() {
                                 <FormControl>
                                     <div className="relative">
                                         <Input type="password" placeholder="Password" autoComplete="current-password" className="w-full" {...field}/>
-                                        <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
+                                        <IconLockSquareRoundedFilled className="absolute w-12 h-[40px] p-2 m-1 bg-gradient-to-l from-white from-70% to-transparent right-0 top-0 text-[#9F9F9F] rounded-tr-md rounded-br-md"/>
                                     </div>
                                 </FormControl>
                                     {!password && (
