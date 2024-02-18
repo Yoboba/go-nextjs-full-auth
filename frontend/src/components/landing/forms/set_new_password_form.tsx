@@ -1,4 +1,3 @@
-"use client"
 import Link from "next/link";
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input"
@@ -9,13 +8,24 @@ import {
     FormItem,
     FormMessage,
   } from "@/components/ui/form"
-  import { IconLockSquareRoundedFilled, IconArrowBackUp, IconPassword } from '@tabler/icons-react';
+import { IconLockSquareRoundedFilled, IconArrowBackUp, IconPassword } from '@tabler/icons-react';
 
 import { useSetNewPasswordForm } from "../configs/configs";
+import { useAnimation } from "../configs/configs";
+import { motion } from 'framer-motion';
 import { pages } from "../constants/constants";
+import { useEffect, useState } from "react";
 
 export default function SetNewPasswordForm() {
+    const [password, setPassword] = useState(true);
+    const [confirmPassword, setConfirmPassword] = useState(true);
+    const { errorPopUp } = useAnimation();
     const {form, onSubmit} = useSetNewPasswordForm()
+
+    useEffect(() => {
+        setPassword(form.formState.errors.password ? false : true);
+        setConfirmPassword(form.formState.errors.confirmPassword ? false : true);
+    }, [form.formState.errors.password, form.formState.errors.confirmPassword])
     return (
         <>
             {/* CONTINUE HERE */}
@@ -39,7 +49,11 @@ export default function SetNewPasswordForm() {
                                         <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
-                                <FormMessage className="text-red-500 text-[10px]"/>
+                                {!password && (
+                                    <motion.div variants={errorPopUp} initial={"hidden"} animate={"visible"}>
+                                        <FormMessage className="text-red-500 text-[10px]"/>
+                                    </motion.div>
+                                )}
                             </FormItem>
 
                         )}
@@ -54,7 +68,11 @@ export default function SetNewPasswordForm() {
                                         <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
-                                <FormMessage className="text-red-500 text-[10px]"/>
+                                {!confirmPassword && (
+                                    <motion.div variants={errorPopUp} initial={"hidden"} animate={"visible"}>
+                                        <FormMessage className="text-red-500 text-[10px]"/>
+                                    </motion.div>
+                                )}
                             </FormItem>
 
                         )}

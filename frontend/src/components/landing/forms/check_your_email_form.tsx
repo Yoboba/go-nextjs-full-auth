@@ -1,4 +1,3 @@
-"use client"
 import Link from "next/link";
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input"
@@ -9,13 +8,22 @@ import {
     FormItem,
     FormMessage,
   } from "@/components/ui/form"
-  import { IconMailFilled, IconArrowBackUp, IconZoomCheckFilled } from '@tabler/icons-react';
+import { IconMailFilled, IconArrowBackUp, IconZoomCheckFilled } from '@tabler/icons-react';
 
 import { useCheckYourEmailForm } from "../configs/configs";
+import { useAnimation } from "../configs/configs";
+import { motion } from 'framer-motion';
 import { pages } from "../constants/constants";
+import { useEffect, useState } from "react";
 
 export default function CheckYourEmailForm() {
+    const [code, setCode] = useState(true);
+    const { errorPopUp } = useAnimation();
     const {form, onSubmit} = useCheckYourEmailForm()
+
+    useEffect(() => {
+        setCode(form.formState.errors.code ? false : true); 
+    }, [form.formState.errors.code])
     return (
         <>
             {/* CONTINUE HERE */}
@@ -38,7 +46,11 @@ export default function CheckYourEmailForm() {
                                         <IconZoomCheckFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
-                                <FormMessage className="text-red-500 text-[10px]"/>
+                                {!code && (
+                                    <motion.div variants={errorPopUp} initial={"hidden"} animate={"visible"}>
+                                        <FormMessage className="text-red-500 text-[10px]"/>
+                                    </motion.div>
+                                )}
                             </FormItem>
                         )}
                         />

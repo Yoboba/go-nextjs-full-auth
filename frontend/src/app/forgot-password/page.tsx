@@ -1,3 +1,4 @@
+"use client"
 import { ForgotPasswordForm } from "../../components/landing/forms/forms";
 
 export default function SignUp() {

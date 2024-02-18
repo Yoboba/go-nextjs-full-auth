@@ -1,4 +1,3 @@
-"use client"
 import Link from "next/link";
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input"
@@ -9,13 +8,26 @@ import {
     FormItem,
     FormMessage,
   } from "@/components/ui/form"
-  import { IconMailFilled,IconLockSquareRoundedFilled, IconBrandGoogleFilled, IconBrandGithubFilled } from '@tabler/icons-react';
+import { IconMailFilled,IconLockSquareRoundedFilled, IconBrandGoogleFilled, IconBrandGithubFilled } from '@tabler/icons-react';
+import { motion } from 'framer-motion';
+import { useAnimation } from "../configs/configs";
 
 import { useSignInForm } from "../configs/configs";
 import { pages } from "../constants/constants";
+import { useEffect, useState } from "react";
+
 
 export default function SignInForm() {
-    const {form, onSubmit} = useSignInForm()
+    const [email, setEmail] = useState(true);
+    const [password, setPassword] = useState(true);
+    const {form, onSubmit} = useSignInForm();
+    const {errorPopUp} = useAnimation();
+
+    useEffect(() => {
+        setEmail(form.formState.errors.email ? false : true);
+        setPassword(form.formState.errors.password ? false : true);
+    }, [form.formState.errors.email, form.formState.errors.password])
+
     return (
         <>
             <div className="flex w-full h-full rounded-2xl flex-col justify-center items-center gap-4">
@@ -33,7 +45,11 @@ export default function SignInForm() {
                                         <IconMailFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
-                                <FormMessage className="text-red-500 text-[10px]"/>
+                                {!email && (
+                                    <motion.div variants={errorPopUp} initial={"hidden"} animate={"visible"}>
+                                        <FormMessage className="text-red-500 text-[10px]"/>
+                                    </motion.div>
+                                )}
                             </FormItem>
 
                         )}
@@ -47,7 +63,11 @@ export default function SignInForm() {
                                         <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
-                                <FormMessage className="text-red-500 text-[10px]"/>
+                                    {!password && (
+                                        <motion.div variants={errorPopUp} initial={"hidden"} animate={"visible"}>
+                                            <FormMessage className="text-red-500 text-[10px] "/>
+                                        </motion.div>
+                                    )}
                             </FormItem>
 
                         )}

@@ -1,4 +1,3 @@
-"use client"
 import Link from "next/link";
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input"
@@ -9,13 +8,22 @@ import {
     FormItem,
     FormMessage,
   } from "@/components/ui/form"
-  import { IconMailFilled, IconArrowBackUp, IconCircleKeyFilled } from '@tabler/icons-react';
+import { IconMailFilled, IconArrowBackUp, IconCircleKeyFilled } from '@tabler/icons-react';
+import { motion } from 'framer-motion';
+import { useAnimation } from "../configs/configs";
 
 import { useForgotPasswordForm } from "../configs/configs";
 import { pages } from "../constants/constants";
+import { useEffect, useState } from "react";
 
 export default function ForgotPasswordForm() {
+    const [email, setEmail] = useState(true);
+    const {errorPopUp} = useAnimation();
     const {form, onSubmit} = useForgotPasswordForm()
+
+    useEffect(() => {
+        setEmail(form.formState.errors.email ? false : true);
+    }, [form.formState.errors.email])
     return (
         <>
             <div className="flex w-full h-full rounded-2xl flex-col justify-center items-center gap-4">
@@ -37,7 +45,11 @@ export default function ForgotPasswordForm() {
                                         <IconMailFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
-                                <FormMessage className="text-red-500 text-[10px]"/>
+                                {!email && (
+                                    <motion.div variants={errorPopUp} initial={"hidden"} animate={"visible"}>
+                                        <FormMessage className="text-red-500 text-[10px]"/>
+                                    </motion.div>
+                                )}
                             </FormItem>
                         )}
                         />

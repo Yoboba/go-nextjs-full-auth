@@ -1,4 +1,3 @@
-"use client"
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input"
 import { Checkbox } from "../../ui/checkbox";
@@ -11,15 +10,42 @@ import {
     FormLabel,
     FormMessage,
   } from "@/components/ui/form"
-
-import { useSignUpForm } from "../configs/configs";
 import { IconUserFilled, IconMailFilled, IconLockSquareRoundedFilled, IconBrandGoogleFilled, IconBrandGithubFilled, IconArrowBackUp } from '@tabler/icons-react';
-import Link from "next/link";
+import { useSignUpForm } from "../configs/configs";
+import { useAnimation } from "../configs/configs";
+import { motion } from 'framer-motion';
 import { pages } from "../constants/enum";
 
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { setFips } from "crypto";
 export default function SignUpForm() {
+    // const [fullname, setFullname] = useState(true);
+    // const [email, setEmail] = useState(true);
+    // const [password, setPassword] = useState(true);
+    // const [confirmPassword, setConfirmPassword] = useState(true);
+    // const [terms, setTerms] = useState(true);
+
+    const [info, setInfo] = useState({
+        fullname : true,
+        email : true,
+        password : true,
+        confirmPassword : true,
+        terms : true
+    });
+
+    const {errorPopUp} = useAnimation();
     const { form, onSubmit } = useSignUpForm()
 
+    useEffect(() => {
+        setInfo({
+            fullname : form.formState.errors.fullname ? false : true,
+            email : form.formState.errors.email ? false : true,
+            password : form.formState.errors.password ? false : true,
+            confirmPassword : form.formState.errors.confirmPassword ? false : true,
+            terms : form.formState.errors.term ? false : true
+        })
+    }, [form.formState.errors.fullname, form.formState.errors.email, form.formState.errors.password, form.formState.errors.confirmPassword, form.formState.errors.term])
     return (
         <>
             <div className="flex w-full h-full rounded-2xl flex-col justify-center items-center gap-4">
@@ -37,7 +63,11 @@ export default function SignUpForm() {
                                         <IconUserFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
-                                <FormMessage className="text-red-500 text-[10px]"/>
+                                {!info.fullname && (
+                                    <motion.div variants={errorPopUp} initial={"hidden"} animate={"visible"}>
+                                        <FormMessage className="text-red-500 text-[10px]"/>
+                                    </motion.div>
+                                )}
                             </FormItem>
                         )}
                         />
@@ -50,7 +80,11 @@ export default function SignUpForm() {
                                         <IconMailFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
-                                <FormMessage className="text-red-500 text-[10px]"/>
+                                {!info.email && (
+                                    <motion.div variants={errorPopUp} initial={"hidden"} animate={"visible"}>
+                                        <FormMessage className="text-red-500 text-[10px]"/>
+                                    </motion.div>
+                                )}
                             </FormItem>
                         )}
                         />
@@ -63,7 +97,11 @@ export default function SignUpForm() {
                                         <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
-                                <FormMessage className="text-red-500 text-[10px]"/>
+                                {!info.password && (
+                                    <motion.div variants={errorPopUp} initial={"hidden"} animate={"visible"}>
+                                        <FormMessage className="text-red-500 text-[10px]"/>
+                                    </motion.div>
+                                )}
                             </FormItem>
                         )}
                         />
@@ -77,7 +115,11 @@ export default function SignUpForm() {
                                         <IconLockSquareRoundedFilled className="absolute right-3 top-3 text-[#9F9F9F]"/>
                                     </div>
                                 </FormControl>
-                                <FormMessage className="text-red-500 text-[10px]"/>
+                                {!info.confirmPassword && (
+                                    <motion.div variants={errorPopUp} initial={"hidden"} animate={"visible"}>
+                                        <FormMessage className="text-red-500 text-[10px]"/>
+                                    </motion.div>
+                                )}
                             </FormItem>
                         )}
                         />
@@ -100,7 +142,11 @@ export default function SignUpForm() {
                                         <FormDescription className="text-[10px] text-muted-foreground underline cursor-pointer">
                                             You agree to our Terms of Service and Privacy Policy.
                                         </FormDescription>
-                                        <FormMessage className="text-red-500 text-[10px] pt-1"/>
+                                        {!info.terms && ( 
+                                            <motion.div variants={errorPopUp} initial={"hidden"} animate={"visible"}>
+                                                <FormMessage className="text-red-500 text-[10px] pt-1"/>
+                                            </motion.div>
+                                        )}
                                     </div>
                                 </FormItem>
                             )}

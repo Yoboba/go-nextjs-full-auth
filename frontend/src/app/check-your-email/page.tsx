@@ -1,3 +1,4 @@
+"use client"
 import { CheckYourEmailForm } from '@/components/landing/forms/forms'
 
 
