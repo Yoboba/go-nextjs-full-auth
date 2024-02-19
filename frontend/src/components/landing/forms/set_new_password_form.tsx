@@ -10,8 +10,7 @@ import {
   } from "@/components/ui/form"
 import { IconLockSquareRoundedFilled, IconArrowBackUp, IconPassword } from '@tabler/icons-react';
 
-import { useSetNewPasswordForm } from "../configs/configs";
-import { useAnimation } from "../configs/configs";
+import { useSetNewPasswordForm, useAnimation } from "../configs/configs";
 import { motion } from 'framer-motion';
 import { pages } from "../constants/constants";
 import { useEffect, useState } from "react";
@@ -23,8 +22,8 @@ export default function SetNewPasswordForm() {
     const {form, onSubmit} = useSetNewPasswordForm()
 
     useEffect(() => {
-        setPassword(form.formState.errors.password ? false : true);
-        setConfirmPassword(form.formState.errors.confirmPassword ? false : true);
+        setPassword(!form.formState.errors.password);
+        setConfirmPassword(!form.formState.errors.confirmPassword);
     }, [form.formState.errors.password, form.formState.errors.confirmPassword])
     return (
         <>
