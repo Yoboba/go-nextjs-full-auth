@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { pages } from "../constants/constants";
+import { pages } from "../../constants/enum";
 
 export function useCheckYourEmailForm() {
     const router = useRouter();
@@ -15,7 +15,7 @@ export function useCheckYourEmailForm() {
     const form = useForm<z.infer<typeof checkYourEmailFormSchema>>({
         resolver: zodResolver(checkYourEmailFormSchema),
         defaultValues: {
-          code: "",
+        code: "",
         },
     })
 

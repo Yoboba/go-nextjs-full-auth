@@ -1,5 +1,4 @@
-"use client"
-import { SignUpForm } from "../../components/landing/forms/forms";
+import SignUpForm from "./sign_up_form";
 
 export default function SignUp() {
     return (

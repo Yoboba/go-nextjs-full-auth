@@ -1,6 +1,6 @@
-import { Button } from "../../ui/button";
-import { Input } from "../../ui/input"
-import { Checkbox } from "../../ui/checkbox";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input"
+import { Checkbox } from "../../components/ui/checkbox";
 import {
     Form,
     FormControl,
@@ -9,14 +9,16 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-  } from "@/components/ui/form"
+} from "@/components/ui/form"
 import { IconUserFilled, IconMailFilled, IconLockSquareRoundedFilled, IconBrandGoogleFilled, IconBrandGithubFilled, IconArrowBackUp } from '@tabler/icons-react';
-import { useSignUpForm, useAnimation } from "../configs/configs";
+import { useAnimation } from "../../constants/animation";
+import { useSignUpForm } from "./sign_up_form_config";
 import { motion } from 'framer-motion';
-import { pages } from "../constants/enum";
+import { pages } from "../../constants/enum";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+
 export default function SignUpForm() {
     const [info, setInfo] = useState({
         fullname : true,

@@ -1,5 +1,4 @@
-"use client"
-import { CheckYourEmailForm } from '@/components/landing/forms/forms'
+import CheckYourEmailForm from "./check_your_email_form"
 
 
 export default function SignUp() {

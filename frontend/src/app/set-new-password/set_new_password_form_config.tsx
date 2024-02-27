@@ -13,8 +13,8 @@ export function useSetNewPasswordForm() {
     const form = useForm<z.infer<typeof setNewPasswordFormSchema>>({
         resolver: zodResolver(setNewPasswordFormSchema),
         defaultValues: {
-          password: "",
-          confirmPassword: ""
+        password: "",
+        confirmPassword: ""
         },
     })
 

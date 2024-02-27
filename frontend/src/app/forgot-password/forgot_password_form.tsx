@@ -1,18 +1,20 @@
+"use client"
 import Link from "next/link";
-import { Button } from "../../ui/button";
-import { Input } from "../../ui/input"
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input"
 import {
     Form,
     FormControl,
     FormField,
     FormItem,
     FormMessage,
-  } from "@/components/ui/form"
+} from "@/components/ui/form"
 import { IconMailFilled, IconArrowBackUp, IconCircleKeyFilled } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 
-import { useForgotPasswordForm, useAnimation } from "../configs/configs";
-import { pages } from "../constants/constants";
+import { useAnimation } from "../../constants/animation";
+import { useForgotPasswordForm } from "./forgot_password_form_config";
+import { pages } from "../../constants/enum";
 import { useEffect, useState } from "react";
 
 export default function ForgotPasswordForm() {

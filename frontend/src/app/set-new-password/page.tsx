@@ -1,5 +1,4 @@
-"use client"
-import { SetNewPasswordForm } from '@/components/landing/forms/forms'
+import SetNewPasswordForm from "./set_new_password_form"
 
 
 export default function SignUp() {

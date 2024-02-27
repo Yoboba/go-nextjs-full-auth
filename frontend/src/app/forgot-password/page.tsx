@@ -1,5 +1,4 @@
-"use client"
-import { ForgotPasswordForm } from "../../components/landing/forms/forms";
+import ForgotPasswordForm from "./forgot_password_form";
 
 export default function SignUp() {
     return (

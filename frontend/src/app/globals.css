@@ -66,13 +66,6 @@
   }
 }
 
-/* not working... */
-/* @layer components {
-  .buttonAnimation {
-    @apply hover:translate-y-[-3px] transition-all duration-200
-  }
-} */
-
 html {
   overflow: hidden;
   height: 100%;

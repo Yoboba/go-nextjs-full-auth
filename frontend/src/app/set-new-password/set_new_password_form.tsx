@@ -1,18 +1,20 @@
+"user client"
 import Link from "next/link";
-import { Button } from "../../ui/button";
-import { Input } from "../../ui/input"
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input"
 import {
     Form,
     FormControl,
     FormField,
     FormItem,
     FormMessage,
-  } from "@/components/ui/form"
+} from "@/components/ui/form"
 import { IconLockSquareRoundedFilled, IconArrowBackUp, IconPassword } from '@tabler/icons-react';
 
-import { useSetNewPasswordForm, useAnimation } from "../configs/configs";
+import { useAnimation } from "../../constants/animation";
+import { useSetNewPasswordForm } from "./set_new_password_form_config";
 import { motion } from 'framer-motion';
-import { pages } from "../constants/constants";
+import { pages } from "../../constants/enum";
 import { useEffect, useState } from "react";
 
 export default function SetNewPasswordForm() {
