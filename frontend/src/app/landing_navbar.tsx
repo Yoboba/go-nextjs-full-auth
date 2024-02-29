@@ -1,49 +1,63 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { pages } from "@/constants/enum";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { IconMoonFilled } from '@tabler/icons-react';
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { IconSquareForbid2 } from "@tabler/icons-react";
 
 import ImageDropzone from "./image_dropzone";
+import ThemeSwitcher from "@/components/ui/theme_switcher";
 
 export default function LandingNavBar() {
-    return (
-        <nav className="flex top-0 sticky z-10 h-16 bg-white justify-between items-center pl-5 pr-5 drop-shadow-md">
-            <h1 className=" font-bold text-4xl text-center">B L O G</h1>
+  return (
+    <nav className="top-0 z-10 flex h-16 items-center justify-between bg-white pl-5 pr-5 drop-shadow-sm dark:bg-black">
+      <div className="flex justify-end items-end gap-1">
+        <IconSquareForbid2 size={50} className="text-g2"/>
+        <h2 className=" font-bold text-2xl text-g2">L O C K</h2>
+      </div>
 
-            <div className="flex justify-center items-center gap-3">
-                <Dialog>
-                    <DialogTrigger>
-                        <Avatar className=" bg-purple-400 drop-shadow-md">
-                            <AvatarImage/>
-                        </Avatar>
-                    </DialogTrigger>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle className=" font-semibold text-xl" >Change your profile image</DialogTitle>
-                            <DialogDescription className=" font-medium text-sm">Update your image here..</DialogDescription>
-                        </DialogHeader>
-                        <ImageDropzone/>
-                    </DialogContent>
-                </Dialog>
-                <div className=" flex flex-col justify-center items-start">
-                    <h2 className=" font-bold text-2xl">Yoboba</h2>
-                    <p className=" font-medium text-xs">Thanachot.onl@student.mahidol.ac.th</p>
-                </div>
-            </div>
+      <div className="flex items-center justify-center gap-3">
+        <Dialog>
+          <DialogTrigger>
+            <Avatar className=" bg-g4 drop-shadow-md">
+              <AvatarImage />
+            </Avatar>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle className=" text-xl font-semibold">
+                Change your profile image
+              </DialogTitle>
+              <DialogDescription className=" text-sm font-medium">
+                Update your image here..
+              </DialogDescription>
+            </DialogHeader>
+            <ImageDropzone />
+          </DialogContent>
+        </Dialog>
+        <div className=" flex flex-col items-start justify-center">
+          <h2 className=" text-g1 text-2xl font-bold">Yoboba</h2>
+          <p className=" text-g1 text-xs font-medium">
+            Thanachot.onl@student.mahidol.ac.th
+          </p>
+        </div>
+      </div>
 
-            <div className="flex justify-center items-center gap-2">
-                <Link href={pages.ADMIN}><Button variant="link" className={`rounded-full font-semibold text-md text-[#775E82]`}>Dashboard</Button></Link>
-                <Button variant="outline" className={` px-[8px] border-[#775E82] text-[#775E82] hover:bg-[#775E82] hover:text-white`}><IconMoonFilled size={20}/></Button>
-            </div>
-        </nav>
-    )
+      <div className="flex items-center justify-center gap-2">
+        <Link href={pages.ADMIN}>
+          <Button variant="link" className={"text-md rounded-full font-semibold text-g2 dark:text-white"}>
+            Dashboard
+          </Button>
+        </Link>
+        <ThemeSwitcher />
+      </div>
+    </nav>
+  );
 }

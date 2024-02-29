@@ -23,6 +23,13 @@ const config = {
     },
     extend: {
       colors: {
+        // Custom color
+        g1: "#01161E",
+        g2: "#124559",
+        g3: "#598392",
+        g4: "#AEC3B0",
+        g5: "#EFF6E0",
+        // End of Custom color
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
