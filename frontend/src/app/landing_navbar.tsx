@@ -50,11 +50,13 @@ export default function LandingNavBar() {
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-2">
-        <Link href={pages.ADMIN}>
-          <Button variant="link" className={"text-md rounded-full font-semibold text-g2 dark:text-white"}>
-            Dashboard
-          </Button>
+      {/* Links */}
+      <div className="flex items-center justify-center gap-6 text-g2">
+        <Link href={pages.SIGN_IN} className=" font-semibold hover:underline">
+          Login
+        </Link>
+        <Link href={pages.ADMIN} className=" font-semibold hover:underline">
+          Dashboard
         </Link>
         <ThemeSwitcher />
       </div>

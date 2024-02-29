@@ -34,7 +34,7 @@ export default function LandingMain() {
             </Button>
           </div>
         </div>
-        <div className="h-[5px] rounded-full bg-g5" />
+        <div className="h-[5px] rounded-full bg-gray-100" />
       </section>
 
       <section className={" h-screen w-1/4 bg-white p-4 border-l-2 border-gray-100"}>
