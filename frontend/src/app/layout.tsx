@@ -3,6 +3,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { poppins } from "../configs/fonts";
 import { ThemeProvider } from "../configs/theme_provider";
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,6 +25,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="light">
           {children}
+          <Toaster/>
         </ThemeProvider>
       </body>
     </html>

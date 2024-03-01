@@ -1,11 +1,10 @@
-"use client";
 import { Button } from "@/components/ui/button";
 import {
   IconMessageShare,
   IconCubePlus,
   IconTag,
 } from "@tabler/icons-react";
-import { 
+import {
   Tabs, 
   TabsList, 
   TabsTrigger 
@@ -34,7 +33,7 @@ export default function LandingMain() {
             </Button>
           </div>
         </div>
-        <div className="h-[5px] rounded-full bg-gray-100" />
+        <div className="h-[3px] rounded-full bg-g4" />
       </section>
 
       <section className={" h-screen w-1/4 bg-white p-4 border-l-2 border-gray-100"}>
