@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
-import ImageDropzone from "@/app/image_dropzone";
+import MyImageDropzone from "@/components/my_ui/my_image_dropzone";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 
 export default function MyAvatar() {
@@ -34,7 +34,7 @@ export default function MyAvatar() {
                         Update your image here..
                     </DialogDescription>
                 </DialogHeader>
-                <ImageDropzone onImageSubmit = {profileImageOnChange} />
+                <MyImageDropzone onImageSubmit = {profileImageOnChange} />
             </DialogContent>
         </Dialog>
     )
