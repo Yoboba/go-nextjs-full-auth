@@ -18,7 +18,7 @@ import {
 import { useAnimation } from "../../constants/animation";
 import { useSetNewPasswordForm } from "./_hooks/use_set_new_password_form";
 import { motion } from 'framer-motion';
-import { pages } from "../../constants/enum";
+import { routes } from "../../constants/route";
 import { useEffect, useState } from "react";
 
 export default function SetNewPasswordForm() {
@@ -91,7 +91,7 @@ export default function SetNewPasswordForm() {
 
                 </form>
             </Form>
-            <Link href={`${pages.SIGN_IN}`}>
+            <Link href={`${routes.SIGN_IN}`}>
                 <Button variant='ghost' className="w-full inline-flex items-center gap-2 text-[#949494] font-medium hover:bg-transparent">
                     <IconArrowBackUp/>
                     Back to sign in

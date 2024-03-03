@@ -13,8 +13,8 @@ import { IconMailFilled, IconArrowBackUp, IconCircleKeyFilled } from '@tabler/ic
 import { motion } from 'framer-motion';
 
 import { useAnimation } from "../../constants/animation";
-import { useForgotPasswordForm } from "./_hooks/use_forgot_password_form";
-import { pages } from "../../constants/enum";
+import { useForgotPasswordForm } from "../../hooks/use_forgot_password_form";
+import { routes } from "../../constants/route";
 import { useEffect, useState } from "react";
 
 export default function ForgotPasswordForm() {
@@ -65,7 +65,7 @@ export default function ForgotPasswordForm() {
 
                 </form>
             </Form>
-            <Link href={`${pages.SIGN_IN}`}>
+            <Link href={`${routes.SIGN_IN}`}>
                 <Button variant='ghost' className="w-full inline-flex items-center gap-2 text-[#949494] font-medium hover:bg-transparent">
                     <IconArrowBackUp/>
                     Back to sign in

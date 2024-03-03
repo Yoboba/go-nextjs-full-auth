@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { pages } from "../../../constants/enum";
+import { routes } from "../constants/route";
 
 export function useCheckYourEmailForm() {
     const router = useRouter();
@@ -21,7 +21,7 @@ export function useCheckYourEmailForm() {
 
     // handle Submit
     function onSubmit(values: z.infer<typeof checkYourEmailFormSchema>, ) {
-        router.push(pages.SET_NEW_PASSWORD);
+        router.push(routes.SET_NEW_PASSWORD);
         console.log(values)
     }
 

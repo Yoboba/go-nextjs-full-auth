@@ -22,7 +22,7 @@ import {
 import { useAnimation } from "../../constants/animation";
 import { useSignUpForm } from "./_hooks/use_sign_up_form";
 import { motion } from 'framer-motion';
-import { pages } from "../../constants/enum";
+import { routes } from "../../constants/route";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -180,7 +180,7 @@ export default function SignUpForm() {
                 </div>
             </section>
 
-            <Link href={`${pages.SIGN_IN}`}>
+            <Link href={`${routes.SIGN_IN}`}>
                 <Button variant='ghost' className="inline-flex items-center gap-2 text-[#949494] font-medium hover:bg-transparent">
                     <IconArrowBackUp/>
                     Back to sign in

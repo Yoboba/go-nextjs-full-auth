@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import { pages } from "../../../constants/enum";
+import { routes } from "../constants/route";
 
 export function useForgotPasswordForm() {
     const router = useRouter();
@@ -22,7 +22,7 @@ export function useForgotPasswordForm() {
 
     // handle Submit
     function onSubmit(values: z.infer<typeof forgotPasswordFormSchema>, ) {
-        router.push(pages.CHECK_YOUR_EMAIL);
+        router.push(routes.CHECK_YOUR_EMAIL);
         console.log(values);
     }
 

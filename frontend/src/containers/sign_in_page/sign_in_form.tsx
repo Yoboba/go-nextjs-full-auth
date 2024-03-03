@@ -9,7 +9,7 @@ import {
     IconLockSquareRoundedFilled, 
 } from '@tabler/icons-react';
 import { useSignInForm } from "./_hooks/use_sign_in_form";
-import { pages } from "../../constants/enum";
+import { routes } from "../../constants/route";
 import MyFormField from "@/components/my_ui/my_form_field";
 
 
@@ -35,8 +35,8 @@ export default function SignInForm() {
                     />
                     {/* forgot password and register */}
                     <div className=" flex justify-between item-center w-full h-fit">
-                        <Link href={pages.FORGOT_PASSWORD} className=" text-blue-500 text-xs font-medium hover:underline">forgot password ?</Link>
-                        <div className="text-neutral-400 text-xs font-medium">don’t have an account ? <Link href={`${pages.SIGN_UP}`} className="text-blue-500 text-xs font-medium hover:underline">Sign up</Link></div>
+                        <Link href={routes.FORGOT_PASSWORD} className=" text-blue-500 text-xs font-medium hover:underline">forgot password ?</Link>
+                        <div className="text-neutral-400 text-xs font-medium">don’t have an account ? <Link href={`${routes.SIGN_UP}`} className="text-blue-500 text-xs font-medium hover:underline">Sign up</Link></div>
                     </div>
                     <div className="h-1"/>
                     <Button type="submit" className="w-full text-white text-md rounded-lg bg-gradient-to-r from-violet-300 to-pink-300 hover:translate-y-[-3px] active:translate-y-[1px] transition-all duration-200">Sign in</Button>
