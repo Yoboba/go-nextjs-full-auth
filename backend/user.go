@@ -14,25 +14,6 @@ type User struct {
 	Role     string `json:"role"`
 }
 
-// type Blog struct {
-// 	id         int
-// 	title      string
-// 	caption    string
-// 	body       string
-// 	user_id    int
-// 	created_at time.Time
-// }
-
-func testDBConnection(c *fiber.Ctx) error {
-	err := db.Ping()
-	if err != nil {
-		c.Status(500).SendString("Database Connection fail")
-	}
-
-	finalStr := fmt.Sprintf("DB connection is working on host: %s port: %d", host, port)
-	return c.SendString(finalStr)
-}
-
 func getUsers(c *fiber.Ctx) error {
 	var users []User
 	rows, err := db.Query("SELECT * FROM users")
@@ -73,10 +54,7 @@ func createUser(c *fiber.Ctx) error {
 	}
 
 	var id int
-	e := db.QueryRow(`INSERT INTO users (username, email, password, role) VALUES ($1, $2, $3, $4) RETURNING id`, user.Username, user.Email, user.Password, user.Role).Scan(&id)
-	if e != nil {
-		c.Status(500).SendString(e.Error())
-	}
+	db.QueryRow(`INSERT INTO users (username, email, password, role) VALUES ($1, $2, $3, $4) RETURNING id`, user.Username, user.Email, user.Password, user.Role).Scan(&id)
 
 	return c.SendString(fmt.Sprintf("new user id : %d", id))
 }
