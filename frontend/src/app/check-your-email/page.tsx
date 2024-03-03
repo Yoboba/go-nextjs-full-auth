@@ -1,4 +1,4 @@
-import CheckYourEmailForm from "./check_your_email_form"
+import CheckYourEmailForm from "../../containers/check_your_email_page/check_your_email_form"
 
 
 export default function SignUp() {

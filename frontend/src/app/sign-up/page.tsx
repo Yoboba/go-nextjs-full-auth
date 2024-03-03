@@ -1,4 +1,4 @@
-import SignUpForm from "./sign_up_form";
+import SignUpForm from "../../containers/sign_up_page/sign_up_form";
 
 export default function SignUp() {
     return (

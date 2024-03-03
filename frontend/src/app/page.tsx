@@ -1,8 +1,8 @@
-import Logo from "./_components/logo"
-import Navigation from "./_components/navigation"
-import Profile from "./_components/profile"
-import BlogSection from "./_components/blog_section";
-import TagSection from "./_components/tag_section";
+import Logo from "../containers/landing_page/navbar_section/logo"
+import Navigation from "../containers/landing_page/navbar_section/navigation"
+import Profile from "../containers/landing_page/navbar_section/profile"
+import BlogSection from "../containers/landing_page/blog_section/blog_section";
+import TagSection from "../containers/landing_page/tag_section/tag_section";
 
 export default function LandingPage() {
 

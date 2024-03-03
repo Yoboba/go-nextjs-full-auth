@@ -20,7 +20,7 @@ import {
     IconArrowBackUp 
 } from '@tabler/icons-react';
 import { useAnimation } from "../../constants/animation";
-import { useSignUpForm } from "./_hooks/use_sign_up_form";
+import { useSignUpForm } from "../../hooks/use_sign_up_form";
 import { motion } from 'framer-motion';
 import { routes } from "../../constants/route";
 

@@ -1,4 +1,4 @@
-import SetNewPasswordForm from "./set_new_password_form"
+import SetNewPasswordForm from "../../containers/set_new_password_page/set_new_password_form"
 
 
 export default function SignUp() {

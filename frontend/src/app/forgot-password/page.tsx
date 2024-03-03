@@ -1,4 +1,4 @@
-import ForgotPasswordForm from "./forgot_password_form";
+import ForgotPasswordForm from "../../containers/forgot_password_page/forgot_password_form";
 
 export default function SignUp() {
     return (
