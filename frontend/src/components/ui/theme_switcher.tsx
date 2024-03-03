@@ -17,7 +17,6 @@ export default function ThemeSwitcher() {
     return null;
   }
 
-  // TODO: replace color code with color from design system
   return (
     <Button
       variant="outline"

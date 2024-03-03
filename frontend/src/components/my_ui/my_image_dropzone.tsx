@@ -1,6 +1,6 @@
 "use client"
-import Image from 'next/image';
 import {useCallback, useState} from 'react'
+import Image from 'next/image';
 import { useDropzone } from 'react-dropzone'
 import { IconUpload } from '@tabler/icons-react';
 import { Button } from '@/components/ui/button';
@@ -8,7 +8,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { ToastAction } from "@/components/ui/toast"
 import { DialogClose } from "@/components/ui/dialog"
 
-export default function MyImageDropzone({onImageSubmit}:{onImageSubmit: Function}) {
+export default function MyImageDropzone({onImageSubmit}:Readonly<{onImageSubmit: Function}>) {
     const { toast } = useToast()
     const [image, setImage] = useState(null)
 

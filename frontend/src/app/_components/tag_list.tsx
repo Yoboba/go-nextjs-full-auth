@@ -1,5 +1,5 @@
-import MyTag from "@/components/my_ui/my_tag";
 import { IconCubePlus } from "@tabler/icons-react";
+import MyTag from "@/components/my_ui/my_tag";
 
 export default function TagList() {
     return (

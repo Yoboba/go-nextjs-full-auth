@@ -1,4 +1,5 @@
 "use client"
+import { useState } from "react";
 import {
     Dialog,
     DialogContent,
@@ -7,10 +8,12 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { useState } from "react";
+import { 
+    Avatar, 
+    AvatarImage, 
+    AvatarFallback 
+} from "@/components/ui/avatar";
 import MyImageDropzone from "@/components/my_ui/my_image_dropzone";
-import { AvatarFallback } from "@radix-ui/react-avatar";
 
 export default function MyAvatar() {
     const [profileImage, setProfileImage] = useState(null)
@@ -22,7 +25,7 @@ export default function MyAvatar() {
             <DialogTrigger>
                 <Avatar className=" bg-g4 drop-shadow-md">
                     <AvatarImage src={profileImage ? URL.createObjectURL(profileImage) : ""} alt="Profile Image"/>
-                    <AvatarFallback className=" flex w-full items-center justify-center font-normal text-lg text-g1">G</AvatarFallback>
+                    <AvatarFallback className=" bg-transparent">G</AvatarFallback>
                 </Avatar>
             </DialogTrigger>
             <DialogContent>

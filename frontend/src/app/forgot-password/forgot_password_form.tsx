@@ -13,7 +13,7 @@ import { IconMailFilled, IconArrowBackUp, IconCircleKeyFilled } from '@tabler/ic
 import { motion } from 'framer-motion';
 
 import { useAnimation } from "../../constants/animation";
-import { useForgotPasswordForm } from "./forgot_password_form_config";
+import { useForgotPasswordForm } from "./_hooks/use_forgot_password_form";
 import { pages } from "../../constants/enum";
 import { useEffect, useState } from "react";
 
@@ -54,7 +54,6 @@ export default function ForgotPasswordForm() {
                         </FormItem>
                     )}
                     />
-                    
                     
                     {/* gap */}
                     <div className="h-1"/>

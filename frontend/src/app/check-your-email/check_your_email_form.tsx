@@ -9,10 +9,14 @@ import {
     FormItem,
     FormMessage,
 } from "@/components/ui/form"
-import { IconMailFilled, IconArrowBackUp, IconZoomCheckFilled } from '@tabler/icons-react';
+import { 
+    IconMailFilled, 
+    IconArrowBackUp, 
+    IconZoomCheckFilled 
+} from '@tabler/icons-react';
 
 import { useAnimation } from "../../constants/animation";
-import { useCheckYourEmailForm } from "./check_your_email_form_config";
+import { useCheckYourEmailForm } from "./_hooks/use_check_your_email_form";
 import { motion } from 'framer-motion';
 import { pages } from "../../constants/enum";
 import { useEffect, useState } from "react";

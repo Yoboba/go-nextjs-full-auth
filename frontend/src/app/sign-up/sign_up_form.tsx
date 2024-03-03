@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input"
 import { Checkbox } from "../../components/ui/checkbox";
@@ -10,9 +11,16 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
-import { IconUserFilled, IconMailFilled, IconLockSquareRoundedFilled, IconBrandGoogleFilled, IconBrandGithubFilled, IconArrowBackUp } from '@tabler/icons-react';
+import { 
+    IconUserFilled, 
+    IconMailFilled, 
+    IconLockSquareRoundedFilled, 
+    IconBrandGoogleFilled, 
+    IconBrandGithubFilled, 
+    IconArrowBackUp 
+} from '@tabler/icons-react';
 import { useAnimation } from "../../constants/animation";
-import { useSignUpForm } from "./sign_up_form_config";
+import { useSignUpForm } from "./_hooks/use_sign_up_form";
 import { motion } from 'framer-motion';
 import { pages } from "../../constants/enum";
 
