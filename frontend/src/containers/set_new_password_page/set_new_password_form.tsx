@@ -16,7 +16,7 @@ import {
 } from '@tabler/icons-react';
 
 import { useAnimation } from "../../constants/animation";
-import { useSetNewPasswordForm } from "./_hooks/use_set_new_password_form";
+import { useSetNewPasswordForm } from "../../hooks/use_set_new_password_form";
 import { motion } from 'framer-motion';
 import { routes } from "../../constants/route";
 import { useEffect, useState } from "react";
