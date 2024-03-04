@@ -42,4 +42,4 @@ func createTag(c *fiber.Ctx) error {
 	return c.SendString(fmt.Sprintf("New tag : %d", id))
 }
 
-// TODO: delete tag
+// TODO: complete api for tags (include optimize code redundancy, )

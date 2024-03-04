@@ -1,6 +1,6 @@
 import SignInForm from '@/containers/sign_in_page/sign_in_form'
-import GoogleButton from '@/components/ui/google_button'
-import GithubButton from '@/components/ui/github_button'
+import GoogleButton from '@/components/ui/buttons/google_button'
+import GithubButton from '@/components/ui/buttons/github_button'
 import Line from '@/components/ui/line'
 
 export default function SignInPage() {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ThemeSwitcher from "@/components/ui/theme_switcher";
+import ThemeSwitcher from "@/components/ui/buttons/theme_switcher_button";
 import { routes } from "@/constants/route";
 
 export default function Navigation() {

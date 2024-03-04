@@ -14,6 +14,7 @@ interface IMyFormField {
     form:UseFormReturn<any>;
     value: string;
     placeholder: string;
+    type?: string;
     icon: React.ReactNode;
 }
 
@@ -30,7 +31,7 @@ export default function MyFormField(props:Readonly<IMyFormField>) {
             <FormItem>
                 <FormControl>
                     <div className="relative">
-                        <Input placeholder={props.placeholder} className="w-full" autoComplete={props.value} {...field}/>
+                        <Input type={props.type} placeholder={props.placeholder} className="w-full" autoComplete={props.value} {...field}/>
                         {props.icon}
                     </div>
                 </FormControl>
