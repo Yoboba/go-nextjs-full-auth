@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useDropzone } from 'react-dropzone'
 import { IconUpload } from '@tabler/icons-react';
 import { Button } from '@/components/ui/buttons/button';
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/hooks/use-toast"
 import { ToastAction } from "@/components/ui/toast"
 import { DialogClose } from "@/components/ui/dialog"
 

@@ -7,6 +7,7 @@ import {
     TabsList, 
     TabsTrigger 
 } from "@/components/ui/tabs"
+import Line from "@/components/ui/line";
 
 export default function BlogSection() {
     return (
@@ -26,7 +27,7 @@ export default function BlogSection() {
                     <IconCubePlus size={40} className="rounded-lg text-g2 cursor-pointer hover:bg-g4/25 transition-colors"/>
                 </div>
             </div>
-            <div className="h-[3px] rounded-full bg-g4/25" />
+            <Line height="3" color="bg-g4/25"/>
         </section>
     );
 }
