@@ -1,5 +1,5 @@
 import BackToSignInButton from "@/components/ui/buttons/back_button"
-import SetNewPasswordForm from "../../containers/set_new_password_page/set_new_password_form"
+import SetNewPasswordForm from "../../pages/set_new_password_page/set_new_password_form"
 import FormHeader from "@/components/ui/form_header"
 import { IconPassword } from "@tabler/icons-react"
 

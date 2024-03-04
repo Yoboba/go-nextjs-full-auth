@@ -4,6 +4,6 @@ interface ILine {
 }
 export default function Line(props:Readonly<ILine>) {
     return (
-        <div className={`w-full h-[${props.height}px] rounded-full ${props.color}`}/>
+        <div className={`w-full ${props.height} rounded-full ${props.color}`}/>
     )
 }

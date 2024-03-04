@@ -1,5 +1,5 @@
 import BackToSignInButton from "@/components/ui/buttons/back_button";
-import ForgotPasswordForm from "../../containers/forgot_password_page/forgot_password_form";
+import ForgotPasswordForm from "../../pages/forgot_password_page/forgot_password_form";
 import FormHeader from "@/components/ui/form_header";
 import { IconCircleKeyFilled } from '@tabler/icons-react';
 

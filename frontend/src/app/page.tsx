@@ -1,8 +1,8 @@
-import Logo from "../containers/landing_page/navbar_section/logo"
-import Navigation from "../containers/landing_page/navbar_section/navigation"
-import Profile from "../containers/landing_page/navbar_section/profile"
-import BlogSection from "../containers/landing_page/blog_section/blog_section";
-import TagSection from "../containers/landing_page/tag_section/tag_section";
+import Logo from "../pages/landing_page/navbar_section/logo"
+import Navigation from "../pages/landing_page/navbar_section/navigation"
+import Profile from "../pages/landing_page/navbar_section/profile"
+import BlogSection from "../pages/landing_page/blog_section/blog_section";
+import TagSection from "../pages/landing_page/tag_section/tag_section";
 
 export default function LandingPage() {
 

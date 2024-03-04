@@ -15,7 +15,7 @@ export default function TagSection() {
                 </div>
                 <IconCubePlus size={20}  className="rounded-lg text-g2 cursor-pointer hover:bg-g4/25 transition-colors"/>
             </div>
-            <Line height="3" color="bg-g4/25"/>
+            <Line height="h-[2px]" color="bg-g4/25"/>
             <TagList/>
         </section>
     )

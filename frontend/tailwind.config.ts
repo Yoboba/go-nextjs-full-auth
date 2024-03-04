@@ -5,7 +5,6 @@ const config = {
   darkMode: ["class"],
   content: [
     './hooks/**/*.{ts,tsx}',
-    './containers/**/*.{ts,tsx}',
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',

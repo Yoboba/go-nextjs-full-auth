@@ -16,7 +16,6 @@ export default function SetNewPasswordForm() {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-2 w-full">
                 {/* new password */}
-                {/* TODO: set these password form field input type to password */}
                 <MyFormField
                     form={form}
                     value="password"

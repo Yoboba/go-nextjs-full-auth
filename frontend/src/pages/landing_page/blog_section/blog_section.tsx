@@ -27,7 +27,7 @@ export default function BlogSection() {
                     <IconCubePlus size={40} className="rounded-lg text-g2 cursor-pointer hover:bg-g4/25 transition-colors"/>
                 </div>
             </div>
-            <Line height="3" color="bg-g4/25"/>
+            <Line height="h-[2px]" color="bg-g4/25"/>
         </section>
     );
 }

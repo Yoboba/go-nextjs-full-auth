@@ -1,5 +1,5 @@
 import FormHeader from "@/components/ui/form_header"
-import CheckYourEmailForm from "../../containers/check_your_email_page/check_your_email_form"
+import CheckYourEmailForm from "../../pages/check_your_email_page/check_your_email_form"
 import { IconMailFilled } from "@tabler/icons-react"
 import BackToSignInButton from "@/components/ui/buttons/back_button"
 
