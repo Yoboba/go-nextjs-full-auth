@@ -10,7 +10,7 @@ export default function SignUp() {
             <div className="flex flex-col gap-4 w-[480px] h-[730px] p-16 bg-white rounded-2xl justify-center items-center drop-shadow-xl">
                 <header className="text-neutral-700 text-[32px] font-semibold">Sign Up</header>
                 <SignUpForm/>
-                <Line height={1} color={"bg-slate-500"}/>
+                <Line height={"2"} color={'bg-gray-200'}/>
                 <section className="justify-center items-start gap-5 flex">
                     <GoogleButton/>
                     <GithubButton/>

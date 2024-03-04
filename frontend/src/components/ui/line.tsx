@@ -1,5 +1,5 @@
 interface ILine {
-    height: number;
+    height: string;
     color: string;
 }
 export default function Line(props:Readonly<ILine>) {
