@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { cn } from "@/lib/utils";
 import { poppins } from "../lib/fonts";
 import { ThemeProvider } from "../lib/theme_provider";
 import { Toaster } from "@/components/ui/toaster"
+import "../styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
