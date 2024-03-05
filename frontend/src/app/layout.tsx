@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { poppins } from "../configs/fonts";
-import { ThemeProvider } from "../configs/theme_provider";
+import { poppins } from "../lib/fonts";
+import { ThemeProvider } from "../lib/theme_provider";
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
