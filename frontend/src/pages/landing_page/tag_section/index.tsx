@@ -5,7 +5,7 @@ import {
 import TagList from "./tag_list";
 import Line from "@/components/ui/line";
 
-export default function TagSection() {
+export default function TagSectionIndex() {
     return (
         <section className="flex flex-col gap-4 h-screen w-1/4 bg-white p-8 border-l-2 border-gray-100">
             <div className="flex gap-2 items-center justify-between">

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/tabs"
 import Line from "@/components/ui/line";
 
-export default function BlogSection() {
+export default function BlogSectionIndex() {
     return (
         <section className="flex h-screen w-full flex-col gap-5 bg-white p-8 dark:bg-black">
             <div className="flex justify-between">
