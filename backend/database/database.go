@@ -1,7 +1,7 @@
 package database
 
-import "database/sql"
+import "gorm.io/gorm"
 
 type Database interface {
-	GetDB() *sql.DB
+	GetDB() *gorm.DB
 }

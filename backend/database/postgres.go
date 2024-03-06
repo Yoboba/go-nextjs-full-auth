@@ -1,14 +1,15 @@
 package database
 
 import (
-	"database/sql"
 	"fmt"
 
 	"github.com/Yoboba/GNA/config"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 type PostgresDatabase struct {
-	Db *sql.DB
+	Db *gorm.DB
 }
 
 func NewPostgresDatabase(cfg *config.Config) Database {
@@ -20,7 +21,8 @@ func NewPostgresDatabase(cfg *config.Config) Database {
 		cfg.Db.DBname,
 		cfg.Db.SSLMode,
 	)
-	db, err := sql.Open("postgres", connStr)
+
+	db, err := gorm.Open(postgres.Open(connStr), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
@@ -29,6 +31,6 @@ func NewPostgresDatabase(cfg *config.Config) Database {
 	return &PostgresDatabase{Db: db}
 }
 
-func (p *PostgresDatabase) GetDB() *sql.DB {
+func (p *PostgresDatabase) GetDB() *gorm.DB {
 	return p.Db
 }
