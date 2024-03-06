@@ -1,20 +1,20 @@
 package server
 
 import (
-	"database/sql"
 	"fmt"
 
 	"github.com/Yoboba/GNA/config"
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm"
 )
 
 type Fiber struct {
 	App *fiber.App
-	Db  *sql.DB
+	Db  *gorm.DB
 	Cfg *config.Config
 }
 
-func NewFiber(db *sql.DB, cfg *config.Config) Server {
+func NewFiber(db *gorm.DB, cfg *config.Config) Server {
 	return &Fiber{
 		App: fiber.New(),
 		Db:  db,
