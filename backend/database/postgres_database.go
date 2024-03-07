@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type PostgresDatabase struct {
+type postgresDatabase struct {
 	Db *gorm.DB
 }
 
@@ -28,9 +28,9 @@ func NewPostgresDatabase(cfg *config.Config) Database {
 	}
 
 	fmt.Printf("Connect to postgres with port : %d", cfg.Db.Port)
-	return &PostgresDatabase{Db: db}
+	return &postgresDatabase{Db: db}
 }
 
-func (p *PostgresDatabase) GetDB() *gorm.DB {
+func (p *postgresDatabase) GetDB() *gorm.DB {
 	return p.Db
 }
