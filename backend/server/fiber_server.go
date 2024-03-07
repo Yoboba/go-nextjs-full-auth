@@ -8,21 +8,21 @@ import (
 	"gorm.io/gorm"
 )
 
-type Fiber struct {
+type fiberServer struct {
 	App *fiber.App
 	Db  *gorm.DB
 	Cfg *config.Config
 }
 
 func NewFiber(db *gorm.DB, cfg *config.Config) Server {
-	return &Fiber{
+	return &fiberServer{
 		App: fiber.New(),
 		Db:  db,
 		Cfg: cfg,
 	}
 }
 
-func (f *Fiber) Start() {
+func (f *fiberServer) Start() {
 	// test
 	f.App.Get("/", helloWorld)
 	// f.App.Get("/api/v1/testdb", testDBConnection)
