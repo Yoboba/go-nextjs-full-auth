@@ -1,4 +1,4 @@
-import FormSectionIndex from "@/pages/forgot_password_page/form_section";
+import FormSectionIndex from "@/containers/forgot_password_page/form_section";
 
 export default function SignUp() {
     return (

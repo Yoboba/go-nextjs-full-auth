@@ -1,6 +1,6 @@
-import NavbarSectionIndex from "@/pages/landing_page/navbar_section";
-import BlogSectionIndex from "../pages/landing_page/blog_section";
-import TagSectionIndex from "../pages/landing_page/tag_section";
+import NavbarSectionIndex from "@/containers/landing_page/navbar_section";
+import BlogSectionIndex from "../containers/landing_page/blog_section";
+import TagSectionIndex from "../containers/landing_page/tag_section";
 
 export default function LandingPage() {
 

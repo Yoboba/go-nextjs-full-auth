@@ -1,4 +1,4 @@
-import FormSectionIndex from '@/pages/sign_in_page/form_section'
+import FormSectionIndex from '@/containers/sign_in_page/form_section'
 
 export default function SignInPage() {
   return (
