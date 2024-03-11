@@ -4,6 +4,9 @@ import (
 	"fmt"
 
 	"github.com/Yoboba/GNA/config"
+	"github.com/Yoboba/GNA/tag/handlers"
+	"github.com/Yoboba/GNA/tag/repositories"
+	"github.com/Yoboba/GNA/tag/usecases"
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
 )
@@ -14,7 +17,7 @@ type fiberServer struct {
 	Cfg *config.Config
 }
 
-func NewFiber(db *gorm.DB, cfg *config.Config) Server {
+func NewFiberServer(db *gorm.DB, cfg *config.Config) Server {
 	return &fiberServer{
 		App: fiber.New(),
 		Db:  db,
@@ -23,24 +26,19 @@ func NewFiber(db *gorm.DB, cfg *config.Config) Server {
 }
 
 func (f *fiberServer) Start() {
-	// test
-	f.App.Get("/", helloWorld)
-	// f.App.Get("/api/v1/testdb", testDBConnection)
-
-	// users
-	// f.App.Get("/api/v1/users", getUsers)
-	// f.App.Get("/api/v1/user/:id", getUser)
-	// f.App.Post("/api/v1/user", createUser)
-	// f.App.Delete("/api/v1/user/:id", deleteUser)
-
-	// // tags
-	// f.App.Get("/api/v1/tags", getTags)
-	// f.App.Post("/api/v1/tag", createTag)
-
+	f.InitTagHttpHandlers()
 	serverURL := fmt.Sprintf(":%d", f.Cfg.App.Port)
 	f.App.Listen(serverURL)
 }
 
-func helloWorld(c *fiber.Ctx) error {
-	return c.SendString("Hello, World!")
+// InitTagHttpHandlers implements Server.
+func (f *fiberServer) InitTagHttpHandlers() {
+	tagRepository := repositories.NewTagPostgresRepository(f.Db)
+
+	tagUseCase := usecases.NewTagUseCaseImpl(tagRepository)
+
+	tagHttpHandler := handlers.NewTagHttpHandler(tagUseCase)
+
+	v1 := f.App.Group("/v1")
+	v1.Post("/tag", tagHttpHandler.CreateTag)
 }

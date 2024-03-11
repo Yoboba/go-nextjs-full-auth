@@ -12,5 +12,5 @@ func main() {
 
 	db := database.NewPostgresDatabase(&cfg)
 
-	server.NewFiber(db.GetDB(), &cfg).Start()
+	server.NewFiberServer(db.GetDB(), &cfg).Start()
 }

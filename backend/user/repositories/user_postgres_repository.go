@@ -14,6 +14,10 @@ func NewUserPostgresRepository(db *gorm.DB) UserRepository {
 }
 
 func (u *UserPostgresRepository) Save(user entities.User) error {
-	// TODO: save/create user to postgres DB
+	// TODO : need test
+	result := u.db.Create(&user)
+	if result.Error != nil {
+		return result.Error
+	}
 	return nil
 }

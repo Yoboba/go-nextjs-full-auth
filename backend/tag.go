@@ -43,5 +43,3 @@ package main
 // 	db.QueryRow(`INSERT INTO tag (name) VALUES ($1) RETURNING id`, tag.Name).Scan(&id)
 // 	return c.SendString(fmt.Sprintf("New tag : %d", id))
 // }
-
-// // TODO: complete api for tags (include optimize code redundancy, )
