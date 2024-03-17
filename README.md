@@ -1,6 +1,6 @@
 # Full Authentication System using GO and Next.js
 
-- now work in progress
+a simple blog application focuses on utilizing JWT for authentication.. **WIP**
 
 #### Setup Instruction
 1. Clone
