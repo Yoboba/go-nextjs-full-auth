@@ -30,3 +30,11 @@ func (t *tagHttpHandler) CreateTag(c *fiber.Ctx) error {
 		"message": "Tag created successfully!",
 	})
 }
+
+func (t *tagHttpHandler) GetTag(c *fiber.Ctx) error {
+	tags, err := t.usecase.GetAllTags()
+	if err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
+	return c.JSON(tags)
+}

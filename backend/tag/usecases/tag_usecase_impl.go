@@ -16,3 +16,7 @@ func NewTagUseCaseImpl(repo repositories.TagRepository) TagUseCase {
 func (t *tagUseCaseImpl) CreateTag(tag entities.Tag) error {
 	return t.repo.Save(tag)
 }
+
+func (t *tagUseCaseImpl) GetAllTags() ([]entities.Tag, error) {
+	return t.repo.FindAll()
+}

@@ -20,3 +20,14 @@ func (t *tagPostgresRepository) Save(tag entities.Tag) error {
 	}
 	return nil
 }
+
+func (t *tagPostgresRepository) FindAll() ([]entities.Tag, error) {
+	var tags []entities.Tag
+	result := t.db.Find(&tags)
+
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return tags, nil
+}
