@@ -1,11 +1,11 @@
-import { 
-    IconCubePlus, 
+import {  
     IconTag 
 } from "@tabler/icons-react";
 import TagList from "./tag_list";
 import Line from "@/components/ui/line";
 import LoadingSkeleton from "@/components/my_ui/loading_skeleton";
 import { Suspense } from "react";
+
 
 export default function TagSectionIndex() {
     return (
@@ -15,12 +15,11 @@ export default function TagSectionIndex() {
                     <h2 className="text-xl font-semibold text-g2">Tags</h2>
                     <IconTag size={20} className="text-g2" />
                 </div>
-                <IconCubePlus size={20}  className="rounded-lg text-g2 cursor-pointer hover:bg-g4/25 transition-colors"/>
             </div>
             <Line height="h-[2px]" color="bg-g4/25"/>
-            <Suspense fallback={<LoadingSkeleton/>}>
+            {/* <Suspense fallback={<LoadingSkeleton/>}>
                 <TagList/>
-            </Suspense>
+            </Suspense> */}
         </section>
     )
 }

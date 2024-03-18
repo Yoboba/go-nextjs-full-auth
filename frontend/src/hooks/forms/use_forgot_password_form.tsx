@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import { routes } from "../constants/route";
+import { routes } from "../../constants/route";
 
 export function useForgotPasswordForm() {
     const router = useRouter();

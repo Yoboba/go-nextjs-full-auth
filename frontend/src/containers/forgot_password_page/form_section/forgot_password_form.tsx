@@ -4,7 +4,7 @@ import {
     Form,
 } from "@/components/ui/form"
 import { IconMailFilled } from '@tabler/icons-react';
-import { useForgotPasswordForm } from "../../../hooks/use_forgot_password_form";
+import { useForgotPasswordForm } from "../../../hooks/forms/use_forgot_password_form";
 import MyFormField from "@/components/my_ui/my_form_field";
 
 export default function ForgotPasswordForm() {

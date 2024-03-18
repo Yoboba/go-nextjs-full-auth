@@ -8,7 +8,7 @@ import {
     IconMailFilled, 
     IconLockSquareRoundedFilled, 
 } from '@tabler/icons-react';
-import { useSignUpForm } from "../../../hooks/use_sign_up_form";
+import { useSignUpForm } from "../../../hooks/forms/use_sign_up_form";
 import MyFormField from "@/components/my_ui/my_form_field";
 import MyFormCheckBox from "@/components/my_ui/my_form_checkbox";
 

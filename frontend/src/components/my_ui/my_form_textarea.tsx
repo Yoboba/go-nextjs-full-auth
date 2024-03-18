@@ -7,18 +7,17 @@ import {
 } from "@/components/ui/form"
 import { UseFormReturn } from "react-hook-form";
 import { motion } from "framer-motion";
-import { Input } from "../ui/input";
 import { useAnimation } from "@/constants/animation";
+import { Textarea } from "../ui/textarea";
 
 interface IMyFormField {
     form:UseFormReturn<any>;
     value: string;
     placeholder: string;
     type?: string;
-    icon: React.ReactNode;
 }
 
-export default function MyFormField(props:Readonly<IMyFormField>) {
+export default function MyFormTextArea(props:Readonly<IMyFormField>) {
     const [value, setValue] = useState(true);
     const {errorPopUp} = useAnimation();
     
@@ -31,7 +30,7 @@ export default function MyFormField(props:Readonly<IMyFormField>) {
             <FormItem>
                 <FormControl>
                     <div className="relative">
-                        <Input type={props.type} placeholder={props.placeholder} className="w-full" autoComplete={props.value} {...field}/>
+                        <Textarea placeholder={props.placeholder} className="w-full h-64" autoComplete={props.value} {...field}/>
                     </div>
                 </FormControl>
                 {!value && (

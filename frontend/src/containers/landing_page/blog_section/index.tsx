@@ -8,8 +8,10 @@ import {
     TabsTrigger 
 } from "@/components/ui/tabs"
 import Line from "@/components/ui/line";
+import BlogDrawer from "@/containers/landing_page/blog_section/blog_drawer";
 
 export default function BlogSectionIndex() {
+    
     return (
         <section className="flex h-screen w-full flex-col gap-5 bg-white p-8 dark:bg-black">
             <div className="flex justify-between">
@@ -24,7 +26,7 @@ export default function BlogSectionIndex() {
                             <TabsTrigger value="descending">DSC</TabsTrigger>
                         </TabsList>
                     </Tabs>
-                    <IconCubePlus size={40} className="rounded-lg text-g2 cursor-pointer hover:bg-g4/25 transition-colors"/>
+                    <BlogDrawer triggerElement={<IconCubePlus size={40} className="rounded-lg text-g2 cursor-pointer hover:bg-g4/25 transition-colors"/>}/>
                 </div>
             </div>
             <Line height="h-[2px]" color="bg-g4/25"/>

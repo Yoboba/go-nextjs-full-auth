@@ -7,7 +7,7 @@ import {
     IconLockSquareRoundedFilled, 
 } from '@tabler/icons-react';
 
-import { useSetNewPasswordForm } from "../../../hooks/use_set_new_password_form";
+import { useSetNewPasswordForm } from "../../../hooks/forms/use_set_new_password_form";
 import MyFormField from "@/components/my_ui/my_form_field";
 
 export default function SetNewPasswordForm() {

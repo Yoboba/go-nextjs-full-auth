@@ -6,7 +6,7 @@ import {
 import { 
     IconZoomCheckFilled 
 } from '@tabler/icons-react';
-import { useCheckYourEmailForm } from "../../../hooks/use_check_your_email_form";
+import { useCheckYourEmailForm } from "../../../hooks/forms/use_check_your_email_form";
 import MyFormField from "@/components/my_ui/my_form_field";
 
 export default function CheckYourEmailForm() {
