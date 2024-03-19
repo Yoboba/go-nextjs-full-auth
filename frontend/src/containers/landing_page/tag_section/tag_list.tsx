@@ -1,7 +1,7 @@
 "use client"
 import MyTag from "@/components/my_ui/my_tag";
 import url from "@/constants/url";
-import useGetMethod from "@/hooks/rest_api/use_get_method";
+import { use } from "react";
 
 interface TagsProps {
     id : number;
@@ -9,7 +9,7 @@ interface TagsProps {
 }
 
 export default function TagList() {
-    const tags = useGetMethod(url.baseUrl.V1, url.endPoints.getTag)
+    const tags = use(fetch(url.baseUrl.V1+url.endPoints.getTag, {method : "GET"}).then((value) => value.json()))
     
     return (
         <div className="flex flex-col gap-2 justify-center items-center">
