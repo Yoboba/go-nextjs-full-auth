@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import { Button } from "../../../components/ui/buttons/button";
+import { Button } from "../../../components/ui/button";
 import {
     Form,
 } from "@/components/ui/form"
@@ -11,6 +11,7 @@ import {
 import { useSignInForm } from "../../../hooks/forms/use_sign_in_form";
 import { routes } from "../../../constants/route";
 import MyFormField from "@/components/my_ui/my_form_field";
+import MyButton from "@/components/my_ui/my_button";
 
 
 export default function SignInForm() {
@@ -42,9 +43,7 @@ export default function SignInForm() {
                     {/* gap */}
                     <div className="h-1"/>
                     {/* submit button */}
-                    <Button type="submit" className="w-full text-white text-md rounded-lg bg-gradient-to-r from-violet-300 to-pink-300 hover:translate-y-[-3px] active:translate-y-[1px] transition-all duration-200">
-                        Sign in
-                    </Button>
+                    <MyButton text="Sign in"/>
                 </form>
             </Form>
     )

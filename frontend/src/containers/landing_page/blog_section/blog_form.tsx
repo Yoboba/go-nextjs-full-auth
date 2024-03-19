@@ -3,7 +3,7 @@ import { Form } from "@/components/ui/form"
 import { useBlogForm } from "@/hooks/forms/use_blog_form"
 import MyFormField from "@/components/my_ui/my_form_field"
 import { IconMailFilled } from "@tabler/icons-react"
-import { Button } from "@/components/ui/buttons/button"
+import { Button } from "@/components/ui/button"
 import MyFormTextArea from "@/components/my_ui/my_form_textarea"
 import TagFormField from "./tag_form_field"
 

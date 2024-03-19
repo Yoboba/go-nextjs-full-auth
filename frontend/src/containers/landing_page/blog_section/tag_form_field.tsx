@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/form";
 import { UseFormReturn } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/buttons/button";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useAnimation } from "@/constants/animation";
 

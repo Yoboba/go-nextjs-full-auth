@@ -1,8 +1,10 @@
-import BackToSignInButton from "@/components/ui/buttons/back_to_sign_in_button";
-import GithubButton from "@/components/ui/buttons/github_button";
-import GoogleButton from "@/components/ui/buttons/google_button";
+import GithubButton from "@/components/my_ui/github_button";
+import GoogleButton from "@/components/my_ui/google_button";
 import Line from "@/components/ui/line";
 import SignUpForm from "./sign_up_form";
+import BackButton from "@/components/my_ui/back_button";
+import { IconArrowBackUp } from "@tabler/icons-react";
+import { routes } from "@/constants/route";
 
 export default function FormSectionIndex() {
     return (
@@ -14,7 +16,7 @@ export default function FormSectionIndex() {
                 <GoogleButton/>
                 <GithubButton/>
             </section>
-            <BackToSignInButton/>
+            <BackButton icon={<IconArrowBackUp />} text={"Back to Sign In"} route={routes.SIGN_IN}/>
         </div>
     )
 }

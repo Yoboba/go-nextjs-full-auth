@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 
-import { Button } from "./button";
+import { Button } from "../ui/button";
 import { IconMoonFilled, IconSunFilled } from "@tabler/icons-react";
 
 export default function ThemeSwitcher() {

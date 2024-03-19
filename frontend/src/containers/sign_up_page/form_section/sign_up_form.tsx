@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "../../../components/ui/buttons/button";
+import { Button } from "../../../components/ui/button";
 import {
     Form,
 } from "@/components/ui/form"
@@ -11,6 +11,7 @@ import {
 import { useSignUpForm } from "../../../hooks/forms/use_sign_up_form";
 import MyFormField from "@/components/my_ui/my_form_field";
 import MyFormCheckBox from "@/components/my_ui/my_form_checkbox";
+import MyButton from "@/components/my_ui/my_button";
 
 export default function SignUpForm() {
     const { form, onSubmit } = useSignUpForm()
@@ -57,9 +58,7 @@ export default function SignUpForm() {
                 {/* gap */}
                 <div className="h-1"/>
                 {/* submit button */}
-                <Button type="submit" className="w-full text-white text-md rounded-lg bg-gradient-to-r from-violet-300 to-pink-300 hover:translate-y-[-3px] active:translate-y-[1px] transition-all duration-200">
-                    Sign Up
-                </Button>
+                <MyButton text="Sign up"/>
             </form>
         </Form>
     )

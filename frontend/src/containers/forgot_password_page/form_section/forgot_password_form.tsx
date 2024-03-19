@@ -1,11 +1,12 @@
 "use client"
-import { Button } from "../../../components/ui/buttons/button";
+import { Button } from "../../../components/ui/button";
 import {
     Form,
 } from "@/components/ui/form"
 import { IconMailFilled } from '@tabler/icons-react';
 import { useForgotPasswordForm } from "../../../hooks/forms/use_forgot_password_form";
 import MyFormField from "@/components/my_ui/my_form_field";
+import MyButton from "@/components/my_ui/my_button";
 
 export default function ForgotPasswordForm() {
     const {form, onSubmit} = useForgotPasswordForm()
@@ -23,9 +24,7 @@ export default function ForgotPasswordForm() {
                 {/* gap */}
                 <div className="h-1"/>
                 {/* submit button */}
-                <Button type="submit" className="w-full text-white text-md rounded-lg bg-gradient-to-r from-violet-300 to-pink-300 hover:translate-y-[-3px] active:translate-y-[1px] transition-all duration-200">
-                    Send
-                </Button>
+                <MyButton text="Send"/>
             </form>
         </Form>
     )
