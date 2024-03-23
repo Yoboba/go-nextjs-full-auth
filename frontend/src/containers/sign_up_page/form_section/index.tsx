@@ -6,7 +6,7 @@ import BackButton from "@/components/my_ui/back_button";
 import { IconArrowBackUp } from "@tabler/icons-react";
 import { routes } from "@/constants/route";
 
-export default function FormSectionIndex() {
+export default function FormSection() {
     return (
         <div className="flex flex-col gap-4 w-[480px] h-[730px] p-16 bg-white rounded-2xl justify-center items-center drop-shadow-xl">
             <header className="text-neutral-700 text-[32px] font-semibold">Sign Up</header>

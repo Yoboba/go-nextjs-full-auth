@@ -3,10 +3,13 @@ package server
 import (
 	"fmt"
 
+	tagHandlers "github.com/Yoboba/GNA/app/tag/handlers"
+	tagRepositories "github.com/Yoboba/GNA/app/tag/repositories"
+	tagUseCases "github.com/Yoboba/GNA/app/tag/usecases"
+	userHandlers "github.com/Yoboba/GNA/app/user/handlers"
+	userRepositories "github.com/Yoboba/GNA/app/user/repositories"
+	userUseCases "github.com/Yoboba/GNA/app/user/usecases"
 	"github.com/Yoboba/GNA/config"
-	"github.com/Yoboba/GNA/tag/handlers"
-	"github.com/Yoboba/GNA/tag/repositories"
-	"github.com/Yoboba/GNA/tag/usecases"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"gorm.io/gorm"
@@ -28,6 +31,7 @@ func NewFiberServer(db *gorm.DB, cfg *config.Config) Server {
 
 func (f *fiberServer) Start() {
 	f.App.Use(cors.New(cors.ConfigDefault))
+	f.InitUserHttpHandlers()
 	f.InitTagHttpHandlers()
 	serverURL := fmt.Sprintf(":%d", f.Cfg.App.Port)
 	f.App.Listen(serverURL)
@@ -35,13 +39,26 @@ func (f *fiberServer) Start() {
 
 // InitTagHttpHandlers implements Server.
 func (f *fiberServer) InitTagHttpHandlers() {
-	tagRepository := repositories.NewTagPostgresRepository(f.Db)
+	tagRepository := tagRepositories.NewTagPostgresRepository(f.Db)
 
-	tagUseCase := usecases.NewTagUseCaseImpl(tagRepository)
+	tagUseCase := tagUseCases.NewTagUseCaseImpl(tagRepository)
 
-	tagHttpHandler := handlers.NewTagHttpHandler(tagUseCase)
+	tagHttpHandler := tagHandlers.NewTagHttpHandler(tagUseCase)
 
-	v1 := f.App.Group("/v1")
-	v1.Post("/tag", tagHttpHandler.CreateTag)
-	v1.Get("/tags", tagHttpHandler.GetTag)
+	v1 := f.App.Group("/v1/tag")
+	v1.Post("", tagHttpHandler.CreateTag)
+	v1.Get("", tagHttpHandler.GetTag)
+}
+
+// InitUserHttpHandlers implements Server.
+func (f *fiberServer) InitUserHttpHandlers() {
+	userRepository := userRepositories.NewUserPostgresRepository(f.Db)
+
+	userUseCase := userUseCases.NewUserUseCaseImpl(userRepository)
+
+	userHttpHandler := userHandlers.NewUserHttpHandler(userUseCase)
+
+	v1 := f.App.Group("/v1/user")
+	v1.Post("/register", userHttpHandler.Register)
+	v1.Get("/:id", userHttpHandler.GetUser)
 }

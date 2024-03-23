@@ -1,4 +1,4 @@
-export default {
+const url = {
     baseUrl : {
         V1 : "http://localhost:7070/v1"
     },
@@ -7,3 +7,4 @@ export default {
     }
 }
 
+export default url
