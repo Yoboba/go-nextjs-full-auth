@@ -1,8 +1,6 @@
 package repositories
 
 import (
-	"log"
-
 	"github.com/Yoboba/GNA/app/user/entities"
 	"gorm.io/gorm"
 )
@@ -23,11 +21,12 @@ func (u *userPostgresRepository) Save(user entities.User) error {
 	return nil
 }
 
-func (u *userPostgresRepository) FindFromID(id uint32) entities.User {
+func (u *userPostgresRepository) FindFromUsername(username string) (entities.User, error) {
 	var user entities.User
-	result := u.db.First(&user, id)
+
+	result := u.db.Where("username = ?", username).First(&user)
 	if result.Error != nil {
-		log.Fatalf("Error finding user : %v", result.Error)
+		return user, result.Error
 	}
-	return user
+	return user, nil
 }

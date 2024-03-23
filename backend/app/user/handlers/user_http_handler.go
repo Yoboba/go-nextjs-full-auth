@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"strconv"
+	"log"
 
 	"github.com/Yoboba/GNA/app/user/entities"
 	"github.com/Yoboba/GNA/app/user/usecases"
@@ -16,7 +16,6 @@ func NewUserHttpHandler(usecase usecases.UserUseCase) UserHandler {
 	return &userHttpHandler{usecase: usecase}
 }
 
-// CreateUser implements UserHandler.
 func (u *userHttpHandler) Register(c *fiber.Ctx) error {
 	tmp := new(entities.User)
 	err := c.BodyParser(tmp)
@@ -34,11 +33,20 @@ func (u *userHttpHandler) Register(c *fiber.Ctx) error {
 	})
 }
 
-func (u *userHttpHandler) GetUser(c *fiber.Ctx) error {
-	id, err := strconv.ParseUint(c.Params("id"), 10, 32)
+func (u *userHttpHandler) Login(c *fiber.Ctx) error {
+	var user entities.User
+	err := c.BodyParser(&user)
 	if err != nil {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
+
+	token, err := u.usecase.ValidateUser(user)
+	if err != nil {
+		log.Fatalf("Validate fail : %v", err)
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
-	user := u.usecase.GetUser(uint32(id))
-	return c.JSON(user)
+
+	return c.JSON(fiber.Map{
+		"token": token,
+	})
 }
