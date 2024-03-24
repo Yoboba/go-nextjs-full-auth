@@ -20,18 +20,18 @@ func main() {
 func userMigrate(db database.Database) {
 	err := db.GetDB().AutoMigrate(&entities.User{})
 	if err != nil {
-		log.Fatalf("\nCannot Migrate User : %v", err)
+		log.Fatalf("\ncannot migrate user : %v", err)
 	}
 }
 
 func createUserMockData(db database.Database) {
 	users := []entities.User{
-		{Username: "Yobubble", Email: "thanachot.onl@student.mahidol.ac.th", Password: "123sd2", RoleID: 2},
-		{Username: "Prisma", Email: "Nanthapat.wat@student.mahidol.ac.th", Password: "aw12345dd", RoleID: 3},
+		{Username: "Yobubble", Email: "thanachot.onl@student.mahidol.ac.th", Password: "123sd2", RoleID: 1},
+		{Username: "Prisma", Email: "Nanthapat.wat@student.mahidol.ac.th", Password: "aw12345dd", RoleID: 2},
 	}
 
 	result := db.GetDB().Create(users)
 	if result.Error != nil {
-		log.Fatalf("\nCannot Create users Mock Data : %v", result.Error)
+		log.Fatalf("\ncannot create users mock data : %v", result.Error)
 	}
 }

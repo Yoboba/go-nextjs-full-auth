@@ -3,7 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/Yoboba/GNA/app/blog/entities"
+	blogEntity "github.com/Yoboba/GNA/app/blog/entities"
+	tagEntity "github.com/Yoboba/GNA/app/tag/entities"
 	"github.com/Yoboba/GNA/config"
 	"github.com/Yoboba/GNA/database"
 )
@@ -18,19 +19,22 @@ func main() {
 }
 
 func blogMigrate(db database.Database) {
-	err := db.GetDB().Migrator().CreateTable(&entities.Blog{})
+	err := db.GetDB().AutoMigrate(&blogEntity.Blog{})
 	if err != nil {
-		log.Fatalf("Cannot Migrate Blog : %v", err)
+		log.Fatalf("\ncannot migrate blog : %v", err)
 	}
 }
 
 func createBlogMockData(db database.Database) {
-	blogs := []entities.Blog{
-		{Title: "Go Clean Architecture", Caption: "maintainable and sustainability", Body: "Go Clean Architecture body test", UserID: 1},
+	blogs := []blogEntity.Blog{
+		{Title: "Go Clean Architecture", Caption: "maintainable and sustainability", Body: "Go Clean Architecture body test", UserID: 1, Tags: []tagEntity.Tag{
+			{Name: "GO (Programming Language)"},
+			{Name: "Clean Architecture"},
+		}},
 	}
 
 	result := db.GetDB().Create(blogs)
 	if result.Error != nil {
-		log.Fatalf("Cannot Create Blog Mock Data : %v", result.Error)
+		log.Fatalf("\ncannot create blog mock data : %v", result.Error)
 	}
 }

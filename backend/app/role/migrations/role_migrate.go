@@ -18,20 +18,19 @@ func main() {
 }
 
 func roleMigrate(db database.Database) {
-	err := db.GetDB().Migrator().CreateTable(&entities.Role{})
+	err := db.GetDB().AutoMigrate(entities.Role{})
 	if err != nil {
-		log.Fatalf("Cannot migrate Role : %v", err)
+		log.Fatalf("\ncannot migrate role : %v", err)
 	}
 }
 
 func createRoleMockData(db database.Database) {
 	roles := []entities.Role{
-		{Name: "guest"},
 		{Name: "user"},
 		{Name: "moderator"},
 	}
 	result := db.GetDB().Create(roles)
 	if result.Error != nil {
-		log.Fatalf("Cannot create roles : %v", result.Error)
+		log.Fatalf("\ncannot create roles : %v", result.Error)
 	}
 }
