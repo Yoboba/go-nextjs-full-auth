@@ -1,7 +1,8 @@
 package handlers
 
 import (
-	"log"
+	"fmt"
+	"time"
 
 	"github.com/Yoboba/GNA/app/user/entities"
 	"github.com/Yoboba/GNA/app/user/usecases"
@@ -42,9 +43,16 @@ func (u *userHttpHandler) Login(c *fiber.Ctx) error {
 
 	token, err := u.usecase.ValidateUser(user)
 	if err != nil {
-		log.Fatalf("Validate fail : %v", err)
-		return c.SendStatus(fiber.StatusInternalServerError)
+		fmt.Printf("\nvalidate fail : %v", err)
+		return c.SendStatus(fiber.StatusUnauthorized)
 	}
+
+	c.Cookie(&fiber.Cookie{
+		Name:     "jwt",
+		Value:    token,
+		Expires:  time.Now().Add(time.Minute * 5),
+		HTTPOnly: true,
+	})
 
 	return c.JSON(fiber.Map{
 		"token": token,

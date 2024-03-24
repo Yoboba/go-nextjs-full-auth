@@ -1,6 +1,7 @@
 package usecases
 
 import (
+	"errors"
 	"os"
 	"time"
 
@@ -36,9 +37,13 @@ func (u *userUseCaseImpl) ValidateUser(user entities.User) (string, error) {
 		return "", err
 	}
 
+	if result.Email != user.Email {
+		return "", errors.New("email mismatch")
+	}
+
 	passwordErr := bcrypt.CompareHashAndPassword([]byte(result.Password), []byte(user.Password))
 	if passwordErr != nil {
-		return "", err
+		return "", passwordErr
 	}
 
 	godotenv.Load()
@@ -46,7 +51,7 @@ func (u *userUseCaseImpl) ValidateUser(user entities.User) (string, error) {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
 	claims["user_id"] = user.ID
-	claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
+	claims["exp"] = time.Now().Add(time.Minute * 5).Unix()
 
 	t, err := token.SignedString([]byte(os.Getenv("jwtSecret"))) // <- from .env
 	if err != nil {
