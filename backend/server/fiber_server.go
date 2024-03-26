@@ -3,13 +3,13 @@ package server
 import (
 	"fmt"
 
-	tagHandlers "github.com/Yoboba/GNA/app/tag/handlers"
-	tagRepositories "github.com/Yoboba/GNA/app/tag/repositories"
-	tagUseCases "github.com/Yoboba/GNA/app/tag/usecases"
-	userHandlers "github.com/Yoboba/GNA/app/user/handlers"
-	userRepositories "github.com/Yoboba/GNA/app/user/repositories"
-	userUseCases "github.com/Yoboba/GNA/app/user/usecases"
-	"github.com/Yoboba/GNA/config"
+	"github.com/Yoboba/GNA/configs"
+	tagHandlers "github.com/Yoboba/GNA/pkg/tag/handlers"
+	tagRepositories "github.com/Yoboba/GNA/pkg/tag/repositories"
+	tagUseCases "github.com/Yoboba/GNA/pkg/tag/usecases"
+	userHandlers "github.com/Yoboba/GNA/pkg/user/handlers"
+	userRepositories "github.com/Yoboba/GNA/pkg/user/repositories"
+	userUseCases "github.com/Yoboba/GNA/pkg/user/usecases"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"gorm.io/gorm"
@@ -18,10 +18,10 @@ import (
 type fiberServer struct {
 	App *fiber.App
 	Db  *gorm.DB
-	Cfg *config.Config
+	Cfg *configs.Config
 }
 
-func NewFiberServer(db *gorm.DB, cfg *config.Config) Server {
+func NewFiberServer(db *gorm.DB, cfg *configs.Config) Server {
 	return &fiberServer{
 		App: fiber.New(),
 		Db:  db,

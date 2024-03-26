@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 
-	"github.com/Yoboba/GNA/config"
+	"github.com/Yoboba/GNA/configs"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -12,7 +12,7 @@ type postgresDatabase struct {
 	Db *gorm.DB
 }
 
-func NewPostgresDatabase(cfg *config.Config) Database {
+func NewPostgresDatabase(cfg *configs.Config) Database {
 	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
 		cfg.Db.Host,
 		cfg.Db.Port,
