@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"fmt"
 	"time"
 
+	"github.com/Yoboba/GNA/pkg/common"
 	"github.com/Yoboba/GNA/pkg/entities"
 	"github.com/Yoboba/GNA/pkg/user/usecases"
 	"github.com/gofiber/fiber/v2"
@@ -21,30 +21,27 @@ func (u *userHttpHandler) Register(c *fiber.Ctx) error {
 	tmp := new(entities.User)
 	err := c.BodyParser(tmp)
 	if err != nil {
-		return c.SendStatus(fiber.StatusBadRequest)
+		return common.Response(c, nil, "some information missing", fiber.StatusBadRequest, err.Error())
 	}
 
 	err1 := u.usecase.CreateUser(*tmp)
 	if err1 != nil {
-		return c.SendStatus(fiber.StatusInternalServerError)
+		return common.Response(c, nil, "cannot register", fiber.StatusInternalServerError, err1.Error())
 	}
 
-	return c.Status(200).JSON(fiber.Map{
-		"message": "User successfully created!",
-	})
+	return common.Response(c, nil, "user successfully created", fiber.StatusOK, "")
 }
 
 func (u *userHttpHandler) Login(c *fiber.Ctx) error {
 	var user entities.User
 	err := c.BodyParser(&user)
 	if err != nil {
-		return c.SendStatus(fiber.StatusBadRequest)
+		return common.Response(c, nil, "some information missing", fiber.StatusBadRequest, err.Error())
 	}
 
 	token, err := u.usecase.ValidateUser(user)
 	if err != nil {
-		fmt.Printf("\nvalidate fail : %v", err)
-		return c.SendStatus(fiber.StatusUnauthorized)
+		return common.Response(c, nil, "validate failed", fiber.StatusUnauthorized, err.Error())
 	}
 
 	c.Cookie(&fiber.Cookie{
@@ -54,7 +51,5 @@ func (u *userHttpHandler) Login(c *fiber.Ctx) error {
 		HTTPOnly: true,
 	})
 
-	return c.JSON(fiber.Map{
-		"token": token,
-	})
+	return common.Response(c, token, "token generated", fiber.StatusOK, "")
 }
