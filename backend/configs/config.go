@@ -6,9 +6,8 @@ import (
 
 type (
 	Config struct {
-		App     App
-		Db      Database
-		DbAdmin DatabaseAdmin
+		App App
+		Db  Database
 	}
 	App struct {
 		Port int
@@ -20,10 +19,6 @@ type (
 		Password string
 		DBname   string
 		SSLMode  string
-	}
-	DatabaseAdmin struct {
-		Host string
-		Port int
 	}
 )
 
@@ -48,10 +43,6 @@ func LoadConfig() Config {
 			Password: viper.GetString("database.password"),
 			DBname:   viper.GetString("database.dbname"),
 			SSLMode:  viper.GetString("database.sslmode"),
-		},
-		DbAdmin: DatabaseAdmin{
-			Host: viper.GetString("database_admin.host"),
-			Port: viper.GetInt("database_admin.port"),
 		},
 	}
 }

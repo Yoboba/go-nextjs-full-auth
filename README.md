@@ -2,6 +2,13 @@
 
 a simple blog application focuses on utilizing JWT for authentication.. **WIP**
 
+Configuration step
+- postgres docker
+- JwtSecret
+- Server port
+- Database
+- server url
+
 #### Setup Instruction
 1. Clone
 ```bash

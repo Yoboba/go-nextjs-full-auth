@@ -10,8 +10,4 @@ database:
   dbname: TEST
   sslmode: disable
 
-database_admin:
-  host: localhost
-  port: 8080
-
 

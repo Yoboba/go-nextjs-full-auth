@@ -17,12 +17,8 @@ export default function TagSection() {
                     <IconTag size={20} className="text-g2" />
                 </div>
             </div>
-            <Line height="h-[2px]" color="bg-g4/25"/>
-            <ErrorBoundary fallback={<p>Error</p>}>
-                <Suspense fallback={<LoadingSkeleton/>}>
-                    <TagList/>
-                </Suspense>
-            </ErrorBoundary>
+            <Line height="h-[2px]" color="bg-g4/25"/>    
+            <TagList/>
         </section>
     )
 }

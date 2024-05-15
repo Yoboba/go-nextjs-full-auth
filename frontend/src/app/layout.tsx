@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
-import { poppins } from "../lib/fonts";
+import { poppins, inter } from "../lib/fonts";
 import { ThemeProvider } from "../lib/theme_provider";
 import { Toaster } from "@/components/ui/toaster"
 import "../styles/globals.css";
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "bg-background min-h-screen font-sans antialiased",
+          "bg-background min-h-screen font-poppins antialiased",
           poppins.variable,
         )}
       >

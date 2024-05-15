@@ -1,10 +1,5 @@
 const url = {
-    baseUrl : {
-        V1 : "http://localhost:7070/v1"
-    },
-    endPoints : {
-        getTag: "/tags"
-    }
+    getTag: "http://localhost:7070/v1/tag"
 }
 
 export default url

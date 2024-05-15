@@ -13,7 +13,7 @@ const config = {
   prefix: "",
   theme: {
     fontFamily: {
-      sans: ["var(--font-poppins)", ...fontFamily.sans],
+      poppins: ["var(--font-poppins)", ...fontFamily.sans],
     },
     container: {
       center: true,
