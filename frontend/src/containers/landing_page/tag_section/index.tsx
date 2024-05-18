@@ -3,9 +3,6 @@ import {
 } from "@tabler/icons-react";
 import TagList from "./tag_list";
 import Line from "@/components/ui/line";
-import LoadingSkeleton from "@/components/my_ui/loading_skeleton";
-import { Suspense } from "react";
-import ErrorBoundary  from "../../../lib/ErrorBoundary";
 
 
 export default function TagSection() {

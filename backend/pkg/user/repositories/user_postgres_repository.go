@@ -30,3 +30,14 @@ func (u *userPostgresRepository) FindFromUsername(username string) (entities.Use
 	}
 	return user, nil
 }
+
+// ValidateEmail implements UserRepository.
+func (u *userPostgresRepository) ValidateEmailAndGetPassword(email string) (uint, string, error) {
+	var user entities.User
+
+	result := u.db.Where("email = ?", email).First(&user)
+	if result.Error != nil {
+		return 0, "", result.Error
+	}
+	return user.ID, user.Password, nil
+}

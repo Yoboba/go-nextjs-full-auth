@@ -74,8 +74,9 @@ html {
   height: 100%;
 }
 
+/* TODO : make blog part scrollable */
 body {
-  overflow: auto;
+  overflow: hidden;
   height: 100%;
   background: linear-gradient(180deg, #598392 0%, #AEC3B0 100%) !important;
 }

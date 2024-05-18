@@ -36,5 +36,4 @@ func (t *tagHttpHandler) GetTag(c *fiber.Ctx) error {
 		return common.Response(c, nil, "cannot get tags from the database", fiber.StatusInternalServerError, err.Error())
 	}
 	return common.Response(c, tags, "successfully get all the tags", fiber.StatusOK, "")
-	// TODO : refactor to use common.Response
 }

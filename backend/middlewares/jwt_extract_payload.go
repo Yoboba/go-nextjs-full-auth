@@ -1,3 +1,17 @@
 package middlewares
 
-// TODO : implement function for extract thing from jwt payload
+import (
+	"github.com/Yoboba/GNA/pkg/entities"
+	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v5"
+	"gorm.io/gorm"
+)
+
+func jwtExtractRoleFromUserId(c *fiber.Ctx, db *gorm.DB) string {
+	var user entities.User
+	token := c.Locals("user").(*jwt.Token)
+	userId := token.Claims.(jwt.MapClaims)["user_id"]
+
+	db.Where("id = ?", userId).First(&user)
+	return user.Role.Name
+}

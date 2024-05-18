@@ -1,9 +1,25 @@
 package middlewares
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"os"
 
-// TODO : get accessToken from jwt and check if token is valid"
+	"github.com/Yoboba/GNA/pkg/common"
+	jwtware "github.com/gofiber/contrib/jwt"
+	"github.com/gofiber/fiber/v2"
+	"github.com/joho/godotenv"
+)
 
-func JwtAuthentication(c *fiber.Ctx) {
+func JwtAuthentication() fiber.Handler {
+	godotenv.Load()
+	return jwtware.New(jwtware.Config{
+		SigningKey:   jwtware.SigningKey{Key: []byte(os.Getenv("jwtSecret"))},
+		ErrorHandler: jwtError,
+	})
+}
 
+func jwtError(c *fiber.Ctx, err error) error {
+	if err.Error() == "missing or malformed jwt" {
+		return common.Response(c, nil, "missing or malformed jwt", fiber.StatusBadRequest, err.Error())
+	}
+	return common.Response(c, nil, "invalid or expired jwt", fiber.StatusUnauthorized, err.Error())
 }
