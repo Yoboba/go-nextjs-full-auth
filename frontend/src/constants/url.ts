@@ -1,5 +1,6 @@
 const url = {
-    getTag: "http://localhost:7070/v1/tag"
+    getTag: "/api/v1/tag",
+    signIn: "/api/v1/user/sign-in",
 }
 
 export default url

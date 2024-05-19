@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod"
+import url from "../../constants/url"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -19,8 +20,16 @@ export function useSignInForm() {
     })
 
     // handle Submit
-    function onSubmit(values: z.infer<typeof signInFormSchema>, ) {
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof signInFormSchema>, ) {
+        const response = await fetch(url.signIn, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(values),
+        })
+        const data = await response.json()
+        console.log(data.data)   
     }
 
     return {

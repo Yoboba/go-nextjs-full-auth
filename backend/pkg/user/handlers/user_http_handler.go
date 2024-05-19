@@ -17,7 +17,7 @@ func NewUserHttpHandler(usecase usecases.UserUseCase) UserHandler {
 	return &userHttpHandler{usecase: usecase}
 }
 
-func (u *userHttpHandler) Register(c *fiber.Ctx) error {
+func (u *userHttpHandler) SignUp(c *fiber.Ctx) error {
 	tmp := new(entities.User)
 	err := c.BodyParser(tmp)
 	if err != nil {
@@ -32,7 +32,7 @@ func (u *userHttpHandler) Register(c *fiber.Ctx) error {
 	return common.Response(c, nil, "user successfully created", fiber.StatusOK, "")
 }
 
-func (u *userHttpHandler) Login(c *fiber.Ctx) error {
+func (u *userHttpHandler) SignIn(c *fiber.Ctx) error {
 	var user entities.User
 	err := c.BodyParser(&user)
 	if err != nil {
@@ -49,6 +49,7 @@ func (u *userHttpHandler) Login(c *fiber.Ctx) error {
 		Value:    token,
 		Expires:  time.Now().Add(time.Minute * 5),
 		HTTPOnly: true,
+		SameSite: "None",
 	})
 
 	return common.Response(c, token, "token generated", fiber.StatusOK, "")

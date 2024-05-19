@@ -60,6 +60,6 @@ func (f *fiberServer) InitUserHttpHandlers() {
 	userHttpHandler := userHandlers.NewUserHttpHandler(userUseCase)
 
 	v1 := f.App.Group("/v1/user")
-	v1.Post("/register", userHttpHandler.Register)
-	v1.Post("/login", userHttpHandler.Login)
+	v1.Post("/sign-up", userHttpHandler.SignUp)
+	v1.Post("/sign-in", userHttpHandler.SignIn)
 }
