@@ -52,5 +52,5 @@ func (u *userHttpHandler) SignIn(c *fiber.Ctx) error {
 		SameSite: "None",
 	})
 
-	return common.Response(c, token, "token generated", fiber.StatusOK, "")
+	return common.Response(c, "jwt token sent via cookie", "token generated", fiber.StatusOK, "")
 }

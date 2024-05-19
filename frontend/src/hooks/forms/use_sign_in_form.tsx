@@ -29,7 +29,7 @@ export function useSignInForm() {
             body: JSON.stringify(values),
         })
         const data = await response.json()
-        console.log(data.data)   
+        console.log(data)
     }
 
     return {
