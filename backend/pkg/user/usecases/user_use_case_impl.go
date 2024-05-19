@@ -31,16 +31,6 @@ func (u *userUseCaseImpl) CreateUser(user entities.User) error {
 }
 
 func (u *userUseCaseImpl) ValidateUser(user entities.User) (string, error) {
-
-	// result, err := u.repo.FindFromUsername(user.Username)
-	// if err != nil {
-	// 	return "", err
-	// }
-
-	// if result.Email != user.Email {
-	// 	return "", errors.New("email mismatch")
-	// }
-
 	id, password, emailErr := u.repo.ValidateEmailAndGetPassword(user.Email)
 	if emailErr != nil {
 		return "", emailErr

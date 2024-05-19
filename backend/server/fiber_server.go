@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/Yoboba/GNA/configs"
-	"github.com/Yoboba/GNA/middlewares"
 	tagHandlers "github.com/Yoboba/GNA/pkg/tag/handlers"
 	tagRepositories "github.com/Yoboba/GNA/pkg/tag/repositories"
 	tagUseCases "github.com/Yoboba/GNA/pkg/tag/usecases"
@@ -33,8 +32,8 @@ func NewFiberServer(db *gorm.DB, cfg *configs.Config) Server {
 func (f *fiberServer) Start() {
 	f.App.Use(cors.New(cors.ConfigDefault))
 	f.InitUserHttpHandlers()
-	f.App.Use(middlewares.JwtAuthentication()) // <- JWT Token Middleware
 	f.InitTagHttpHandlers()
+	// f.App.Use(middlewares.JwtAuthentication()) // <- JWT Token Middleware, Moderator Authorization ready but not being used
 	serverURL := fmt.Sprintf(":%d", f.Cfg.App.Port)
 	f.App.Listen(serverURL)
 }
@@ -47,7 +46,7 @@ func (f *fiberServer) InitTagHttpHandlers() {
 
 	tagHttpHandler := tagHandlers.NewTagHttpHandler(tagUseCase)
 
-	v1 := f.App.Group("/v1/tag", middlewares.ModeratorAuthorization)
+	v1 := f.App.Group("/v1/tag")
 	v1.Post("", tagHttpHandler.CreateTag)
 	v1.Get("", tagHttpHandler.GetTag)
 }
