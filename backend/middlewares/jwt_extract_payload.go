@@ -7,11 +7,11 @@ import (
 	"gorm.io/gorm"
 )
 
-func jwtExtractRoleFromUserId(c *fiber.Ctx, db *gorm.DB) string {
+func JwtExtractUserFromUserId(c *fiber.Ctx, db *gorm.DB) entities.User {
 	var user entities.User
 	token := c.Locals("user").(*jwt.Token)
 	userId := token.Claims.(jwt.MapClaims)["user_id"]
 
 	db.Where("id = ?", userId).First(&user)
-	return user.Role.Name
+	return user
 }

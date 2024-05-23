@@ -12,8 +12,8 @@ func ModeratorAuthorization(c *fiber.Ctx) error {
 
 	db := database.NewPostgresDatabase(&cfg).GetDB()
 
-	role := jwtExtractRoleFromUserId(c, db)
-	if role != "moderator" {
+	user := JwtExtractUserFromUserId(c, db)
+	if user.Role.Name != "moderator" {
 		return common.Response(c, nil, "moderator unauthorized", fiber.StatusUnauthorized, "")
 	}
 	return c.Next()

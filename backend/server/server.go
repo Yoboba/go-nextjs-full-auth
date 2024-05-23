@@ -4,4 +4,5 @@ type Server interface {
 	Start()
 	InitTagHttpHandlers()
 	InitUserHttpHandlers()
+	InitAuthHttpHandlers()
 }

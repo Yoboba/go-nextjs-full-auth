@@ -4,6 +4,10 @@ import (
 	"fmt"
 
 	"github.com/Yoboba/GNA/configs"
+	"github.com/Yoboba/GNA/middlewares"
+	authHandlers "github.com/Yoboba/GNA/pkg/auth/handlers"
+	authRepositories "github.com/Yoboba/GNA/pkg/auth/repositories"
+	authUseCases "github.com/Yoboba/GNA/pkg/auth/usecases"
 	tagHandlers "github.com/Yoboba/GNA/pkg/tag/handlers"
 	tagRepositories "github.com/Yoboba/GNA/pkg/tag/repositories"
 	tagUseCases "github.com/Yoboba/GNA/pkg/tag/usecases"
@@ -21,21 +25,28 @@ type fiberServer struct {
 	Cfg *configs.Config
 }
 
-func NewFiberServer(db *gorm.DB, cfg *configs.Config) Server {
-	return &fiberServer{
-		App: fiber.New(),
-		Db:  db,
-		Cfg: cfg,
-	}
-}
-
 func (f *fiberServer) Start() {
 	f.App.Use(cors.New(cors.ConfigDefault))
-	f.InitUserHttpHandlers()
+	f.InitAuthHttpHandlers()
 	f.InitTagHttpHandlers()
-	// f.App.Use(middlewares.JwtAuthentication()) // <- JWT Token Middleware, Moderator Authorization ready but not being used
+	f.App.Use(middlewares.JwtAuthentication())
+	f.InitUserHttpHandlers()
+	// Moderator Authorization still hasn't used
 	serverURL := fmt.Sprintf(":%d", f.Cfg.App.Port)
 	f.App.Listen(serverURL)
+}
+
+// InitAuthHttpHandlers implements Server.
+func (f *fiberServer) InitAuthHttpHandlers() {
+	authRepository := authRepositories.NewAuthPostgresRepository(f.Db)
+
+	authUseCase := authUseCases.NewAuthUseCaseImpl(authRepository)
+
+	authHttpHandler := authHandlers.NewAuthHttpHandler(authUseCase)
+
+	v1 := f.App.Group("/v1/auth")
+	v1.Post("/sign-up", authHttpHandler.SignUp)
+	v1.Post("/sign-in", authHttpHandler.SignIn)
 }
 
 // InitTagHttpHandlers implements Server.
@@ -60,6 +71,13 @@ func (f *fiberServer) InitUserHttpHandlers() {
 	userHttpHandler := userHandlers.NewUserHttpHandler(userUseCase)
 
 	v1 := f.App.Group("/v1/user")
-	v1.Post("/sign-up", userHttpHandler.SignUp)
-	v1.Post("/sign-in", userHttpHandler.SignIn)
+	v1.Get("", userHttpHandler.GetUserByID)
+}
+
+func NewFiberServer(db *gorm.DB, cfg *configs.Config) Server {
+	return &fiberServer{
+		App: fiber.New(),
+		Db:  db,
+		Cfg: cfg,
+	}
 }
