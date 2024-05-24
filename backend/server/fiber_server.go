@@ -71,7 +71,7 @@ func (f *fiberServer) InitUserHttpHandlers() {
 	userHttpHandler := userHandlers.NewUserHttpHandler(userUseCase)
 
 	v1 := f.App.Group("/v1/user")
-	v1.Get("", userHttpHandler.GetUserByID)
+	v1.Get("", userHttpHandler.GetUserFromJwt)
 }
 
 func NewFiberServer(db *gorm.DB, cfg *configs.Config) Server {

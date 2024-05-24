@@ -1,7 +1,7 @@
 package usecases
 
-import "github.com/Yoboba/GNA/pkg/entities"
+import "github.com/Yoboba/GNA/pkg/models"
 
 type UserUseCase interface {
-	GetUserByID(id uint) (entities.User, error)
+	GetUserByID(id uint) (models.User, error)
 }

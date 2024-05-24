@@ -1,7 +1,7 @@
 package repositories
 
-import "github.com/Yoboba/GNA/pkg/entities"
+import "github.com/Yoboba/GNA/pkg/models"
 
 type UserRepository interface {
-	FindUserFromID(id uint) (entities.User, error)
+	FindUserFromID(id uint) (models.User, error)
 }

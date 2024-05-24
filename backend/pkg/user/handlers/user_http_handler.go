@@ -1,18 +1,27 @@
 package handlers
 
 import (
+	"github.com/Yoboba/GNA/pkg/common"
 	"github.com/Yoboba/GNA/pkg/user/usecases"
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 type userHttpHandler struct {
 	usecase usecases.UserUseCase
 }
 
-// GetUserByID implements UserHandler.
-func (u *userHttpHandler) GetUserByID(c *fiber.Ctx) error {
-	// TODO : implement the GetUserByID method
-	return nil
+// GetUser implements UserHandler.
+func (u *userHttpHandler) GetUserFromJwt(c *fiber.Ctx) error {
+	token := c.Locals("user").(*jwt.Token)
+	userId := token.Claims.(jwt.MapClaims)["user_id"]
+
+	user, err := u.usecase.GetUserByID(uint(userId.(float64)))
+	if err != nil {
+		return common.Response(c, nil, "user not found", fiber.StatusNotFound, err.Error())
+	}
+
+	return common.Response(c, user, "user founded", fiber.StatusOK, "")
 }
 
 func NewUserHttpHandler(usecase usecases.UserUseCase) UserHandler {

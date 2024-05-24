@@ -1,7 +1,7 @@
 package usecases
 
 import (
-	"github.com/Yoboba/GNA/pkg/entities"
+	"github.com/Yoboba/GNA/pkg/models"
 	"github.com/Yoboba/GNA/pkg/user/repositories"
 )
 
@@ -13,6 +13,6 @@ func NewUserUseCaseImpl(repo repositories.UserRepository) UserUseCase {
 	return &userUseCaseImpl{repo: repo}
 }
 
-func (u *userUseCaseImpl) GetUserByID(id uint) (entities.User, error) {
+func (u *userUseCaseImpl) GetUserByID(id uint) (models.User, error) {
 	return u.repo.FindUserFromID(id)
 }
