@@ -11,5 +11,4 @@ type User struct {
 	Password string `gorm:"not null" json:"password"`
 	RoleID   uint   `gorm:"not null" json:"role_id"`
 	Role     Role   `gorm:"foreignKey:RoleID"`
-	Blogs    []Blog `gorm:"foreignKey:UserID"`
 }

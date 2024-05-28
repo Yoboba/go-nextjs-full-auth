@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import { Button } from "../../../components/ui/button";
+import { useRouter } from "next/navigation";
 import {
     Form,
 } from "@/components/ui/form"
@@ -8,14 +8,53 @@ import {
     IconMailFilled,
     IconLockSquareRoundedFilled, 
 } from '@tabler/icons-react';
-import { useSignInForm } from "../../../hooks/forms/use_sign_in_form";
-import { routes } from "../../../constants/route";
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
 import MyFormField from "@/components/my_ui/my_form_field";
 import MyButton from "@/components/my_ui/my_button";
-
+import { routes } from "../../../constants/routes";
+import url from "../../../constants/url"
+import { useToast } from "@/hooks/use-toast";
 
 export default function SignInForm() {
-    const {form, onSubmit} = useSignInForm();
+    const { toast } = useToast()
+    const router = useRouter()
+    const signInFormSchema = z.object({
+        email: z.string().email({ message : "Invalid Email"}),
+        password: z.string().min(2, {message: "Password should be at least 2 characters"}).max(15, {message: "Password should be less than 15 characters"}),
+    })
+    const form = useForm<z.infer<typeof signInFormSchema>>({
+        resolver: zodResolver(signInFormSchema),
+        defaultValues: {
+        email: "",
+        password: ""
+        },
+    })
+    async function onSubmit(values: z.infer<typeof signInFormSchema>, ) {
+        const response = await fetch(url.client.signIn, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(values),
+        })
+        const res = await response.json()
+        if (res.error === "") {
+            toast({
+                title: "Login Successful",
+                description: "Thanks for coming!",
+            })
+            router.push(routes.ROOT)
+            router.refresh()
+        } else {
+            toast({
+                variant: "destructive",
+                title: "Oh no! Something went wrong.",
+                description: "Please check your email and password.",
+            })
+        }
+    }
 
     return (
             <Form {...form}>

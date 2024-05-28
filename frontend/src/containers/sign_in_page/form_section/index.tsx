@@ -4,7 +4,7 @@ import Line from "@/components/ui/line";
 import SignInForm from "./sign_in_form";
 import BackButton from "@/components/my_ui/back_button";
 import { IconArrowBackUp } from "@tabler/icons-react";
-import { routes } from "@/constants/route";
+import { routes } from "@/constants/routes";
 
 export default function FormSection() {
     return (

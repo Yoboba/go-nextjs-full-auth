@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"fmt"
+
 	"github.com/Yoboba/GNA/pkg/common"
 	"github.com/Yoboba/GNA/pkg/user/usecases"
 	"github.com/gofiber/fiber/v2"
@@ -13,6 +15,7 @@ type userHttpHandler struct {
 
 // GetUser implements UserHandler.
 func (u *userHttpHandler) GetUserFromJwt(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "GetUserFromJwt")
 	token := c.Locals("user").(*jwt.Token)
 	userId := token.Claims.(jwt.MapClaims)["user_id"]
 

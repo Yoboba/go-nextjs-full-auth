@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/Yoboba/GNA/pkg/auth/usecases"
@@ -26,14 +27,27 @@ func (a *authHttpHandler) SignIn(c *fiber.Ctx) error {
 		return common.Response(c, nil, "validate failed", fiber.StatusUnauthorized, err.Error())
 	}
 
+	user1, err := a.usecase.GetUserByEmail(user.Email)
+	if err != nil {
+		return common.Response(c, nil, "user not found", fiber.StatusNotFound, err.Error())
+	}
+
 	c.Cookie(&fiber.Cookie{
 		Name:     "jwt",
 		Value:    token,
-		Expires:  time.Now().Add(time.Minute * 5),
+		Expires:  time.Now().Add(time.Minute * 5), // 5 minutes
+		HTTPOnly: true,
+		SameSite: "None",
+	})
+	c.Cookie(&fiber.Cookie{
+		Name:     "username",
+		Value:    user1.Username,
+		Expires:  time.Now().Add(time.Minute * 5), // 5 minutes
 		HTTPOnly: true,
 		SameSite: "None",
 	})
 
+	fmt.Println(c.Path(), "SignIn")
 	return common.Response(c, "jwt token sent via cookie", "token generated", fiber.StatusOK, "")
 }
 
@@ -49,7 +63,7 @@ func (a *authHttpHandler) SignUp(c *fiber.Ctx) error {
 	if err1 != nil {
 		return common.Response(c, nil, "cannot register", fiber.StatusInternalServerError, err1.Error())
 	}
-
+	fmt.Println(c.Path(), "SignUp")
 	return common.Response(c, nil, "user successfully created", fiber.StatusOK, "")
 }
 

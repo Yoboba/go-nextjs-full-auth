@@ -8,11 +8,11 @@ import {
 } from "@/components/ui/drawer"
 import BlogForm from "./blog_form"
 
-interface NewBlogDrawerProps {
+interface BlogDrawerProps {
     triggerElement : React.ReactNode
 }
 
-export default function BlogDrawer(props:Readonly<NewBlogDrawerProps>) {
+export default function BlogDrawer(props:Readonly<BlogDrawerProps>) {
     return (
         <Drawer>
             <DrawerTrigger>{props.triggerElement}</DrawerTrigger>

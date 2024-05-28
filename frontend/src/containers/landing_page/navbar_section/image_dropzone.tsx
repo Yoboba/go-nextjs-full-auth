@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast"
 import { ToastAction } from "@/components/ui/toast"
 import { DialogClose } from "@/components/ui/dialog"
 
-export default function MyImageDropzone({onImageSubmit}:Readonly<{onImageSubmit: Function}>) {
+export default function ImageDropzone({onImageSubmit}:Readonly<{onImageSubmit: Function}>) {
     const { toast } = useToast()
     const [image, setImage] = useState(null)
 

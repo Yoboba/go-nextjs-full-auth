@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "../../../components/ui/button";
+import { useRouter } from "next/navigation";
 import {
     Form,
 } from "@/components/ui/form"
@@ -8,21 +8,67 @@ import {
     IconMailFilled, 
     IconLockSquareRoundedFilled, 
 } from '@tabler/icons-react';
-import { useSignUpForm } from "../../../hooks/forms/use_sign_up_form";
 import MyFormField from "@/components/my_ui/my_form_field";
 import MyFormCheckBox from "@/components/my_ui/my_form_checkbox";
 import MyButton from "@/components/my_ui/my_button";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
+import url from "@/constants/url";
+import { routes } from "@/constants/routes";
 
 export default function SignUpForm() {
-    const { form, onSubmit } = useSignUpForm()
+    const router = useRouter()
+    const signUpformSchema = z.object({
+        username: z.string().min(5, {message : "Fullname should be at least 5 characters"}).max(50, {message : "Fullname should be less than 50 characters"}),
+        email: z.string().email({message : "Invalid Email"}),
+        password: z.string().min(2, {message : "Password should be at least 2 characters"}).max(15, {message : "Password should be less than 15 characters"}),
+        confirmPassword: z.string(),
+        term: z.boolean().default(false).refine((data) => data === true, {message : "Please accept terms and conditions"}),
+    }).refine((data) => data.password === data.confirmPassword, {
+        message: "Passwords do not match",
+        path: ["confirmPassword"],
+    })
+
+    const form = useForm<z.infer<typeof signUpformSchema>>({
+        resolver: zodResolver(signUpformSchema),
+        defaultValues: {
+        username: "",
+        email : "",
+        password: "",
+        confirmPassword: "",
+        term: false
+        },
+    })
+
+    async function onSubmit(values: z.infer<typeof signUpformSchema>) {
+        const body = {
+            "username" : values.username,
+            "email" :   values.email,
+            "password" : values.password,
+            "role_id" : 1
+        }
+        const response = await fetch(url.client.signUp, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body),
+        })
+        const res = await response.json()
+        if (res.error === "") {
+            router.push(routes.SIGN_IN)
+        }
+    }
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-2 w-full">
                 {/* fullname */}
                 <MyFormField
                     form={form}
-                    value="fullname"
-                    placeholder="Full name"
+                    value="username"
+                    placeholder="Username"
                     icon={<IconUserFilled className="absolute w-12 h-[40px] p-2 m-1 bg-gradient-to-l from-white from-70% to-transparent right-0 top-0 text-[#9F9F9F] rounded-tr-md rounded-br-md]"/>}
                 />
                 {/* email */}

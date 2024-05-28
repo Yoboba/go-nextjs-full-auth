@@ -7,4 +7,5 @@ import (
 type TagHandler interface {
 	CreateTag(c *fiber.Ctx) error
 	GetTag(c *fiber.Ctx) error
+	GetTagFromBlogId(c *fiber.Ctx) error
 }

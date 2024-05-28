@@ -5,4 +5,5 @@ type Server interface {
 	InitTagHttpHandlers()
 	InitUserHttpHandlers()
 	InitAuthHttpHandlers()
+	InitBlogHttpHandlers()
 }

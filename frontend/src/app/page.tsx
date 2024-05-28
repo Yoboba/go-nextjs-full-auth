@@ -1,6 +1,6 @@
 import NavbarSectionIndex from "@/containers/landing_page/navbar_section";
-import BlogSectionIndex from "../containers/landing_page/blog_section";
 import TagSectionIndex from "../containers/landing_page/tag_section";
+import GlobalBlogSection from "@/containers/landing_page/global_blog_section";
 
 export default function LandingPage() {
 
@@ -8,7 +8,7 @@ export default function LandingPage() {
     <div>
       <NavbarSectionIndex/>
       <main className="flex justify-center">
-        <BlogSectionIndex/>
+        <GlobalBlogSection/>
         <TagSectionIndex/>
       </main>
     </div>

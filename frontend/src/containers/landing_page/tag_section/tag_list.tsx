@@ -14,7 +14,9 @@ export default function TagList() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(url.getTag, { method: "GET" })
+        fetch(url.client.getTag, { 
+            method: "GET" 
+        })
             .then((response) => response.json())
             .then((data) => {
                 setTags(data.data);

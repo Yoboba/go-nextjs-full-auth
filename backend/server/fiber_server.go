@@ -8,6 +8,9 @@ import (
 	authHandlers "github.com/Yoboba/GNA/pkg/auth/handlers"
 	authRepositories "github.com/Yoboba/GNA/pkg/auth/repositories"
 	authUseCases "github.com/Yoboba/GNA/pkg/auth/usecases"
+	blogHandlers "github.com/Yoboba/GNA/pkg/blog/handlers"
+	blogRepositories "github.com/Yoboba/GNA/pkg/blog/repositories"
+	blogUseCases "github.com/Yoboba/GNA/pkg/blog/usecases"
 	tagHandlers "github.com/Yoboba/GNA/pkg/tag/handlers"
 	tagRepositories "github.com/Yoboba/GNA/pkg/tag/repositories"
 	tagUseCases "github.com/Yoboba/GNA/pkg/tag/usecases"
@@ -25,23 +28,22 @@ type fiberServer struct {
 	Cfg *configs.Config
 }
 
-func (f *fiberServer) Start() {
-	f.App.Use(cors.New(cors.ConfigDefault))
-	f.InitAuthHttpHandlers()
-	f.InitTagHttpHandlers()
-	f.App.Use(middlewares.JwtAuthentication())
-	f.InitUserHttpHandlers()
-	// Moderator Authorization still hasn't used
-	serverURL := fmt.Sprintf(":%d", f.Cfg.App.Port)
-	f.App.Listen(serverURL)
+// InitBlogHttpHandlers implements Server.
+func (f *fiberServer) InitBlogHttpHandlers() {
+	blogRepository := blogRepositories.NewBlogPostgresRepository(*f.Db)
+	blogUseCase := blogUseCases.NewBlogUseCaseImpl(blogRepository)
+	blogHttpHandler := blogHandlers.NewBlogHttpHandler(blogUseCase)
+
+	v1 := f.App.Group("/v1/blog")
+	v1.Get("", blogHttpHandler.GetBlogs)
+	v1.Get("/like/:blogId", blogHttpHandler.GetLikeByBlogId)
+	v1.Get("/like", blogHttpHandler.GetLikeStatusByUsernameAndBlogId)
 }
 
 // InitAuthHttpHandlers implements Server.
 func (f *fiberServer) InitAuthHttpHandlers() {
 	authRepository := authRepositories.NewAuthPostgresRepository(f.Db)
-
 	authUseCase := authUseCases.NewAuthUseCaseImpl(authRepository)
-
 	authHttpHandler := authHandlers.NewAuthHttpHandler(authUseCase)
 
 	v1 := f.App.Group("/v1/auth")
@@ -52,22 +54,19 @@ func (f *fiberServer) InitAuthHttpHandlers() {
 // InitTagHttpHandlers implements Server.
 func (f *fiberServer) InitTagHttpHandlers() {
 	tagRepository := tagRepositories.NewTagPostgresRepository(f.Db)
-
 	tagUseCase := tagUseCases.NewTagUseCaseImpl(tagRepository)
-
 	tagHttpHandler := tagHandlers.NewTagHttpHandler(tagUseCase)
 
 	v1 := f.App.Group("/v1/tag")
 	v1.Post("", tagHttpHandler.CreateTag)
 	v1.Get("", tagHttpHandler.GetTag)
+	v1.Get("/:blogId", tagHttpHandler.GetTagFromBlogId)
 }
 
 // InitUserHttpHandlers implements Server.
 func (f *fiberServer) InitUserHttpHandlers() {
 	userRepository := userRepositories.NewUserPostgresRepository(f.Db)
-
 	userUseCase := userUseCases.NewUserUseCaseImpl(userRepository)
-
 	userHttpHandler := userHandlers.NewUserHttpHandler(userUseCase)
 
 	v1 := f.App.Group("/v1/user")
@@ -80,4 +79,16 @@ func NewFiberServer(db *gorm.DB, cfg *configs.Config) Server {
 		Db:  db,
 		Cfg: cfg,
 	}
+}
+
+func (f *fiberServer) Start() {
+	f.App.Use(cors.New(cors.ConfigDefault))
+	f.InitAuthHttpHandlers()
+	f.InitTagHttpHandlers()
+	f.InitBlogHttpHandlers()
+	f.App.Use(middlewares.JwtAuthentication())
+	f.InitUserHttpHandlers()
+	// Moderator Authorization still hasn't used
+	serverURL := fmt.Sprintf(":%d", f.Cfg.App.Port)
+	f.App.Listen(serverURL)
 }

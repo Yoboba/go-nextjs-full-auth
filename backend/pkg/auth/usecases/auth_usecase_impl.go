@@ -15,6 +15,11 @@ type authUseCaseImpl struct {
 	repo repositories.AuthRepository
 }
 
+// GetUserByEmail implements AuthUseCase.
+func (a *authUseCaseImpl) GetUserByEmail(email string) (entities.User, error) {
+	return a.repo.FindUserByEmail(email)
+}
+
 // CreateUser implements AuthUseCase.
 func (a *authUseCaseImpl) CreateUser(user entities.User) error {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)

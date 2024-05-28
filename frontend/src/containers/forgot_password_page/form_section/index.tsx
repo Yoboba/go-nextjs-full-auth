@@ -2,7 +2,7 @@ import FormHeader from "@/components/ui/form_header";
 import { IconArrowBackUp, IconCircleKeyFilled } from "@tabler/icons-react";
 import ForgotPasswordForm from "./forgot_password_form";
 import BackButton from "@/components/my_ui/back_button";
-import { routes } from "@/constants/route";
+import { routes } from "@/constants/routes";
 
 export default function FormSection() {
     return (

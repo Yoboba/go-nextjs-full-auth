@@ -1,8 +1,16 @@
 const url = {
-    getTag: "/api/server/v1/tag",
-    getUser: "/api/server/v1/user",
-    signIn: "/api/server/v1/auth/sign-in",
-
+    client : {
+        getTag: "/api/server/v1/tag",
+        signIn: "/api/server/v1/auth/sign-in",
+        signUp: "/api/server/v1/auth/sign-up",
+        GetLike: "/api/server/v1/blog/like/", // one parameter : blog_id
+        GetLikeStatus: "/api/server/v1/blog/like", // two query parameter : username , blogId
+    }, 
+    server : {
+        getUser: "http://localhost:7070/v1/user",
+        getTag: "http://localhost:7070/v1/tag",
+        getBlog: "http://localhost:7070/v1/blog",
+    }
 }
 
 export default url

@@ -9,8 +9,13 @@ type tagPostgresRepository struct {
 	db *gorm.DB
 }
 
-func NewTagPostgresRepository(db *gorm.DB) TagRepository {
-	return &tagPostgresRepository{db: db}
+// FindAllFromUserId implements TagRepository.
+func (t *tagPostgresRepository) FindAllFromBlogId(id uint) ([]entities.Tag, error) {
+	var result []entities.Tag
+
+	t.db.Table("blog_tags").Select("tags.id, tags.name").Joins("left join tags on tags.id = blog_tags.tag_id").Where("blog_tags.blog_id = ?", id).Scan(&result)
+
+	return result, nil
 }
 
 func (t *tagPostgresRepository) Save(tag entities.Tag) error {
@@ -30,4 +35,8 @@ func (t *tagPostgresRepository) FindAll() ([]entities.Tag, error) {
 	}
 
 	return tags, nil
+}
+
+func NewTagPostgresRepository(db *gorm.DB) TagRepository {
+	return &tagPostgresRepository{db: db}
 }

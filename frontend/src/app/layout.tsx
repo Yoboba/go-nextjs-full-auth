@@ -4,6 +4,7 @@ import { poppins, inter } from "../lib/fonts";
 import { ThemeProvider } from "../lib/theme_provider";
 import { Toaster } from "@/components/ui/toaster"
 import "../styles/globals.css";
+import NavbarSectionIndex from "@/containers/landing_page/navbar_section";
 
 export const metadata: Metadata = {
   title: "Create Next App",

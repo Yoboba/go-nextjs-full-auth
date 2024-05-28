@@ -9,8 +9,15 @@ type authPostgresRepository struct {
 	db *gorm.DB
 }
 
-func NewAuthPostgresRepository(db *gorm.DB) AuthRepository {
-	return &authPostgresRepository{db: db}
+// FindUserByEmail implements AuthRepository.
+func (a *authPostgresRepository) FindUserByEmail(email string) (entities.User, error) {
+	var user entities.User
+
+	result := a.db.Where("email = ?", email).First(&user)
+	if result.Error != nil {
+		return entities.User{}, result.Error
+	}
+	return user, nil
 }
 
 // SaveUser implements AuthRepository.
@@ -31,4 +38,8 @@ func (a *authPostgresRepository) ValidateEmailAndGetPassword(email string) (uint
 		return 0, "", result.Error
 	}
 	return user.ID, user.Password, nil
+}
+
+func NewAuthPostgresRepository(db *gorm.DB) AuthRepository {
+	return &authPostgresRepository{db: db}
 }

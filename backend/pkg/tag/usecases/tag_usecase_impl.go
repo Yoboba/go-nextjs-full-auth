@@ -9,8 +9,9 @@ type tagUseCaseImpl struct {
 	repo repositories.TagRepository
 }
 
-func NewTagUseCaseImpl(repo repositories.TagRepository) TagUseCase {
-	return &tagUseCaseImpl{repo: repo}
+// GetAllTagsFromUserId implements TagUseCase.
+func (t *tagUseCaseImpl) GetAllTagsFromBlogId(id uint) ([]entities.Tag, error) {
+	return t.repo.FindAllFromBlogId(id)
 }
 
 func (t *tagUseCaseImpl) CreateTag(tag entities.Tag) error {
@@ -19,4 +20,8 @@ func (t *tagUseCaseImpl) CreateTag(tag entities.Tag) error {
 
 func (t *tagUseCaseImpl) GetAllTags() ([]entities.Tag, error) {
 	return t.repo.FindAll()
+}
+
+func NewTagUseCaseImpl(repo repositories.TagRepository) TagUseCase {
+	return &tagUseCaseImpl{repo: repo}
 }

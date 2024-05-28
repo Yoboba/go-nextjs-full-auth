@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { routes } from "../../constants/route";
+import { routes } from "../../constants/routes";
 
 export function useCheckYourEmailForm() {
     const router = useRouter();

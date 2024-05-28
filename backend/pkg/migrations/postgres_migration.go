@@ -17,17 +17,17 @@ func NewPostgresMigration(db database.Database) Migration {
 
 // TableMigrate implements Migration.
 func (p postgresMigration) TableMigrate() error {
-	roleMigrate(p.db)
-	tagMigrate(p.db)
+	// roleMigrate(p.db)
+	// tagMigrate(p.db)
 	userMigrate(p.db)
-	blogMigrate(p.db)
+	// blogMigrate(p.db)
 	return nil
 }
 
 // MockDataMigrate implements Migration.
 func (p postgresMigration) MockDataMigrate() error {
-	createRoleMockData(p.db)
-	createUserMockData(p.db)
+	// createRoleMockData(p.db)
+	// createUserMockData(p.db)
 	createBlogMockData(p.db)
 	return nil
 }
@@ -59,10 +59,34 @@ func userMigrate(db database.Database) {
 
 func createBlogMockData(db database.Database) {
 	blogs := []entities.Blog{
-		{Title: "Go Clean Architecture", Caption: "maintainable and sustainability", Body: "Go Clean Architecture body test", UserID: 1, Tags: []entities.Tag{
-			{Name: "GO (Programming Language)"},
-			{Name: "Clean Architecture"},
-		}},
+		// {
+		// 	Title:   "Go Clean Architecture",
+		// 	Caption: "maintainable and sustainability",
+		// 	Body:    "Go Clean Architecture body test",
+		// 	UserID:  1,
+		// 	Tags: []entities.Tag{
+		// 		{
+		// 			Name: "GO",
+		// 		},
+		// 		{
+		// 			Name: "Clean Architecture",
+		// 		},
+		// 	},
+		// },
+		{
+			Title:   "PHP fundamentals",
+			Caption: "php basic knowledge and lavarel framework",
+			Body:    "Hello everyone, this is Prom from ICT Mahidol, today I'll teach how to make hamburger",
+			UserID:  4,
+			Tags: []entities.Tag{
+				{
+					Name: "PHP",
+				},
+				{
+					Name: "Laravel",
+				},
+			},
+		},
 	}
 
 	result := db.GetDB().Create(blogs)
