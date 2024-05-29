@@ -6,11 +6,56 @@ import (
 
 	"github.com/Yoboba/GNA/pkg/blog/usecases"
 	"github.com/Yoboba/GNA/pkg/common"
+	"github.com/Yoboba/GNA/pkg/entities"
 	"github.com/gofiber/fiber/v2"
 )
 
 type blogHttpHandler struct {
 	usecase usecases.BlogUsecase
+}
+
+// DeleteBlog implements BlogHandler.
+func (b *blogHttpHandler) DeleteBlog(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "DeleteBlog")
+	blog_id, err := strconv.ParseInt(c.Params("blogId"), 10, 64)
+	if err != nil {
+		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, err.Error())
+	}
+	err1 := b.usecase.DeleteBlog(uint(blog_id))
+	if err1 != nil {
+		return common.Response(c, nil, "cannot delete blog", fiber.StatusInternalServerError, err1.Error())
+	}
+	return common.Response(c, nil, "delete blog successfully", fiber.StatusOK, "")
+}
+
+// UpdateBlog implements BlogHandler.
+func (b *blogHttpHandler) UpdateBlog(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "UpdateBlog")
+	var blog entities.Blog
+	err := c.BodyParser(&blog)
+	if err != nil {
+		return common.Response(c, nil, "some information missing", fiber.StatusBadRequest, err.Error())
+	}
+	err = b.usecase.UpdateBlog(blog)
+	if err != nil {
+		return common.Response(c, nil, "cannot create blog", fiber.StatusInternalServerError, err.Error())
+	}
+	return common.Response(c, nil, "blog successfully created", fiber.StatusOK, "")
+}
+
+// CreateBlog implements BlogHandler.
+func (b *blogHttpHandler) CreateBlog(c *fiber.Ctx) error {
+	var blog entities.Blog
+	fmt.Println(c.Path(), "CreateBlog")
+	err := c.BodyParser(&blog)
+	if err != nil {
+		return common.Response(c, nil, "some information missing", fiber.StatusBadRequest, err.Error())
+	}
+	err = b.usecase.CreateBlog(blog)
+	if err != nil {
+		return common.Response(c, nil, "cannot create blog", fiber.StatusInternalServerError, err.Error())
+	}
+	return common.Response(c, nil, "blog successfully created", fiber.StatusOK, "")
 }
 
 // GetLikeStatusByUsernameAndBlogId implements BlogHandler.
@@ -24,7 +69,7 @@ func (b *blogHttpHandler) GetLikeStatusByUsernameAndBlogId(c *fiber.Ctx) error {
 
 	id, err := strconv.ParseInt(q["blogId"], 10, 64)
 	if err != nil {
-		return common.Response(c, nil, "cannot parse blogId to Integer", fiber.StatusBadRequest, err.Error())
+		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, err.Error())
 	}
 
 	status, err := b.usecase.GetLikeStatusFromUsernameAndBlogId(q["username"], uint(id))
@@ -39,7 +84,7 @@ func (b *blogHttpHandler) GetLikeByBlogId(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "GetLikeByBlogId")
 	blog_id, err := strconv.ParseInt(c.Params("blogId"), 10, 64)
 	if err != nil {
-		return common.Response(c, nil, "cannot parse blogId to Integer", fiber.StatusBadRequest, err.Error())
+		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, err.Error())
 	}
 	like, err := b.usecase.GetLikeFromBlogId(uint(blog_id))
 	if err != nil {

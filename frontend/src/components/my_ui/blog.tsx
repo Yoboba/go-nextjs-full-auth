@@ -10,8 +10,9 @@ import { getCookie } from "@/lib/cookies";
 interface BlogProps {
     id : number;
     author : string;
-    articleName : string;
-    articleDescription : string;
+    title : string;
+    caption : string;
+    body : string;
     dateTime : Date;
 }
 
@@ -25,8 +26,8 @@ export default function Blog(props: Readonly<BlogProps>) {
             <div className="flex flex-col justify-between h-full">
                 <BlogAvatar username={props.author}/>
                 <main className=" space-y-1">
-                    <h2 className="text-3xl font-semibold text-g1">{props.articleName}</h2>
-                    <p className=" text-sm">{props.articleDescription}</p>
+                    <h2 className="text-3xl font-semibold text-g1">{props.title}</h2>
+                    <p className=" text-sm">{props.caption}</p>
                 </main>
                 <div className="flex items-center gap-5 text-sm">
                     <p>{months[date.getMonth()-1]} {date.getDate()}</p>

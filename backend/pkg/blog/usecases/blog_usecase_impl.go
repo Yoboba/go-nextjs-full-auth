@@ -2,11 +2,27 @@ package usecases
 
 import (
 	"github.com/Yoboba/GNA/pkg/blog/repositories"
+	"github.com/Yoboba/GNA/pkg/entities"
 	"github.com/Yoboba/GNA/pkg/models"
 )
 
 type blogUseCaseImpl struct {
 	repo repositories.BlogRepository
+}
+
+// DeleteBlog implements BlogUsecase.
+func (b *blogUseCaseImpl) DeleteBlog(id uint) error {
+	return b.repo.Delete(id)
+}
+
+// UpdateBlog implements BlogUsecase.
+func (b *blogUseCaseImpl) UpdateBlog(blog entities.Blog) error {
+	return b.repo.Update(blog)
+}
+
+// CreateBlog implements BlogUsecase.
+func (b *blogUseCaseImpl) CreateBlog(blog entities.Blog) error {
+	return b.repo.Save(blog)
 }
 
 // GetLikeStatusFromUsernameAndBlogId implements BlogUsecase.

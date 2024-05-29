@@ -28,8 +28,8 @@ type fiberServer struct {
 	Cfg *configs.Config
 }
 
-// InitBlogHttpHandlers implements Server.
-func (f *fiberServer) InitBlogHttpHandlers() {
+// InitGlobalBlogHttpHandlers implements Server.
+func (f *fiberServer) InitGlobalBlogHttpHandlers() {
 	blogRepository := blogRepositories.NewBlogPostgresRepository(*f.Db)
 	blogUseCase := blogUseCases.NewBlogUseCaseImpl(blogRepository)
 	blogHttpHandler := blogHandlers.NewBlogHttpHandler(blogUseCase)
@@ -38,6 +38,18 @@ func (f *fiberServer) InitBlogHttpHandlers() {
 	v1.Get("", blogHttpHandler.GetBlogs)
 	v1.Get("/like/:blogId", blogHttpHandler.GetLikeByBlogId)
 	v1.Get("/like", blogHttpHandler.GetLikeStatusByUsernameAndBlogId)
+}
+
+// InitBlogHttpHandlers implements Server.
+func (f *fiberServer) InitBlogHttpHandlers() {
+	blogRepository := blogRepositories.NewBlogPostgresRepository(*f.Db)
+	blogUseCase := blogUseCases.NewBlogUseCaseImpl(blogRepository)
+	blogHttpHandler := blogHandlers.NewBlogHttpHandler(blogUseCase)
+
+	v1 := f.App.Group("/v1/blog")
+	v1.Post("", blogHttpHandler.CreateBlog)
+	v1.Put("", blogHttpHandler.UpdateBlog)
+	v1.Delete("/:blogId", blogHttpHandler.DeleteBlog)
 }
 
 // InitAuthHttpHandlers implements Server.
@@ -85,8 +97,9 @@ func (f *fiberServer) Start() {
 	f.App.Use(cors.New(cors.ConfigDefault))
 	f.InitAuthHttpHandlers()
 	f.InitTagHttpHandlers()
-	f.InitBlogHttpHandlers()
+	f.InitGlobalBlogHttpHandlers()
 	f.App.Use(middlewares.JwtAuthentication())
+	f.InitBlogHttpHandlers()
 	f.InitUserHttpHandlers()
 	// Moderator Authorization still hasn't used
 	serverURL := fmt.Sprintf(":%d", f.Cfg.App.Port)

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
 import { poppins, inter } from "../lib/fonts";
 import { ThemeProvider } from "../lib/theme_provider";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster";
 import "../styles/globals.css";
 import NavbarSectionIndex from "@/containers/landing_page/navbar_section";
 
@@ -26,7 +26,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="light">
           {children}
-          <Toaster/>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

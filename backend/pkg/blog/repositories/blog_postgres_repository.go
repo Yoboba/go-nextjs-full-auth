@@ -12,9 +12,30 @@ type blogPostgresRepository struct {
 	db gorm.DB
 }
 
+// Delete implements BlogRepository.
+func (b *blogPostgresRepository) Delete(id uint) error {
+	result := b.db.Delete(&entities.Blog{}, id)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
+
+// Update implements BlogRepository.
+func (b *blogPostgresRepository) Update(blog entities.Blog) error {
+	result := b.db.Save(blog)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
+
 // Save implements BlogRepository.
 func (b *blogPostgresRepository) Save(blog entities.Blog) error {
-	// TODO : Create blog in database
+	result := b.db.Create(&blog)
+	if result.Error != nil {
+		return result.Error
+	}
 	return nil
 }
 
@@ -44,7 +65,7 @@ func (b *blogPostgresRepository) FindLikeFromBlogId(id uint) (models.BlogLike, e
 		Group("user_blogs_like.blog_id").Scan(&like)
 
 	if result.RowsAffected == 0 {
-		return like, fmt.Errorf("blog_id %d not exist", id)
+		return like, fmt.Errorf("blog_id %d not exist or do not have any like yet", id)
 	}
 	if result.Error != nil {
 		return like, result.Error

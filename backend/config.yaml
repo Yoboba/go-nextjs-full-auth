@@ -9,5 +9,3 @@ database:
   password: mypassword
   dbname: TEST
   sslmode: disable
-
-

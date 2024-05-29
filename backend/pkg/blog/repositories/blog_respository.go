@@ -10,4 +10,6 @@ type BlogRepository interface {
 	FindLikeFromBlogId(id uint) (models.BlogLike, error)
 	FindLikeStatusFromUsernameAndBlogId(username string, id uint) (bool, error)
 	Save(blog entities.Blog) error
+	Update(blog entities.Blog) error
+	Delete(id uint) error
 }

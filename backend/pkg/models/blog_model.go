@@ -16,6 +16,6 @@ type BlogLike struct {
 }
 
 type BlogLikeStatus struct {
-	UserId string "json:user_id"
-	BlogId uint   "json:blog_id"
+	UserId uint `json:"user_id"`
+	BlogId uint `json:"blog_id"`
 }
