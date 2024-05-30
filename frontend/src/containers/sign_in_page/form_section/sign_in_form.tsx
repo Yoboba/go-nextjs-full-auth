@@ -14,10 +14,13 @@ import * as z from "zod"
 import MyFormField from "@/components/my_ui/my_form_field";
 import MyButton from "@/components/my_ui/my_button";
 import { routes } from "../../../constants/routes";
-import url from "../../../constants/url"
+import url from "../../../constants/url";
 import { useToast } from "@/hooks/use-toast";
 
-export default function SignInForm() {
+interface SignInFormProps {
+    username: string | undefined
+}
+export default function SignInForm(props:SignInFormProps) {
     const { toast } = useToast()
     const router = useRouter()
     const signInFormSchema = z.object({
@@ -42,10 +45,10 @@ export default function SignInForm() {
         const res = await response.json()
         if (res.error === "") {
             toast({
-                title: "Login Successful",
+                title: "Login Successful...",
                 description: "Thanks for coming!",
             })
-            router.push(routes.ROOT)
+            router.push(`/${props.username}`)
             router.refresh()
         } else {
             toast({

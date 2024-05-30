@@ -50,6 +50,8 @@ func (f *fiberServer) InitBlogHttpHandlers() {
 	v1.Post("", blogHttpHandler.CreateBlog)
 	v1.Put("", blogHttpHandler.UpdateBlog)
 	v1.Delete("/:blogId", blogHttpHandler.DeleteBlog)
+	v1.Post("/like/:blogId", blogHttpHandler.CreatelikeByUserIdAndBlogId)
+	v1.Delete("/like/:blogId", blogHttpHandler.DeletelikeByUserIdAndBlogId)
 }
 
 // InitAuthHttpHandlers implements Server.

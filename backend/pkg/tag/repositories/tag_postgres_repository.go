@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"github.com/Yoboba/GNA/pkg/entities"
+	"github.com/Yoboba/GNA/pkg/models"
 	"gorm.io/gorm"
 )
 
@@ -10,12 +11,22 @@ type tagPostgresRepository struct {
 }
 
 // FindAllFromUserId implements TagRepository.
-func (t *tagPostgresRepository) FindAllFromBlogId(id uint) ([]entities.Tag, error) {
-	var result []entities.Tag
-
-	t.db.Table("blog_tags").Select("tags.id, tags.name").Joins("left join tags on tags.id = blog_tags.tag_id").Where("blog_tags.blog_id = ?", id).Scan(&result)
-
-	return result, nil
+func (t *tagPostgresRepository) FindAllFromBlogId(id uint) ([]models.Tag, error) {
+	var blog entities.Blog
+	result := t.db.Where("id = ?", id).Preload("Tags").First(&blog)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	// convert to model
+	var tags []models.Tag
+	for _, entityTag := range blog.Tags {
+		modelTag := models.Tag{
+			ID:   entityTag.Id,
+			Name: entityTag.Name,
+		}
+		tags = append(tags, modelTag)
+	}
+	return tags, nil
 }
 
 func (t *tagPostgresRepository) Save(tag entities.Tag) error {
@@ -26,14 +37,12 @@ func (t *tagPostgresRepository) Save(tag entities.Tag) error {
 	return nil
 }
 
-func (t *tagPostgresRepository) FindAll() ([]entities.Tag, error) {
-	var tags []entities.Tag
-	result := t.db.Find(&tags)
-
+func (t *tagPostgresRepository) FindAll() ([]models.Tag, error) {
+	var tags []models.Tag
+	result := t.db.Model(&entities.Tag{}).Find(&tags)
 	if result.Error != nil {
 		return nil, result.Error
 	}
-
 	return tags, nil
 }
 

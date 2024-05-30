@@ -12,6 +12,44 @@ type blogPostgresRepository struct {
 	db gorm.DB
 }
 
+// DeleteLikeFromBlogIdAndUserId implements BlogRepository.
+func (b *blogPostgresRepository) DeleteLikeFromBlogIdAndUserId(userId uint, blogId uint) error {
+	var blog entities.Blog
+	var user entities.User
+	blogResult := b.db.Where("id = ?", blogId).First(&blog)
+	if blogResult.Error != nil {
+		return blogResult.Error
+	}
+	userResult := b.db.Where("id = ?", userId).First(&user)
+	if userResult.Error != nil {
+		return userResult.Error
+	}
+	err := b.db.Model(&user).Association("Blogs").Delete(blog)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// SaveLikeFromBlogIdAndUserId implements BlogRepository.
+func (b *blogPostgresRepository) SaveLikeFromBlogIdAndUserId(userId uint, blogId uint) error {
+	var blog entities.Blog
+	var user entities.User
+	blogResult := b.db.Where("id = ?", blogId).First(&blog)
+	if blogResult.Error != nil {
+		return blogResult.Error
+	}
+	userResult := b.db.Where("id = ?", userId).First(&user)
+	if userResult.Error != nil {
+		return userResult.Error
+	}
+	err := b.db.Model(&user).Association("Blogs").Append(&blog)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 // Delete implements BlogRepository.
 func (b *blogPostgresRepository) Delete(id uint) error {
 	result := b.db.Delete(&entities.Blog{}, id)

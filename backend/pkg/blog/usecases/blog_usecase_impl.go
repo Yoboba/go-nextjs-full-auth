@@ -10,6 +10,16 @@ type blogUseCaseImpl struct {
 	repo repositories.BlogRepository
 }
 
+// DeleteLikeFromBlogIdAndUserId implements BlogUsecase.
+func (b *blogUseCaseImpl) DeleteLikeFromBlogIdAndUserId(userId uint, blogId uint) error {
+	return b.repo.DeleteLikeFromBlogIdAndUserId(userId, blogId)
+}
+
+// CreateLikeFromBlogIdAndUserId implements BlogUsecase.
+func (b *blogUseCaseImpl) CreateLikeFromBlogIdAndUserId(userId uint, blogId uint) error {
+	return b.repo.SaveLikeFromBlogIdAndUserId(userId, blogId)
+}
+
 // DeleteBlog implements BlogUsecase.
 func (b *blogUseCaseImpl) DeleteBlog(id uint) error {
 	return b.repo.Delete(id)

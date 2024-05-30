@@ -18,7 +18,11 @@ interface ITagFormField {
 }
 
 export default function TagFormField(props: Readonly<ITagFormField>) {
-    const [tags, setTags] = useState<string[]>([]);
+    const [tags, setTags] = useState([
+        {
+            name : ""
+        }
+    ]);
     const [inputValue, setInputValue] = useState("");
     const { errorPopUp } = useAnimation();
 
@@ -32,13 +36,15 @@ export default function TagFormField(props: Readonly<ITagFormField>) {
 
     const handleAddTag = () => {
         if (inputValue.trim()) {
-            setTags([...tags, inputValue.trim()]);
+            setTags([...tags, { name: inputValue.trim() }]);
+            console.log(tags)
             setInputValue("");
         }
     };
 
     const handleRemoveTag = (tagToRemove: string) => {
-        setTags(tags.filter((tag) => tag !== tagToRemove));
+        setTags(tags.filter((tag) => tag.name !== tagToRemove));
+        console.log(tags)
     };
 
     const { formState: { errors } } = props.form;
@@ -70,8 +76,8 @@ export default function TagFormField(props: Readonly<ITagFormField>) {
                             )}
                             <div className="flex gap-2 flex-wrap">
                                 {tags.map((tag, index) => (
-                                    <p key={index} className="text-xs bg-gray-200 text-gray-800 px-2 py-1 rounded-md cursor-pointer" onClick={() => handleRemoveTag(tag)}>
-                                        {tag} &times;
+                                    <p key={index} className="text-xs bg-gray-200 text-gray-800 px-2 py-1 rounded-md cursor-pointer" onClick={() => handleRemoveTag(tag.name)}>
+                                        {tag.name} &times;
                                     </p>
                                 ))}
                             </div>

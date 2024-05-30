@@ -8,10 +8,45 @@ import (
 	"github.com/Yoboba/GNA/pkg/common"
 	"github.com/Yoboba/GNA/pkg/entities"
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 type blogHttpHandler struct {
 	usecase usecases.BlogUsecase
+}
+
+// DeletelikeByUserIdAndBlogId implements BlogHandler.
+func (b *blogHttpHandler) DeletelikeByUserIdAndBlogId(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "DeletelikeByUserIdAndBlogId")
+	blogId, parseErr := strconv.ParseInt(c.Params("blogId"), 10, 64)
+	if parseErr != nil {
+		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, parseErr.Error())
+	}
+	token := c.Locals("user").(*jwt.Token)
+	userId := token.Claims.(jwt.MapClaims)["user_id"]
+
+	deleteLikeErr := b.usecase.DeleteLikeFromBlogIdAndUserId(uint(userId.(float64)), uint(blogId))
+	if deleteLikeErr != nil {
+		return common.Response(c, nil, "cannot add like to the database", fiber.StatusInternalServerError, deleteLikeErr.Error())
+	}
+	return common.Response(c, nil, "Delete like successfully", fiber.StatusOK, "")
+}
+
+// CreatelikeByUserIdAndBlogId implements BlogHandler.
+func (b *blogHttpHandler) CreatelikeByUserIdAndBlogId(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "CreatelikeByUserIdAndBlogId")
+	blogId, parseErr := strconv.ParseInt(c.Params("blogId"), 10, 64)
+	if parseErr != nil {
+		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, parseErr.Error())
+	}
+	token := c.Locals("user").(*jwt.Token)
+	userId := token.Claims.(jwt.MapClaims)["user_id"]
+
+	createLikeErr := b.usecase.CreateLikeFromBlogIdAndUserId(uint(userId.(float64)), uint(blogId))
+	if createLikeErr != nil {
+		return common.Response(c, nil, "cannot add like to the database", fiber.StatusInternalServerError, createLikeErr.Error())
+	}
+	return common.Response(c, nil, "create like successfully", fiber.StatusOK, "")
 }
 
 // DeleteBlog implements BlogHandler.
@@ -36,6 +71,11 @@ func (b *blogHttpHandler) UpdateBlog(c *fiber.Ctx) error {
 	if err != nil {
 		return common.Response(c, nil, "some information missing", fiber.StatusBadRequest, err.Error())
 	}
+
+	token := c.Locals("user").(*jwt.Token)
+	userId := token.Claims.(jwt.MapClaims)["user_id"]
+	blog.UserID = uint(userId.(float64))
+
 	err = b.usecase.UpdateBlog(blog)
 	if err != nil {
 		return common.Response(c, nil, "cannot create blog", fiber.StatusInternalServerError, err.Error())
@@ -51,6 +91,11 @@ func (b *blogHttpHandler) CreateBlog(c *fiber.Ctx) error {
 	if err != nil {
 		return common.Response(c, nil, "some information missing", fiber.StatusBadRequest, err.Error())
 	}
+
+	token := c.Locals("user").(*jwt.Token)
+	userId := token.Claims.(jwt.MapClaims)["user_id"]
+	blog.UserID = uint(userId.(float64))
+
 	err = b.usecase.CreateBlog(blog)
 	if err != nil {
 		return common.Response(c, nil, "cannot create blog", fiber.StatusInternalServerError, err.Error())

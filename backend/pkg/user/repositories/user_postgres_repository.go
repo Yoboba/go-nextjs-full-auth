@@ -15,7 +15,6 @@ func NewUserPostgresRepository(db *gorm.DB) UserRepository {
 
 func (u *userPostgresRepository) FindUserFromID(id uint) (models.User, error) {
 	var user models.User
-
 	result := u.db.Where("id = ?", id).Preload("Role").Find(&user)
 	if result.Error != nil {
 		return user, result.Error

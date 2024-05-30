@@ -13,7 +13,8 @@ func main() {
 
 	db := database.NewPostgresDatabase(&cfg)
 
-	migrations.NewPostgresMigration(db).TableMigrate()
+	// migrations.NewPostgresMigration(db).TableMigrate()
+	migrations.NewPostgresMigration(db).MockDataMigrate()
 
 	server.NewFiberServer(db.GetDB(), &cfg).Start()
 }
