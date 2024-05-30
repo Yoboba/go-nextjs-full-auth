@@ -12,6 +12,28 @@ type blogPostgresRepository struct {
 	db gorm.DB
 }
 
+// FindFromLike implements BlogRepository.
+func (b *blogPostgresRepository) FindFromLike(id uint) ([]models.Blog, error) {
+	var user entities.User
+	var blogs []models.Blog
+	result := b.db.Where("id = ?", id).Preload("Blogs").Find(&user)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	for _, blog := range user.Blogs {
+		var tmp models.Blog
+		tmp.Id = blog.ID
+		tmp.Title = blog.Title
+		tmp.Caption = blog.Caption
+		tmp.Body = blog.Body
+		tmp.Username = blog.User.Username
+		tmp.CreatedAt = blog.CreatedAt
+		blogs = append(blogs, tmp)
+	}
+
+	return blogs, nil
+}
+
 // DeleteLikeFromBlogIdAndUserId implements BlogRepository.
 func (b *blogPostgresRepository) DeleteLikeFromBlogIdAndUserId(userId uint, blogId uint) error {
 	var blog entities.Blog

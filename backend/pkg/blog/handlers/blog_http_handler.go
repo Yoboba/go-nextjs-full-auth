@@ -15,6 +15,18 @@ type blogHttpHandler struct {
 	usecase usecases.BlogUsecase
 }
 
+// GetBlogsByLike implements BlogHandler.
+func (b *blogHttpHandler) GetBlogsByLike(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "GetBlogsByLike")
+	token := c.Locals("user").(*jwt.Token)
+	userId := token.Claims.(jwt.MapClaims)["user_id"]
+	blogs, err := b.usecase.GetFromLike(uint(userId.(float64)))
+	if err != nil {
+		return common.Response(c, nil, "cannot get blogs from like", fiber.StatusInternalServerError, err.Error())
+	}
+	return common.Response(c, blogs, "successfully retrieve blogs from like", fiber.StatusOK, "")
+}
+
 // DeletelikeByUserIdAndBlogId implements BlogHandler.
 func (b *blogHttpHandler) DeletelikeByUserIdAndBlogId(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "DeletelikeByUserIdAndBlogId")
@@ -25,9 +37,9 @@ func (b *blogHttpHandler) DeletelikeByUserIdAndBlogId(c *fiber.Ctx) error {
 	token := c.Locals("user").(*jwt.Token)
 	userId := token.Claims.(jwt.MapClaims)["user_id"]
 
-	deleteLikeErr := b.usecase.DeleteLikeFromBlogIdAndUserId(uint(userId.(float64)), uint(blogId))
-	if deleteLikeErr != nil {
-		return common.Response(c, nil, "cannot add like to the database", fiber.StatusInternalServerError, deleteLikeErr.Error())
+	err := b.usecase.DeleteLikeFromBlogIdAndUserId(uint(userId.(float64)), uint(blogId))
+	if err != nil {
+		return common.Response(c, nil, "cannot add like to the database", fiber.StatusInternalServerError, err.Error())
 	}
 	return common.Response(c, nil, "Delete like successfully", fiber.StatusOK, "")
 }

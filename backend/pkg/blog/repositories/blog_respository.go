@@ -7,6 +7,7 @@ import (
 
 type BlogRepository interface {
 	FindAll(condition string) ([]models.Blog, error)
+	FindFromLike(id uint) ([]models.Blog, error)
 	FindLikeFromBlogId(id uint) (models.BlogLike, error)
 	SaveLikeFromBlogIdAndUserId(userId uint, blogId uint) error
 	DeleteLikeFromBlogIdAndUserId(userId uint, blogId uint) error

@@ -37,7 +37,7 @@ func (f *fiberServer) InitGlobalBlogHttpHandlers() {
 	v1 := f.App.Group("/v1/blog")
 	v1.Get("", blogHttpHandler.GetBlogs)
 	v1.Get("/like/:blogId", blogHttpHandler.GetLikeByBlogId)
-	v1.Get("/like", blogHttpHandler.GetLikeStatusByUsernameAndBlogId)
+	v1.Get("/like/status", blogHttpHandler.GetLikeStatusByUsernameAndBlogId)
 }
 
 // InitBlogHttpHandlers implements Server.
@@ -50,6 +50,7 @@ func (f *fiberServer) InitBlogHttpHandlers() {
 	v1.Post("", blogHttpHandler.CreateBlog)
 	v1.Put("", blogHttpHandler.UpdateBlog)
 	v1.Delete("/:blogId", blogHttpHandler.DeleteBlog)
+	v1.Get("/like", blogHttpHandler.GetBlogsByLike)
 	v1.Post("/like/:blogId", blogHttpHandler.CreatelikeByUserIdAndBlogId)
 	v1.Delete("/like/:blogId", blogHttpHandler.DeletelikeByUserIdAndBlogId)
 }
