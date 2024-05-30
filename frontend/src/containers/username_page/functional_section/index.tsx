@@ -3,14 +3,13 @@ import {
     IconCubePlus,
 } from "@tabler/icons-react";
 import Line from "@/components/ui/line";
-import BlogDrawer from "@/containers/username_page/blog_section/blog_drawer";
+import BlogDrawer from "@/containers/username_page/functional_section/blog_drawer";
 import SearchBar from "./searchbar";
 import Filter from "./filter";
 
-export default function BlogSectionIndex() {
-    
+export default function FunctionalSectionIndex() {
     return (
-        <section className="flex h-screen w-full flex-col gap-5 bg-white p-8 dark:bg-black">
+        <section className="flex h-full w-full flex-col gap-5  p-8 dark:bg-black bg-white">
             <div className="flex justify-between">
                 <div className="flex items-center gap-5">
                     <div className="relative flex h-14 w-40 items-center">

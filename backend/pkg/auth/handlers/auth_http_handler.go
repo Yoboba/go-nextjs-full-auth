@@ -35,14 +35,14 @@ func (a *authHttpHandler) SignIn(c *fiber.Ctx) error {
 	c.Cookie(&fiber.Cookie{
 		Name:     "jwt",
 		Value:    token,
-		Expires:  time.Now().Add(time.Minute * 5), // 5 minutes
+		Expires:  time.Now().Add(time.Minute * 15), // 5 minutes
 		HTTPOnly: true,
 		SameSite: "None",
 	})
 	c.Cookie(&fiber.Cookie{
 		Name:     "username",
 		Value:    user1.Username,
-		Expires:  time.Now().Add(time.Minute * 5), // 5 minutes
+		Expires:  time.Now().Add(time.Minute * 15), // 5 minutes
 		HTTPOnly: true,
 		SameSite: "None",
 	})

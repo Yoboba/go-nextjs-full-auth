@@ -22,10 +22,10 @@ export default function Blog(props: Readonly<BlogProps>) {
     // TODO :  fetch tag from blog id
 
     return (
-        <div className="flex w-3/5 h-3/8 justify-between items-center p-8 shadow-none hover:shadow-xl rounded-xl transition-all border gap-4">
-            <div className="flex flex-col justify-between h-full">
+        <div className="flex w-3/6 h-3/6  items-center p-8 shadow-none hover:shadow-xl rounded-xl transition-all border gap-1">
+            <div className="flex flex-col justify-between w-full h-full space-y-5">
                 <BlogAvatar username={props.author}/>
-                <main className=" space-y-1">
+                <main>
                     <h2 className="text-3xl font-semibold text-g1">{props.title}</h2>
                     <p className=" text-sm">{props.caption}</p>
                 </main>

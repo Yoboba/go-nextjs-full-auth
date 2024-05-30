@@ -92,6 +92,22 @@ func (b *blogPostgresRepository) Update(blog entities.Blog) error {
 
 // Save implements BlogRepository.
 func (b *blogPostgresRepository) Save(blog entities.Blog) error {
+	var tags []entities.Tag
+	for _, tag := range blog.Tags {
+		var existingTag entities.Tag
+		result := b.db.Where("name = ?", tag.Name).First(&existingTag)
+		if result.Error != nil {
+			fmt.Print("some thing weird")
+		}
+		if result.RowsAffected == 0 {
+			fmt.Println("add")
+			tags = append(tags, tag)
+		} else {
+			fmt.Printf("%s already existed", tag.Name)
+			tags = append(tags, existingTag)
+		}
+	}
+	blog.Tags = tags
 	result := b.db.Create(&blog)
 	if result.Error != nil {
 		return result.Error

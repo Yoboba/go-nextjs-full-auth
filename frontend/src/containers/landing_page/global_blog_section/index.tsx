@@ -14,7 +14,7 @@ export default async function GlobalBlogSection() {
     }
     const res = await getBlogs()
     return (
-        <section className="flex items-center h-screen w-full flex-col gap-5 bg-white p-8 dark:bg-black">
+        <section className="flex flex-col items-center h-full w-full gap-5  dark:bg-black overflow-scroll pt-12 pb-12 border-r-2 border-gray-100">
             {res.data.map((blog:any) => (
                 <Blog key={blog.id} id={blog.id} author={blog.username} title={blog.title} caption={blog.caption} body={blog.body} dateTime={blog.created_at}/>
             ))}

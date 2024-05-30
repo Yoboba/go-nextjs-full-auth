@@ -7,7 +7,7 @@ import Line from "@/components/ui/line";
 
 export default function TagSection() {
     return (
-        <section className="flex flex-col gap-4 h-screen w-1/4 bg-white p-8 border-l-2 border-gray-100">
+        <section className="flex flex-col gap-4 h-full w-1/4  p-8 sticky top-0">
             <div className="flex gap-2 items-center justify-between">
                 <div className="flex gap-2 items-center">
                     <h2 className="text-xl font-semibold text-g2">Tags</h2>

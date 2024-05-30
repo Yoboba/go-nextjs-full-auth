@@ -7,12 +7,14 @@ import {
     DrawerTrigger,
 } from "@/components/ui/drawer"
 import BlogForm from "./blog_form"
+import { getCookie } from "@/lib/cookies";
 
 interface BlogDrawerProps {
     triggerElement : React.ReactNode
 }
 
 export default function BlogDrawer(props:Readonly<BlogDrawerProps>) {
+    const token = getCookie("jwt")
     return (
         <Drawer>
             <DrawerTrigger>{props.triggerElement}</DrawerTrigger>
@@ -22,7 +24,7 @@ export default function BlogDrawer(props:Readonly<BlogDrawerProps>) {
                     <DrawerDescription>Telling your story to the world...</DrawerDescription>
                 </DrawerHeader>
                 <main className="w-1/2 pb-20">
-                    <BlogForm/>
+                    <BlogForm token={token?.value}/>
                 </main>
             </DrawerContent>
         </Drawer>

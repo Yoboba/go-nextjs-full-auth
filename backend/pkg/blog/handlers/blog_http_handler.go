@@ -157,11 +157,11 @@ func (b *blogHttpHandler) GetBlogs(c *fiber.Ctx) error {
 	q := c.Queries()
 	condition := ""
 
-	if q["userId"] != "" {
-		condition += "user_id = " + q["userId"]
+	if q["username"] != "" {
+		condition += "users.username = " + "'" + q["username"] + "'"
 	}
 	if q["tagId"] != "" {
-		if q["userId"] != "" {
+		if q["username"] != "" {
 			condition += " AND " + "tag_id = " + q["tagId"]
 		} else {
 			condition += "tag_id = " + q["tagId"]

@@ -7,16 +7,20 @@ import MyFormTextArea from "@/components/my_ui/my_form_textarea"
 import TagFormField from "./tag_form_field"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useToast } from "@/hooks/use-toast"
 import * as z from "zod"
+import url from "@/constants/url"
 
-export default function BlogForm() {
+interface BlogFormProps {
+    token : string | undefined
+}
+
+export default function BlogForm(props:Readonly<BlogFormProps>) {
+    const { toast } = useToast()
     const blogFormSchema = z.object({
         title: z.string().min(1,"Title cannot be empty"),
         caption: z.string().min(1, "Caption cannot be empty"),
         body: z.string().min(1, "Body cannot be empty"),
-        // tags: z.object({
-        //     name : z.string()
-        // }).array().nonempty({message: "Must have at least one tag per blog"}),
         tags: z.array(z.object({ name: z.string() })).nonempty({message: "Must have at least one tag per blog"}),
     })
     const form = useForm<z.infer<typeof blogFormSchema>>({
@@ -28,8 +32,38 @@ export default function BlogForm() {
             tags: [],
         },
     })
-    function onSubmit(values: z.infer<typeof blogFormSchema>, ) {
+
+    async function onSubmit(values: z.infer<typeof blogFormSchema>, ) {
         console.log(values)
+        if (props.token === undefined) {
+            toast({
+                variant : "destructive",
+                title : "Token undefined"
+            })
+        } else {
+            const response = await fetch(url.client.CreateBlog, {
+                method : "POST",
+                headers: {
+                    "Authorization": `Bearer ${props.token}`,
+                    "Content-Type": "application/json",
+                },
+                body : JSON.stringify(values)
+            })
+            const res = await response.json()
+            if (res.status === 200) {
+                toast({
+                    title : "Successfully created the blog"
+                })
+                // TODO : reset all field
+                form.resetField
+            } else {
+                toast({
+                    variant : "destructive",
+                    title : "Fail to create the blog"
+                })
+            }
+            console.log(res)
+        }
     }
     
     return (

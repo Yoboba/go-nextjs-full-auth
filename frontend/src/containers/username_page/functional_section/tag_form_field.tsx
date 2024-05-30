@@ -17,12 +17,12 @@ interface ITagFormField {
     placeholder: string;
 }
 
+interface ITag {
+    name : string
+}
+
 export default function TagFormField(props: Readonly<ITagFormField>) {
-    const [tags, setTags] = useState([
-        {
-            name : ""
-        }
-    ]);
+    const [tags, setTags] = useState<ITag[]>([]);
     const [inputValue, setInputValue] = useState("");
     const { errorPopUp } = useAnimation();
 

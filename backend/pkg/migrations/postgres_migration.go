@@ -60,6 +60,7 @@ func (p postgresMigration) MockDataMigrate() error {
 	// 		},
 	// 	},
 	// }
+	// prevent duplicate tag
 	// var tags []entities.Tag
 	// for _, tag := range blogs.Tags {
 	// 	var existingTag entities.Tag
