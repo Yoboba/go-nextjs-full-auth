@@ -13,7 +13,6 @@ interface BlogHeartProps {
 }
 
 export default function BlogHeart(props: Readonly<BlogHeartProps>) {
-  // TODO : hanlde when click, triggered to fetch like count again
   const router = useRouter();
   const { toast } = useToast();
   const [likeCount, setLikeCount] = useState(0);

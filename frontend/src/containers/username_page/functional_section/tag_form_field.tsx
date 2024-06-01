@@ -37,14 +37,12 @@ export default function TagFormField(props: Readonly<ITagFormField>) {
     const handleAddTag = () => {
         if (inputValue.trim()) {
             setTags([...tags, { name: inputValue.trim() }]);
-            console.log(tags)
             setInputValue("");
         }
     };
 
     const handleRemoveTag = (tagToRemove: string) => {
         setTags(tags.filter((tag) => tag.name !== tagToRemove));
-        console.log(tags)
     };
 
     const { formState: { errors } } = props.form;

@@ -36,7 +36,6 @@ export default function BlogForm(props:Readonly<BlogFormProps>) {
     const { reset } = form;
 
     async function onSubmit(values: z.infer<typeof blogFormSchema>, ) {
-        console.log(values)
         if (props.token === undefined) {
             toast({
                 variant : "destructive",
@@ -64,7 +63,6 @@ export default function BlogForm(props:Readonly<BlogFormProps>) {
                     title : "Fail to create the blog"
                 })
             }
-            console.log(res)
         }
     }
     
