@@ -1,6 +1,5 @@
 import BlogAvatar from "./blog_avatar";
 import { 
-    IconDots,
     IconBookmarkPlus,
 } from '@tabler/icons-react';
 import BlogHeart from "./blog_heart";
@@ -8,6 +7,14 @@ import { months } from "@/constants/months";
 import { getCookie } from "@/lib/cookies";
 import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
+import BlogOption from "./blog_option";
+
 
 interface BlogProps {
     id : number;
@@ -18,14 +25,14 @@ interface BlogProps {
     dateTime : Date;
 }
 
-export default function Blog(props: Readonly<BlogProps>) {
+export default async function Blog(props: Readonly<BlogProps>) {
     const username = getCookie("username")
     const token = getCookie("jwt")
     const date = new Date(props.dateTime)
     // TODO :  fetch tag from blog id
 
     return (
-        <div className="flex w-1/2 h-1/2  items-center p-8  rounded-xl transition-all border gap-1">
+        <div className="flex w-full h-1/2  items-center p-8  rounded-xl transition-all border gap-1">
             <div className="flex flex-col justify-between w-full h-full space-y-6 ">
                 <BlogAvatar username={props.author}/>
                 <main>
@@ -37,8 +44,17 @@ export default function Blog(props: Readonly<BlogProps>) {
                     <div className="flex items-center gap-1">
                         <BlogHeart username={username?.value} blog_id={props.id} token={token?.value}/>
                     </div>
-                    <IconBookmarkPlus size={20} className="cursor-pointer"/>
-                    <IconDots size={20} className="cursor-pointer"/>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <IconBookmarkPlus size={20} className="cursor-pointer"/>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                            <p>Coming Soon!</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                    <BlogOption username={username?.value} author={props.author} token={token?.value} blogId={props.id}/>
                 </div>
             </div>
             <Skeleton className="h-[150px] w-[200px] bg-gray-200 rounded-xl"/>

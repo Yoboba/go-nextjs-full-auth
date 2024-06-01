@@ -16,7 +16,7 @@ export default function FormSection() {
                 <GoogleButton/>
                 <GithubButton/>
             </section>
-            <BackButton icon={<IconArrowBackUp />} text={"Back to Sign In"} route={routes.SIGN_IN}/>
+            <BackButton icon={<IconArrowBackUp />} text={"Back to Home"} route={routes.ROOT}/>
         </div>
     )
 }

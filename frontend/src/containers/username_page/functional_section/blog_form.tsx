@@ -10,12 +10,13 @@ import { useForm } from "react-hook-form"
 import { useToast } from "@/hooks/use-toast"
 import * as z from "zod"
 import url from "@/constants/url"
-
+import { useRouter } from "next/navigation"
 interface BlogFormProps {
     token : string | undefined
 }
 
 export default function BlogForm(props:Readonly<BlogFormProps>) {
+    const router = useRouter()
     const { toast } = useToast()
     const blogFormSchema = z.object({
         title: z.string().min(1,"Title cannot be empty"),
@@ -32,6 +33,7 @@ export default function BlogForm(props:Readonly<BlogFormProps>) {
             tags: [],
         },
     })
+    const { reset } = form;
 
     async function onSubmit(values: z.infer<typeof blogFormSchema>, ) {
         console.log(values)
@@ -54,8 +56,8 @@ export default function BlogForm(props:Readonly<BlogFormProps>) {
                 toast({
                     title : "Successfully created the blog"
                 })
-                // TODO : reset all field
-                form.resetField
+                reset()
+                router.refresh()
             } else {
                 toast({
                     variant : "destructive",

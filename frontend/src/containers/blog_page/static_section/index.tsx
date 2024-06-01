@@ -21,14 +21,12 @@ export default async function StaticSection(props:StaticSectionProps) {
 
     return (
         <div className="w-full h-full flex flex-col items-center p-8 gap-5">
-            <h1 className="text-5xl text-g2 font-bold">{res.data.title}</h1>
-            <div className="w-full h-[3px] bg-gray-200 rounded-md"/>
-            <h2 className="text-xl text-g3 font-medium">{res.data.caption}</h2>
-            <div className="w-full h-[3px] bg-gray-200 rounded-md"/>
+            <h1 className="text-5xl text-g2 font-bold border-b-2 border-gray-100 pb-6">{res.data.title}</h1>
+            <h2 className="text-xl text-g3 font-medium border-b-2 border-gray-100 pb-6">{res.data.caption}</h2>
             <div className="w-full h-full text-wrap flex flex-wrap break-all justify-center">
                 <p className="text-base text-g1 font-normal ">{res.data.body}</p> 
             </div>
-            <BackButton icon={<IconArrowBackUp/>} text={"Back to home"} route={routes.ROOT}/>
+            <BackButton icon={<IconArrowBackUp />} text={"Back to home"} route={routes.ROOT}/>
         </div>
     )
 }

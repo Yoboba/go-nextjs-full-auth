@@ -15,12 +15,19 @@ export default async function UserBlogsSection() {
         return data
     }
     const res = await getUserBlogs()
-
-    return (
-        <div className="h-full w-full bg-white flex flex-col items-center justify-center overflow-scroll gap-5 pb-8">
-            {res.data.map((blog:any) => (
-                <Blog key={blog.id} id={blog.id} author={blog.username} title={blog.title} caption={blog.caption} body={blog.body} dateTime={blog.created_at}/>
-            ))}
-        </div>
-    )
+    if (res.data === null) {
+        return (
+            <section className="h-full w-full bg-white flex flex-col items-center justify-center overflow-y-auto gap-5 pl-8 pr-8 pb-8">
+                <p className=" text-g3 font-light text-2xl">No blog found...</p>
+            </section>
+        )
+    } else {
+        return (
+            <section className="h-full w-full bg-white flex flex-col items-center justify-center overflow-auto gap-5 pl-8 pr-8 pb-8">
+                {res.data.map((blog:any) => (
+                    <Blog key={blog.id} id={blog.id} author={blog.username} title={blog.title} caption={blog.caption} body={blog.body} dateTime={blog.updated_at}/>
+                ))}
+            </section>
+        )
+    }
 }

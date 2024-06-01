@@ -10,7 +10,7 @@ type Blog struct {
 	Caption   string    `json:"caption"`
 	Body      string    `gorm:"not null" json:"body"`
 	Username  string    `gorm:"not null" json:"username"`
-	CreatedAt time.Time `gorm:"not null" json:"created_at"`
+	UpdatedAt time.Time `gorm:"not null" json:"updated_at"`
 }
 
 type BlogLike struct {

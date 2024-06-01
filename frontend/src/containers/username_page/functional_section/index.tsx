@@ -6,6 +6,7 @@ import Line from "@/components/ui/line";
 import BlogDrawer from "@/containers/username_page/functional_section/blog_drawer";
 import SearchBar from "./searchbar";
 import Filter from "./filter";
+import { Separator } from "@/components/ui/separator";
 
 export default function FunctionalSectionIndex() {
     return (
@@ -23,7 +24,7 @@ export default function FunctionalSectionIndex() {
                     <BlogDrawer triggerElement={<IconCubePlus size={40} className="rounded-lg text-g2 cursor-pointer hover:bg-g4/25 transition-colors"/>}/>
                 </div>
             </div>
-            <Line height="h-[2px]" color="bg-g4/25"/>
+            <Separator/>
         </section>
     );
 }

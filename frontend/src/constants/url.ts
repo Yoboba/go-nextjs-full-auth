@@ -16,7 +16,8 @@ const url = {
         getTag: "http://localhost:7070/v1/tag",
         getBlog: "http://localhost:7070/v1/global/blog",
         getUserBlogs: "http://localhost:7070/v1/global/blog",
-        GetBlogById: "http://localhost:7070/v1/global/blog/" // one parameter : blog_id
+        GetBlogById: "http://localhost:7070/v1/global/blog/", // one parameter : blog_id
+        DeleteBlogById: "http://localhost:7070/v1/blog/" // one parameter : blog_id
     }
 }
 

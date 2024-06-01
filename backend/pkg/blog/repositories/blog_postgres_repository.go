@@ -15,7 +15,7 @@ type blogPostgresRepository struct {
 // FindFromId implements BlogRepository.
 func (b *blogPostgresRepository) FindFromId(id uint) (models.Blog, error) {
 	var blog models.Blog
-	result := b.db.Select("blogs.id, blogs.title, blogs.caption, blogs.body, blogs.created_at, users.username").
+	result := b.db.Select("blogs.id, blogs.title, blogs.caption, blogs.body, blogs.updated_at, users.username").
 		Joins("left join users on users.id = blogs.user_id").
 		Where("blogs.id = ?", id).First(&blog)
 	if result.Error != nil {
@@ -39,7 +39,7 @@ func (b *blogPostgresRepository) FindFromLike(id uint) ([]models.Blog, error) {
 		tmp.Caption = blog.Caption
 		tmp.Body = blog.Body
 		tmp.Username = blog.User.Username
-		tmp.CreatedAt = blog.CreatedAt
+		tmp.UpdatedAt = blog.UpdatedAt
 		blogs = append(blogs, tmp)
 	}
 
@@ -165,7 +165,7 @@ func (b *blogPostgresRepository) FindLikeFromBlogId(id uint) (models.BlogLike, e
 func (b *blogPostgresRepository) FindAll(condition string) ([]models.Blog, error) {
 	var blogs []models.Blog
 	result := b.db.Model(&entities.Blog{}).
-		Select("blogs.id, blogs.title, blogs.caption, blogs.body, blogs.created_at, users.username").
+		Select("blogs.id, blogs.title, blogs.caption, blogs.body, blogs.updated_at, users.username").
 		Joins("left join users on users.id = blogs.user_id").
 		Joins("left join blog_tags on blog_tags.blog_id = blogs.id").
 		Where(condition).

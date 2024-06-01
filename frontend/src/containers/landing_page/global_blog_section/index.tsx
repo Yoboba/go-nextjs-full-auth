@@ -13,11 +13,19 @@ export default async function GlobalBlogSection() {
         return data
     }
     const res = await getBlogs()
-    return (
-        <section className="flex flex-col items-center h-full w-full gap-5  dark:bg-black overflow-scroll pt-12 pb-12 border-r-2 border-gray-100">
-            {res.data.map((blog:any) => (
-                <Blog key={blog.id} id={blog.id} author={blog.username} title={blog.title} caption={blog.caption} body={blog.body} dateTime={blog.created_at}/>
-            ))}
-        </section>
-    )
+    if (res.data === null) {
+        return (
+            <section className="flex flex-col items-center h-full w-full gap-5  dark:bg-black overflow-auto p-8 ">
+                <p className=" text-g3 font-thin text-2xl">No blog found...</p>
+            </section>
+        )
+    } else {
+        return (
+            <section className="flex flex-col items-center h-full w-full gap-5  dark:bg-black overflow-auto p-8">
+                {res.data.map((blog:any) => (
+                    <Blog key={blog.id} id={blog.id} author={blog.username} title={blog.title} caption={blog.caption} body={blog.body} dateTime={blog.updated_at}/>
+                ))}
+            </section>
+        )
+    }
 }

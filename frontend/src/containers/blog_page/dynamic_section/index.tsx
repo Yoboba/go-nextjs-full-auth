@@ -1,9 +1,13 @@
 "use client"
+import { useRouter } from "next/navigation"
 import BackButton from "@/components/my_ui/back_button"
+import { Button } from "@/components/ui/button"
 import { routes } from "@/constants/routes"
 import url from "@/constants/url"
 import { IconArrowBackUp } from "@tabler/icons-react"
 import { useEffect, useState } from "react"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 
 interface DynamicSectionProps {
     blogId : number
@@ -12,6 +16,7 @@ interface DynamicSectionProps {
 }
 
 export default function DynamicSection(props: DynamicSectionProps) {
+    const router = useRouter()
     const [blogInfo, setBlogInfo] = useState({
         title: "", 
         caption: "",
@@ -66,44 +71,42 @@ export default function DynamicSection(props: DynamicSectionProps) {
     return (
         <div className="w-full h-full flex flex-col items-center p-8 gap-5">
             {isEditing ? (
-                <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-                    <input 
+                <form onSubmit={handleSubmit} className="w-full h-full flex flex-col gap-4">
+                    <Input 
                         type="text" 
                         name="title" 
                         value={blogInfo.title} 
                         onChange={handleChange} 
-                        className="text-5xl text-g2 font-bold" 
+                        className="text-5xl text-g2 font-bold border-none shadow-none pt-12 pl-5 pb-12" 
                     />
-                    <div className="w-full h-[3px] bg-gray-200 rounded-md"/>
-                    <input 
+                    <div className="w-full h-[2px] bg-gray-200 rounded-md"/>
+                    <Input 
                         type="text" 
                         name="caption" 
                         value={blogInfo.caption} 
                         onChange={handleChange} 
-                        className="text-xl text-g3 font-medium" 
+                        className="text-xl text-g3 font-medium border-none shadow-none" 
                     />
-                    <div className="w-full h-[3px] bg-gray-200 rounded-md"/>
-                    <textarea 
+                    <div className="w-full h-[2px] bg-gray-200 rounded-md "/>
+                    <Textarea
                         name="body" 
                         value={blogInfo.body} 
                         onChange={handleChange} 
-                        className="w-full h-full text-wrap flex flex-wrap break-all justify-center text-base text-g1 font-normal" 
+                        className="w-full h-full text-wrap flex flex-wrap break-all justify-center text-base text-g1 font-normal border-none shadow-none" 
                     />
-                    <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Save</button>
+                    <Button type="submit" className="bottom-0 bg-g3 hover:bg-g4 text-white font-semibold py-2 px-4 rounded">Save</Button>
                 </form>
             ) : (
                 <>
-                    <h1 className="text-5xl text-g2 font-bold">{blogInfo.title}</h1>
-                    <div className="w-full h-[3px] bg-gray-200 rounded-md"/>
-                    <h2 className="text-xl text-g3 font-medium">{blogInfo.caption}</h2>
-                    <div className="w-full h-[3px] bg-gray-200 rounded-md"/>
+                    <h1 className="text-5xl text-g2 font-bold border-b-2 border-gray-100 pb-6">{blogInfo.title}</h1>
+                    <h2 className="text-xl text-g3 font-medium border-b-2 border-gray-100 pb-6">{blogInfo.caption}</h2>
                     <div className="w-full h-full text-wrap flex flex-wrap break-all justify-center">
                         <p className="text-base text-g1 font-normal">{blogInfo.body}</p> 
                     </div>
-                    <button onClick={() => setIsEditing(true)} className="bg-blue-500 text-white py-2 px-4 rounded">Edit</button>
+                    <Button onClick={() => setIsEditing(true)} className="bg-g3 text-white font-semibold py-2 px-4 rounded-xl hover:bg-g4">Edit</Button>
                 </>
             )}
-            <BackButton icon={<IconArrowBackUp/>} text={"Back to home"} route={routes.ROOT}/>
+            <BackButton icon={<IconArrowBackUp/>} text={"Back to previous page"} route={""} onClick={() => router.back()}/>
         </div>
     )
 }
