@@ -15,6 +15,20 @@ type blogHttpHandler struct {
 	usecase usecases.BlogUsecase
 }
 
+// GetBlogById implements BlogHandler.
+func (b *blogHttpHandler) GetBlogById(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "GetBlogById")
+	blogId, parseErr := strconv.ParseInt(c.Params("blogId"), 10, 64)
+	if parseErr != nil {
+		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, parseErr.Error())
+	}
+	blogs, err := b.usecase.GetFromId(uint(blogId))
+	if err != nil {
+		return common.Response(c, nil, "cannot retrieve blog from blog id", fiber.StatusInternalServerError, err.Error())
+	}
+	return common.Response(c, blogs, "successfully retrieve blog", fiber.StatusOK, "")
+}
+
 // GetBlogsByLike implements BlogHandler.
 func (b *blogHttpHandler) GetBlogsByLike(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "GetBlogsByLike")
@@ -78,8 +92,13 @@ func (b *blogHttpHandler) DeleteBlog(c *fiber.Ctx) error {
 // UpdateBlog implements BlogHandler.
 func (b *blogHttpHandler) UpdateBlog(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "UpdateBlog")
+	blogId, parseErr := strconv.ParseInt(c.Params("blogId"), 10, 64)
+	if parseErr != nil {
+		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, parseErr.Error())
+	}
 	var blog entities.Blog
 	err := c.BodyParser(&blog)
+	blog.ID = uint(blogId)
 	if err != nil {
 		return common.Response(c, nil, "some information missing", fiber.StatusBadRequest, err.Error())
 	}
@@ -120,6 +139,7 @@ func (b *blogHttpHandler) GetLikeStatusByUsernameAndBlogId(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "GetLikeStatusByUsernameAndBlogId")
 	q := c.Queries()
 
+	fmt.Println(q["username"], q["blogId"])
 	if q["username"] == "" || q["blogId"] == "" {
 		return common.Response(c, nil, "username or blogId is missing", fiber.StatusBadRequest, "")
 	}

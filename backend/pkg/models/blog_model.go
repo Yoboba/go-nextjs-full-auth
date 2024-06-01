@@ -1,6 +1,8 @@
 package models
 
-import "time"
+import (
+	"time"
+)
 
 type Blog struct {
 	Id        uint      `gorm:"not null" json:"id"`

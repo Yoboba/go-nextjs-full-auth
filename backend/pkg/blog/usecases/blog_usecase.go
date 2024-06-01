@@ -7,6 +7,7 @@ import (
 
 type BlogUsecase interface {
 	GetAll(condition string) ([]models.Blog, error)
+	GetFromId(id uint) (models.Blog, error)
 	GetFromLike(id uint) ([]models.Blog, error)
 	GetLikeFromBlogId(id uint) (models.BlogLike, error)
 	CreateLikeFromBlogIdAndUserId(userId uint, blogId uint) error

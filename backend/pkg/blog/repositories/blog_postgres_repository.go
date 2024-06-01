@@ -12,6 +12,18 @@ type blogPostgresRepository struct {
 	db gorm.DB
 }
 
+// FindFromId implements BlogRepository.
+func (b *blogPostgresRepository) FindFromId(id uint) (models.Blog, error) {
+	var blog models.Blog
+	result := b.db.Select("blogs.id, blogs.title, blogs.caption, blogs.body, blogs.created_at, users.username").
+		Joins("left join users on users.id = blogs.user_id").
+		Where("blogs.id = ?", id).First(&blog)
+	if result.Error != nil {
+		return blog, result.Error
+	}
+	return blog, nil
+}
+
 // FindFromLike implements BlogRepository.
 func (b *blogPostgresRepository) FindFromLike(id uint) ([]models.Blog, error) {
 	var user entities.User

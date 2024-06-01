@@ -10,6 +10,11 @@ type blogUseCaseImpl struct {
 	repo repositories.BlogRepository
 }
 
+// GetFromId implements BlogUsecase.
+func (b *blogUseCaseImpl) GetFromId(id uint) (models.Blog, error) {
+	return b.repo.FindFromId(id)
+}
+
 // GetFromLike implements BlogUsecase.
 func (b *blogUseCaseImpl) GetFromLike(id uint) ([]models.Blog, error) {
 	return b.repo.FindFromLike(id)

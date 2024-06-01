@@ -11,7 +11,7 @@ export default function FormSection() {
     const username = getCookie("username")
     
     return (
-        <div className="flex flex-col gap-4  w-[480px] h-[550px] p-16 bg-white rounded-2xl justify-center items-center drop-shadow-xl">
+        <div className="flex flex-col gap-4  w-[480px] h-[550px] p-16 bg-white rounded-2xl justify-center items-center drop-shadow-xl ">
             <header className="text-neutral-700 text-[32px] font-semibold">Sign in</header>
             <SignInForm username={username?.value}/>
             <Line height="h-[2px]" color="bg-gray-200"/>
