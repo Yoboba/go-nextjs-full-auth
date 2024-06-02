@@ -16,7 +16,7 @@ export default function Navigation() {
                     <Link href={routes.SIGN_IN} className="hover:underline text-base">
                         Sign In
                     </Link>
-                    <Link href={routes.SIGN_UP} className=" hover:underline text-base">
+                    <Link href={routes.SIGN_UP} className=" text-base bg-g2 hover:bg-g3 rounded-md text-white pl-3 pr-3 pb-[6px] pt-[6px] transition-colors">
                         Sign Up
                     </Link>
                 </div>

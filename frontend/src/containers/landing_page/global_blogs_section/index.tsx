@@ -3,7 +3,7 @@ import url from "@/constants/url";
 
 export default async function GlobalBlogSection() {
     async function getBlogs() {
-        const response = await fetch(url.server.getBlog + "?userId=&tagId=", {
+        const response = await fetch(url.server.getBlog + "userId=&tagId=", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

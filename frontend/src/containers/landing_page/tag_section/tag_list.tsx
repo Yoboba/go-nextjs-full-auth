@@ -34,7 +34,7 @@ export default function TagList() {
                 {loading ? (
                     <Skeleton/>
                 ) : (
-                    tags.map((tag) => <MyTag key={tag.id} tag_name={tag.name} />)
+                    tags.map((tag) => <MyTag key={tag.id} name={tag.name} id={tag.id}/>)
                 )}
             </div>
         </div>

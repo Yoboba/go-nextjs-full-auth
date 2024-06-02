@@ -45,7 +45,7 @@ export default function SignInForm(props:SignInFormProps) {
         const res = await response.json()
         if (res.error === "") {
             toast({
-                title: "Login Successful...",
+                title: "Login Successful!",
                 description: "Thanks for coming!",
             })
             router.push(`/${props.username}`)
@@ -53,7 +53,7 @@ export default function SignInForm(props:SignInFormProps) {
         } else {
             toast({
                 variant: "destructive",
-                title: "Oh no! Something went wrong.",
+                title: "Something went wrong...",
                 description: "Please check your email and password.",
             })
         }

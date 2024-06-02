@@ -14,7 +14,7 @@ const url = {
     server : {
         getUser: "http://localhost:7070/v1/user",
         getTag: "http://localhost:7070/v1/tag",
-        getBlog: "http://localhost:7070/v1/global/blog",
+        getBlog: "http://localhost:7070/v1/global/blog?", // 2 query parameter : username, tag_id
         getUserBlogs: "http://localhost:7070/v1/global/blog",
         GetBlogById: "http://localhost:7070/v1/global/blog/", // one parameter : blog_id
         DeleteBlogById: "http://localhost:7070/v1/blog/" // one parameter : blog_id

@@ -57,7 +57,7 @@ export default async function Blog(props: Readonly<BlogProps>) {
                     <BlogOption username={username?.value} author={props.author} token={token?.value} blogId={props.id}/>
                 </div>
             </div>
-            <Skeleton className="h-[150px] w-[200px] bg-gray-200 rounded-xl"/>
+            <Skeleton className="h-[150px] w-[170px] bg-gray-200 rounded-xl"/>
         </div>
     )
 }
