@@ -25,8 +25,9 @@ import { routes } from "@/constants/routes";
 import { 
     IconPhotoEdit, 
     IconLogin2, 
-    IconNote,
-    IconSettings
+    IconSettings,
+    IconHearts,
+    IconBooks
 } from '@tabler/icons-react';
 
 interface MyAvatarProps {
@@ -73,12 +74,24 @@ export default function MyAvatar(props: MyAvatarProps) {
                     </Dialog>
                 </DropdownMenuItem>
                 { props.username ? 
-                    <Link href={`/${props.username}`}>
+                    <div>
+                        <Link href={`/${props.username}`}>
+                            <DropdownMenuItem className="flex items-center gap-2">
+                                <IconBooks size={20}/>
+                                My Blogs
+                            </DropdownMenuItem>
+                        </Link>
                         <DropdownMenuItem className="flex items-center gap-2">
-                            <IconNote size={20}/>
-                            My Blogs
+                            <IconSettings size={20}/>
+                            Setting
                         </DropdownMenuItem>
-                    </Link>
+                        <Link href={`/${props.username}/hearted`}>
+                            <DropdownMenuItem className="flex items-center gap-2">
+                                <IconHearts size={20}/> 
+                                Hearted
+                            </DropdownMenuItem>
+                        </Link>
+                    </div>
                 :
                     <Link href={routes.SIGN_IN}>
                         <DropdownMenuItem className="flex items-center gap-2">
@@ -87,10 +100,6 @@ export default function MyAvatar(props: MyAvatarProps) {
                         </DropdownMenuItem>
                     </Link>
                 }
-                <DropdownMenuItem className="flex items-center gap-2">
-                    <IconSettings size={20}/>
-                    Setting
-                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     )

@@ -2,7 +2,6 @@
 import { useRouter } from "next/navigation"
 import BackButton from "@/components/my_ui/back_button"
 import { Button } from "@/components/ui/button"
-import { routes } from "@/constants/routes"
 import url from "@/constants/url"
 import { IconArrowBackUp } from "@tabler/icons-react"
 import { useEffect, useState } from "react"
@@ -98,15 +97,15 @@ export default function DynamicSection(props: DynamicSectionProps) {
                 </form>
             ) : (
                 <>
-                    <h1 className="text-5xl text-g2 font-bold border-b-2 border-gray-100 pb-6">{blogInfo.title}</h1>
-                    <h2 className="text-xl text-g3 font-medium border-b-2 border-gray-100 pb-6">{blogInfo.caption}</h2>
-                    <div className="w-full h-full text-wrap flex flex-wrap break-all justify-center">
+                    <h1 className="w-2/3 text-5xl text-center text-g2 font-bold border-b-2 border-gray-100 pb-6 leading-relaxed">{blogInfo.title}</h1>
+                    <h2 className="w-2/3 text-xl text-center text-g3 font-medium border-b-2 border-gray-100 pb-6">{blogInfo.caption}</h2>
+                    <div className="w-2/3 h-full text-center text-wrap flex flex-wrap break-all justify-center">
                         <p className="text-base text-g1 font-normal">{blogInfo.body}</p> 
                     </div>
                     <Button onClick={() => setIsEditing(true)} className="bg-g3 text-white font-semibold py-2 px-4 rounded-xl hover:bg-g4">Edit</Button>
                 </>
             )}
-            <BackButton icon={<IconArrowBackUp/>} text={"Back to previous page"} route={""} onClick={() => router.back()}/>
+            <BackButton icon={<IconArrowBackUp/>} text={"Back to previous page"} route={""} onClick={() => {router.back();}}/>
         </div>
     )
 }

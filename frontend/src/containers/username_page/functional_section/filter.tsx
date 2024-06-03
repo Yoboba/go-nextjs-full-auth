@@ -10,7 +10,6 @@ import {
     MenubarTrigger,
 } from "@/components/ui/menubar"
 import url from "@/constants/url"
-import { IconHearts } from '@tabler/icons-react';
 
 export default async function Filter() {
     async function getTags() {
@@ -56,8 +55,6 @@ export default async function Filter() {
                             <MenubarItem>descended</MenubarItem>
                         </MenubarSubContent>
                     </MenubarSub>
-                    <MenubarSeparator />
-                    <MenubarItem className="gap-2"><IconHearts size={20}/> Hearted</MenubarItem>
                 </MenubarContent>
             </MenubarMenu>
         </Menubar>
