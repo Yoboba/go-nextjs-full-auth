@@ -20,7 +20,7 @@ import { useToast } from "@/hooks/use-toast";
 interface SignInFormProps {
     username: string | undefined
 }
-export default function SignInForm(props:SignInFormProps) {
+export default function SignInForm(props:Readonly<SignInFormProps>) {
     const { toast } = useToast()
     const router = useRouter()
     const signInFormSchema = z.object({
