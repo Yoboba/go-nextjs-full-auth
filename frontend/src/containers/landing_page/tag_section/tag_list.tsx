@@ -15,7 +15,7 @@ export default function TagList() {
 
     useEffect(() => {
         fetch(url.client.getTag, { 
-            method: "GET" 
+            method: "GET"
         })
             .then((response) => response.json())
             .then((data) => {

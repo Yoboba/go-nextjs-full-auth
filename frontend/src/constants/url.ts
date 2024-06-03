@@ -1,15 +1,15 @@
 const url = {
     client : {
-        getTag: "/api/server/v1/tag",
-        signIn: "/api/server/v1/auth/sign-in",
-        signUp: "/api/server/v1/auth/sign-up",
-        GetLike: "/api/server/v1/global/blog/like/", // one parameter : blog_id
-        GetLikeStatus: "/api/server/v1/blog/like/status?", // two query parameter : username , blogId
-        DeleteLike: "api/server/v1/blog/like/", // one parameter : blog_id
-        CreateLike: "api/server/v1/blog/like/", // one parameter : blog_id
-        CreateBlog: "/api/server/v1/blog",
-        UpdateBlog: "/api/server/v1/blog/",
-        GetBlogById: "/api/server/v1/global/blog/" // one parameter : blog_id
+        getTag: "/api/v1/tag",
+        signIn: "/api/v1/auth/sign-in",
+        signUp: "/api/v1/auth/sign-up",
+        GetLike: "/api/v1/global/blog/like/", // one parameter : blog_id
+        GetLikeStatus: "/api/v1/blog/like/status?", // two query parameter : username , blogId
+        DeleteLike: "api/v1/blog/like/", // one parameter : blog_id
+        CreateLike: "api/v1/blog/like/", // one parameter : blog_id
+        CreateBlog: "/api/v1/blog",
+        UpdateBlog: "/api/v1/blog/",
+        GetBlogById: "/api/v1/global/blog/" // one parameter : blog_id
     }, 
     server : {
         getUser: "http://localhost:7070/v1/user",

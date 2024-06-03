@@ -32,15 +32,15 @@ export default async function Blog(props: Readonly<BlogProps>) {
     // TODO :  fetch tag from blog id
 
     return (
-        <div className="flex w-full h-1/2  items-center p-8  rounded-xl transition-all border gap-1">
-            <div className="flex flex-col justify-between w-full h-full space-y-6 ">
+        <div className="flex w-[1000px] h-[250px]  items-center p-8  rounded-xl transition-all border gap-2">
+            <div className="flex flex-col justify-between w-full h-full ">
                 <BlogAvatar username={props.author}/>
                 <main>
                     <Link href={`/blog/${props.id}`} className="text-3xl font-semibold text-g1 hover:text-g3 rounded-xl w-fit transition-all cursor-pointer">{props.title}</Link>
                     <p className=" text-sm">{props.caption}</p>
                 </main>
                 <div className="flex items-center gap-5 text-sm">
-                    <p>{months[date.getMonth()-1]} {date.getDate()}</p>
+                    <p>{months[date.getMonth()]} {date.getDate()}</p>
                     <div className="flex items-center gap-1">
                         <BlogHeart username={username?.value} blog_id={props.id} token={token?.value}/>
                     </div>
@@ -57,7 +57,7 @@ export default async function Blog(props: Readonly<BlogProps>) {
                     <BlogOption username={username?.value} author={props.author} token={token?.value} blogId={props.id}/>
                 </div>
             </div>
-            <Skeleton className="h-[150px] w-[170px] bg-gray-200 rounded-xl"/>
+            <Skeleton className="h-[150px] w-[150px] rounded-xl"/>
         </div>
     )
 }

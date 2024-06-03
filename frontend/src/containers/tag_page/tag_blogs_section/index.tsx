@@ -24,7 +24,7 @@ export default async function BlogsSection(props:Readonly<BlogsSectionProps>) {
         )
     } else {
         return (
-            <main className=" text-4xl  text-g1 w-1/2 h-1/2 flex flex-col gap-2 ">
+            <main className=" text-4xl text-g1 w-full h-full flex flex-col items-center gap-5 p-8">
                 {res.data.map((blog : any) => (
                     <Blog key={blog.id} id={blog.id} author={blog.username} title={blog.title} caption={blog.caption} body={blog.body} dateTime={blog.updated_at}/>
                 ))}

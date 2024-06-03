@@ -2,7 +2,6 @@ import {
     IconTag 
 } from "@tabler/icons-react";
 import TagList from "./tag_list";
-import Line from "@/components/ui/line";
 import { Separator } from "@/components/ui/separator";
 
 
@@ -16,7 +15,7 @@ export default function TagSection() {
                 </div>
             </div>
             <Separator/>
-            <TagList/>
+            <TagList/> 
         </section>
     )
 }
