@@ -19,42 +19,42 @@ export default async function Profile() {
 
     if (jwt !== undefined) {
         const res = await getUser(jwt.value)
-        if (res.error === "") {
+        if (res.status !== 200) {
+            console.error("Error Fetching User Info : ", res.error)
             return (
                 <div className="flex items-center justify-center gap-3">
-                    <MyAvatar username={username?.value}/>
-                    <div className="flex flex-col items-start justify-center">
-                        <h2 className="text-g2 text-2xl font-bold">{res.data.username}</h2>
-                        <p className="text-g2 text-xs font-medium">
-                            {res.data.email}
-                        </p>
-                    </div>
-                </div>
-            )
-        } else {
-            console.error(res.error)
-            return (
-                <div className="flex items-center justify-center gap-3">
-                    <MyAvatar username={username?.value}/>
-                    <div className=" flex flex-col items-start justify-center">
-                        <h2 className=" text-g2 text-2xl font-bold">Guest</h2>
-                        <p className=" text-g2 text-xs font-medium">
+                    <div className=" flex flex-col items-end justify-center">
+                        <h2 className=" text-g2 text-xl font-bold">Guest</h2>
+                        <p className=" text-g2 text-xs font-light">
                             °˖✧◝(⁰▿⁰)◜✧˖° 
                         </p>
                     </div>
+                    <MyAvatar username={username?.value}/>
+                </div>
+            )
+        } else {
+            return (
+                <div className="flex items-center justify-center gap-3">
+                    <div className="flex flex-col items-end justify-center">
+                        <h2 className="text-g2 text-xl font-bold">{res.data.username}</h2>
+                        <p className="text-g2 text-xs font-light">
+                            {res.data.email}
+                        </p>
+                    </div>
+                    <MyAvatar username={username?.value}/>
                 </div>
             )
         }
     } else {
         return (
             <div className="flex items-center justify-center gap-3">
-                <MyAvatar username={username?.value}/>
-                <div className=" flex flex-col items-start justify-center">
-                    <h2 className=" text-g2 text-2xl font-bold">Guest</h2>
-                    <p className=" text-g2 text-xs font-medium">
+                <div className=" flex flex-col items-end justify-center">
+                    <h2 className=" text-g2 text-xl font-bold">Guest</h2>
+                    <p className=" text-g2 text-xs font-light">
                         °˖✧◝(⁰▿⁰)◜✧˖° 
                     </p>
                 </div>
+                <MyAvatar username={username?.value}/>
             </div>
         )
     }

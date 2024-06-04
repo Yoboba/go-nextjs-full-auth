@@ -16,9 +16,12 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 import url from "@/constants/url";
 import { routes } from "@/constants/routes";
+import { useToast } from "@/hooks/use-toast";
+import { messages } from "@/constants/messages";
 
 export default function SignUpForm() {
     const router = useRouter()
+    const { toast } = useToast()
     const signUpformSchema = z.object({
         username: z.string().min(5, {message : "Fullname should be at least 5 characters"}).max(50, {message : "Fullname should be less than 50 characters"}),
         email: z.string().email({message : "Invalid Email"}),
@@ -56,7 +59,18 @@ export default function SignUpForm() {
             body: JSON.stringify(body),
         })
         const res = await response.json()
-        if (res.error === "") {
+
+        if (res.status !== 200) {
+            toast({
+                variant : "destructive",
+                title : messages.errorMessage,
+                description : messages.signUpFailedDescription
+            })
+        } else {
+            toast({
+                title : messages.signUpSucceedTitle,
+                description : messages.signUpSucceedDescription
+            })
             router.push(routes.SIGN_IN)
         }
     }

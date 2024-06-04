@@ -7,6 +7,8 @@ import { IconArrowBackUp } from "@tabler/icons-react"
 import { useEffect, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { useToast } from "@/hooks/use-toast"
+import { messages } from "@/constants/messages"
 
 interface DynamicSectionProps {
     blogId : number
@@ -16,6 +18,7 @@ interface DynamicSectionProps {
 
 export default function DynamicSection(props: DynamicSectionProps) {
     const router = useRouter()
+    const { toast } = useToast()
     const [blogInfo, setBlogInfo] = useState({
         title: "", 
         caption: "",
@@ -34,12 +37,27 @@ export default function DynamicSection(props: DynamicSectionProps) {
         return data
     }
 
+    async function updateBlogbyId() {
+        const response = await fetch(url.client.UpdateBlog + props.blogId, {
+            method: "PUT",
+            headers: {
+                "Authorization" : `Bearer ${props.token}`,
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(blogInfo)
+        });
+        const data = await response.json()
+        return data
+    }
+
     useEffect(() => {
         getBlogById().then((res: any) => setBlogInfo({
             title: res.data.title,
             caption: res.data.caption,
             body: res.data.body
-        }))
+        })).catch((err) => {
+            console.error("Error fetching Blog info : ", err)
+        })
     }, [])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -52,18 +70,19 @@ export default function DynamicSection(props: DynamicSectionProps) {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const response = await fetch(url.client.UpdateBlog + props.blogId, {
-            method: "PUT",
-            headers: {
-                "Authorization" : `Bearer ${props.token}`,
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(blogInfo)
-        });
-        if (response.ok) {
-            setIsEditing(false);
+        const res = await updateBlogbyId()
+        if (res.status !== 200) {
+            toast({
+                variant : "destructive",
+                title : messages.errorMessage,
+                description : messages.updateBlogFailedDescription
+            })
         } else {
-            // Handle error
+            toast({
+                title : messages.updateBlogSucceedTitle,
+                description : messages.updateBlogSucceedDescription
+            })
+            setIsEditing(false);
         }
     }
 

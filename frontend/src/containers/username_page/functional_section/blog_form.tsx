@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast"
 import * as z from "zod"
 import url from "@/constants/url"
 import { useRouter } from "next/navigation"
+import { messages } from "@/constants/messages"
 interface BlogFormProps {
     token : string | undefined
 }
@@ -39,7 +40,8 @@ export default function BlogForm(props:Readonly<BlogFormProps>) {
         if (props.token === undefined) {
             toast({
                 variant : "destructive",
-                title : "Token undefined"
+                title : messages.errorMessage,
+                description : messages.tokenUndefined
             })
         } else {
             const response = await fetch(url.client.CreateBlog, {
@@ -51,17 +53,19 @@ export default function BlogForm(props:Readonly<BlogFormProps>) {
                 body : JSON.stringify(values)
             })
             const res = await response.json()
-            if (res.status === 200) {
+            if (res.status !== 200) {
                 toast({
-                    title : "Successfully created the blog"
+                    variant : "destructive",
+                    title : messages.errorMessage,
+                    description : messages.createBlogFailedDescription
+                })
+            } else {
+                toast({
+                    title : messages.createBlogSucceedTitle,
+                    description : messages.createBlogSucceedDescription
                 })
                 reset()
                 router.refresh()
-            } else {
-                toast({
-                    variant : "destructive",
-                    title : "Fail to create the blog"
-                })
             }
         }
     }

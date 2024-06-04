@@ -18,6 +18,9 @@ export default async function StaticSection(props:StaticSectionProps) {
         return data
     }
     const res = await getBlogById()
+    if (res.status !== 200) {
+        console.error("Error Fetching Blog Info : ", res.error)
+    }
 
     return (
         <div className="w-full h-full flex flex-col items-center p-8 gap-5">

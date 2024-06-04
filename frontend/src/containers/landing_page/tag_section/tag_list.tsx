@@ -1,9 +1,7 @@
 "use client";
-import MyTag from "@/components/my_ui/my_tag";
-import { Skeleton } from "@/components/ui/skeleton";
-import url from "@/constants/url";
 import { useState, useEffect } from "react";
-
+import MyTag from "@/components/my_ui/my_tag";
+import url from "@/constants/url";
 interface TagsProps {
     id: number;
     name: string;
@@ -11,31 +9,38 @@ interface TagsProps {
 
 export default function TagList() {
     const [tags, setTags] = useState<TagsProps[]>([]);
-    const [loading, setLoading] = useState(true);
+
+    async function getTag() {
+        const response = await fetch(url.client.getTag, { 
+            method: "GET",
+            headers : {
+                "Content-type" : "application/json"
+            }
+        })
+        const data = await response.json()
+        return data
+    }
 
     useEffect(() => {
-        fetch(url.client.getTag, { 
-            method: "GET"
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setTags(data.data);
-                setLoading(false);
+        getTag().then((res) => {
+                setTags(res.data);
             })
             .catch((error) => {
                 console.error("Error fetching tags:", error);
-                setLoading(false);
+                return ( 
+                    <div className="flex flex-col gap-2 justify-center items-center">
+                        <div className="flex gap-2 flex-wrap">
+                            Error or No tag found...
+                        </div>
+                    </div> 
+                )
             });
     }, []);
 
     return (
         <div className="flex flex-col gap-2 justify-center items-center">
             <div className="flex gap-2 flex-wrap">
-                {loading ? (
-                    <Skeleton/>
-                ) : (
-                    tags.map((tag) => <MyTag key={tag.id} name={tag.name} id={tag.id}/>)
-                )}
+                {tags.map((tag) => <MyTag key={tag.id} name={tag.name} id={tag.id}/>)}
             </div>
         </div>
     );

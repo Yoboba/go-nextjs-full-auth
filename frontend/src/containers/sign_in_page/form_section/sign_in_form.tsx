@@ -16,6 +16,7 @@ import MyButton from "@/components/my_ui/my_button";
 import { routes } from "../../../constants/routes";
 import url from "../../../constants/url";
 import { useToast } from "@/hooks/use-toast";
+import { messages } from "@/constants/messages";
 
 interface SignInFormProps {
     username: string | undefined
@@ -43,19 +44,19 @@ export default function SignInForm(props:Readonly<SignInFormProps>) {
             body: JSON.stringify(values),
         })
         const res = await response.json()
-        if (res.error === "") {
+        if (res.Status !== 200) {
             toast({
-                title: "Login Successful!",
-                description: "Thanks for coming!",
+                variant: "destructive",
+                title: messages.errorMessage,
+                description: messages.signInFailedDescription,
+            })
+        } else {
+            toast({
+                title: messages.signInSucceedTitle,
+                description: messages.signInSucceedDescription,
             })
             router.push(`/${props.username}`)
             router.refresh()
-        } else {
-            toast({
-                variant: "destructive",
-                title: "Something went wrong...",
-                description: "Please check your email and password.",
-            })
         }
     }
 

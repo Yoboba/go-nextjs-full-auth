@@ -22,17 +22,16 @@ export default async function Filter() {
         const data = await response.json()
         return data
     }
-
+    
     const res = await getTags()
-
-    return (
-        <Menubar className="border border-g2/50 rounded-lg text-g2">
+    if (res.status !== 200) {
+        console.error("Error Fetching Tags : ", res.error)
+        return (
+            <Menubar className="border border-g2/50 rounded-lg text-g2">
             <MenubarMenu>
                 <MenubarTrigger>tags</MenubarTrigger>
                 <MenubarContent>
-                    {res.data.map((tag: any) => (
-                        <MenubarItem key={tag.id}>{tag.name}</MenubarItem>
-                    ))}
+                    Error or No tags found...
                 </MenubarContent>
             </MenubarMenu>
             <MenubarMenu>
@@ -58,5 +57,41 @@ export default async function Filter() {
                 </MenubarContent>
             </MenubarMenu>
         </Menubar>
-    )
+        )
+    } else {
+        return (
+            <Menubar className="border border-g2/50 rounded-lg text-g2">
+                <MenubarMenu>
+                    <MenubarTrigger>tags</MenubarTrigger>
+                    <MenubarContent>
+                        {res.data.map((tag: any) => (
+                            <MenubarItem key={tag.id}>{tag.name}</MenubarItem>
+                        ))}
+                    </MenubarContent>
+                </MenubarMenu>
+                <MenubarMenu>
+                    <MenubarTrigger>sort</MenubarTrigger>
+                    <MenubarContent>
+                        <MenubarSub>
+                            <MenubarSubTrigger>Article&apos;s Name</MenubarSubTrigger>
+                            <MenubarSubContent>
+                                <MenubarItem>ascended</MenubarItem>
+                                <MenubarSeparator />
+                                <MenubarItem>descended</MenubarItem>
+                            </MenubarSubContent>
+                        </MenubarSub>
+                        <MenubarSeparator />
+                        <MenubarSub>
+                            <MenubarSubTrigger>Tag&apos;s Name</MenubarSubTrigger>
+                            <MenubarSubContent>
+                                <MenubarItem>ascended</MenubarItem>
+                                <MenubarSeparator />
+                                <MenubarItem>descended</MenubarItem>
+                            </MenubarSubContent>
+                        </MenubarSub>
+                    </MenubarContent>
+                </MenubarMenu>
+            </Menubar>
+        )
+    }
 }

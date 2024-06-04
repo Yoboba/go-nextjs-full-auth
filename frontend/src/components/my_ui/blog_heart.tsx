@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { routes } from "@/constants/routes";
 import { useToast } from "@/hooks/use-toast";
+import { messages } from "@/constants/messages";
 
 interface BlogHeartProps {
   username: string | undefined;
@@ -44,13 +45,7 @@ export default function BlogHeart(props: Readonly<BlogHeartProps>) {
     return data;
   }
   async function getLikeStatus() {
-    const response = await fetch(
-      url.client.GetLikeStatus +
-        "username=" +
-        props.username +
-        "&blogId=" +
-        props.blog_id,
-      {
+    const response = await fetch(url.client.GetLikeStatus + "username=" + props.username + "&blogId=" + props.blog_id, {
         method: "GET",
         headers: {
           "Authorization" : `Bearer ${props.token}`,
@@ -90,18 +85,29 @@ export default function BlogHeart(props: Readonly<BlogHeartProps>) {
     if (props.username === undefined && props.token === undefined) {
       router.push(routes.SIGN_IN);
       toast({
-        title: "Please Sign In...",
-        description: "User need to sign in before being able to like the blog",
+        variant : "destructive",
+        title: messages.errorMessage,
+        description: messages.likeFailedDescription,
       });
     } else {
       if (liked === true ) {
         const res = await deleteLike()
-        if (res.status === 401) { 
+        if (res.status !== 200) { 
+          toast({
+            variant : "destructive",
+            title: messages.errorMessage,
+            description: messages.likeFailedDescription,
+          })
           router.replace(routes.SIGN_IN)
         }
       } else {
         const res = await createLike()
-        if (res.status === 401) { 
+        if (res.status !== 200) { 
+          toast({
+            variant : "destructive",
+            title: messages.errorMessage,
+            description: messages.likeFailedDescription,
+          })
           router.replace(routes.SIGN_IN)
         }
       }

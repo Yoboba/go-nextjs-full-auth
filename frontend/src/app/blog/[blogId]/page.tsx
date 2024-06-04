@@ -17,9 +17,13 @@ export default async function BlogPage({params}:Readonly<{params: {blogId : numb
         return data
     }
     const res = await getBlogById()
-    if (token === undefined || res.data.username !== username?.value) {
-        return <StaticSection blogId={params.blogId}/>
+    if (res.status !== 200) {
+        console.error("Error Fetching Blog Info : ",res.error)
     } else {
-        return <DynamicSection username={username!.value} blogId={params.blogId} token={token.value}/>
+        if (token === undefined || res.data.username !== username?.value) {
+            return <StaticSection blogId={params.blogId}/>
+        } else {
+            return <DynamicSection username={username!.value} blogId={params.blogId} token={token.value}/>
+        }
     }
 }

@@ -16,7 +16,7 @@ export default async function GlobalBlogSection() {
     if (res.data === null) {
         return (
             <section className="flex flex-col items-center h-full w-full gap-5  dark:bg-black overflow-auto p-8 ">
-                <p className=" text-g3 font-thin text-2xl">No blog found...</p>
+                <p className=" text-g3 font-thin text-2xl">Error or No blog found...</p>
             </section>
         )
     } else {

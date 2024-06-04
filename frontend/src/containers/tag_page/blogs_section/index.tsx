@@ -16,10 +16,11 @@ export default async function BlogsSection(props:Readonly<BlogsSectionProps>) {
         return data
     }
     const res = await getBlogByTagId()
+    
     if (res.data === null) {
         return (
             <main className=" text-xl font-light text-red-200">
-                No blog found...
+                Error or No blog found...
             </main>
         )
     } else {

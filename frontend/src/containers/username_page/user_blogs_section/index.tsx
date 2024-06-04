@@ -18,7 +18,7 @@ export default async function UserBlogsSection() {
     if (res.data === null) {
         return (
             <section className="h-full w-full bg-white flex flex-col items-center justify-center overflow-y-auto gap-5 pl-8 pr-8 pb-8">
-                <p className=" text-g3 font-light text-2xl">No blog found...</p>
+                <p className=" text-g3 font-light text-2xl">Error or No blog found...</p>
             </section>
         )
     } else {

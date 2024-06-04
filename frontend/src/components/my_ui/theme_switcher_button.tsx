@@ -18,16 +18,22 @@ export default function ThemeSwitcher() {
   }
 
   return (
-    <Button
-      variant="outline"
+    <div
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className=" border-g2 px-[8px] text-g2 hover:bg-g2 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-g2"
+      className="w-full h-full cursor-pointer px-[2px] py-[2px] text-g2   flex items-center justify-center"
     >
       {theme === "light" ? (
-        <IconMoonFilled size={20} />
+        <div className=" inline-flex items-center gap-2">
+          <IconMoonFilled size={20} />
+          <h2 className="font-semibold">Dark</h2>
+        </div>
+
       ) : (
-        <IconSunFilled size={20} />
+        <div className=" inline-flex items-center gap-2">
+          <IconSunFilled size={20} />
+          <h2 className="font-semibold">Light</h2>
+        </div>
       )}
-    </Button>
+    </div>
   );
 }

@@ -11,6 +11,7 @@ import { IconDots } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
 import { useToast } from "@/hooks/use-toast"
 import Link from "next/link"
+import { messages } from "@/constants/messages"
 
 interface BlogOptionProps {
     username : string | undefined
@@ -35,15 +36,16 @@ export default function BlogOption(props:BlogOptionProps) {
 
     async function handleDelete() {
         const res = await deleteBlog()
-        if (res.status === 200) {
+        if (res.status !== 200) {
             toast({
-                title : "Successfully delete the blog!"
+                variant : "destructive",
+                title : messages.errorMessage,
+                description : messages.deleteBlogFailedDescription
             })
         } else {
             toast({
-                variant : "destructive",
-                title : "Something was wrong...",
-                description : "please check if you properly sign-in"
+                title : messages.deleteBlogSucceedTitle,
+                description : messages.deleteBlogSucceedDescription
             })
         }
         router.refresh()

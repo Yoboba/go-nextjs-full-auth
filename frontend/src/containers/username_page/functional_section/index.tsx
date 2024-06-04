@@ -17,7 +17,6 @@ export default function FunctionalSectionIndex() {
                         <h2 className="relative text-3xl text-g2 font-semibold">My Blogs</h2>
                         <IconMessageShare className="absolute right-0 top-0 text-g2" />
                     </div>
-                    <SearchBar/>
                     <Filter/>
                 </div>
                 <div className="flex items-center justify-center gap-4">

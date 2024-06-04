@@ -18,6 +18,7 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
+    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link";
@@ -27,8 +28,10 @@ import {
     IconLogin2, 
     IconSettings,
     IconHearts,
-    IconBooks
+    IconBooks,
+    IconLogout2
 } from '@tabler/icons-react';
+import ThemeSwitcher from "@/components/my_ui/theme_switcher_button";
 
 interface MyAvatarProps {
     username : string | undefined;
@@ -53,7 +56,7 @@ export default function MyAvatar(props: MyAvatarProps) {
                     <AvatarFallback className=" bg-transparent">G</AvatarFallback>
                 </Avatar>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent align="end" className=" mt-5">
                 <DropdownMenuItem onClick={preventDefault}>
                     <Dialog>
                         <DialogTrigger className="flex items-center gap-2">
@@ -76,30 +79,46 @@ export default function MyAvatar(props: MyAvatarProps) {
                 { props.username ? 
                     <div>
                         <Link href={`/${props.username}`}>
-                            <DropdownMenuItem className="flex items-center gap-2">
+                            <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
                                 <IconBooks size={20}/>
                                 My Blogs
                             </DropdownMenuItem>
                         </Link>
-                        <DropdownMenuItem className="flex items-center gap-2">
+                        <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
                             <IconSettings size={20}/>
                             Setting
                         </DropdownMenuItem>
                         <Link href={`/${props.username}/hearted`}>
-                            <DropdownMenuItem className="flex items-center gap-2">
+                            <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
                                 <IconHearts size={20}/> 
                                 Hearted
                             </DropdownMenuItem>
                         </Link>
+                        <DropdownMenuItem onClick={preventDefault}>
+                            <IconLogout2 size={20}/>
+                            Sign Out
+                        </DropdownMenuItem>
                     </div>
                 :
-                    <Link href={routes.SIGN_IN}>
-                        <DropdownMenuItem className="flex items-center gap-2">
-                            <IconLogin2 size={20}/>
-                            Sign In
-                        </DropdownMenuItem>
-                    </Link>
+                    <div>
+                        <Link href={routes.SIGN_IN}>
+                            <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                                <IconLogin2 size={20}/>
+                                Sign In
+                            </DropdownMenuItem>
+                        </Link>
+                        <Link href={routes.SIGN_UP}>
+                            <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                                <IconLogin2 size={20}/>
+                                Sign Up
+                            </DropdownMenuItem>
+                        </Link>
+                    </div>
                 }
+                <DropdownMenuSeparator/>
+                <DropdownMenuItem onClick={preventDefault}>
+                    <ThemeSwitcher/>
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     )
