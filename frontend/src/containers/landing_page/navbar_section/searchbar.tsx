@@ -15,10 +15,10 @@ export default function SearchBar() {
         console.log(search)
     }
     return (
-        <div className="flex items-center w-64 max-w-sm rounded-lg border border-g2/50 bg-white dark:bg-gray-900 ">
+        <div className="flex items-center w-96 max-w-sm rounded-full border border-g2/50 bg-white dark:bg-gray-900 ">
             <IconSearch size={20} className=" text-g2  ml-3 mr-0"/>
             <form onSubmit={handleSubmit} className=" w-full">
-                <Input className="w-full border-0 h-8 focus:border-white shadow-none focus-visible:ring-0" placeholder="article's name" type="text" value={search} onChange={handleChange}/>
+                <Input className="w-full border-0 h-8 focus:border-white shadow-none focus-visible:ring-0" placeholder="Author's name" type="text" value={search} onChange={handleChange}/>
             </form>
         </div>
     )

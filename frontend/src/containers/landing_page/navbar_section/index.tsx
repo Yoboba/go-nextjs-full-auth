@@ -1,7 +1,6 @@
-import SearchBar from "@/containers/username_page/functional_section/searchbar";
+import SearchBar from "./searchbar";
 import Logo from "./logo";
 import Profile from "./profile";
-import ThemeSwitcher from "@/components/my_ui/theme_switcher_button";
 
 export default function NavbarSection() {
     return (

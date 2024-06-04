@@ -6,7 +6,7 @@ import url from "@/constants/url"
 interface StaticSectionProps {
     blogId : number
 }
-export default async function StaticSection(props:StaticSectionProps) {
+export default async function StaticSection(props:Readonly<StaticSectionProps>) {
     async function getBlogById() {
         const response = await fetch(url.server.GetBlogById + props.blogId, {
             method : "GET",

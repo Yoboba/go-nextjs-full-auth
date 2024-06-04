@@ -13,6 +13,16 @@ type userHttpHandler struct {
 	usecase usecases.UserUseCase
 }
 
+// GetUsers implements UserHandler.
+func (u *userHttpHandler) GetUsers(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "GetUsers")
+	users, err := u.usecase.GetUsers()
+	if err != nil {
+		return common.Response(c, nil, "cannot retrieve users from the database", fiber.StatusInternalServerError, err.Error())
+	}
+	return common.Response(c, users, "successfully retrieve users", fiber.StatusOK, "")
+}
+
 // GetUser implements UserHandler.
 func (u *userHttpHandler) GetUserFromJwt(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "GetUserFromJwt")

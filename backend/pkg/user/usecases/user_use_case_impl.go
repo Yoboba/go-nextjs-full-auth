@@ -9,6 +9,11 @@ type userUseCaseImpl struct {
 	repo repositories.UserRepository
 }
 
+// GetUsers implements UserUseCase.
+func (u *userUseCaseImpl) GetUsers() ([]models.User, error) {
+	return u.repo.FindUsers()
+}
+
 func NewUserUseCaseImpl(repo repositories.UserRepository) UserUseCase {
 	return &userUseCaseImpl{repo: repo}
 }

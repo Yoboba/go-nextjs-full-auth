@@ -28,6 +28,30 @@ type fiberServer struct {
 	Cfg *configs.Config
 }
 
+func (f *fiberServer) Start() {
+	f.App.Use(cors.New(cors.ConfigDefault))
+	f.InitAuthHttpHandlers()
+	f.InitTagHttpHandlers()
+	f.InitGlobalBlogHttpHandlers()
+	f.InitGlobalUserHttpHandlers()
+	f.App.Use(middlewares.JwtAuthentication())
+	f.InitBlogHttpHandlers()
+	f.InitUserHttpHandlers()
+	// Moderator Authorization still hasn't been used
+	serverURL := fmt.Sprintf(":%d", f.Cfg.App.Port)
+	f.App.Listen(serverURL)
+}
+
+// InitGlobalUserHttpHandlers implements Server.
+func (f *fiberServer) InitGlobalUserHttpHandlers() {
+	userRepository := userRepositories.NewUserPostgresRepository(f.Db)
+	userUsecase := userUseCases.NewUserUseCaseImpl(userRepository)
+	userHttpHandler := userHandlers.NewUserHttpHandler(userUsecase)
+
+	v1 := f.App.Group("/v1/users")
+	v1.Get("", userHttpHandler.GetUsers)
+}
+
 // InitGlobalBlogHttpHandlers implements Server.
 func (f *fiberServer) InitGlobalBlogHttpHandlers() {
 	blogRepository := blogRepositories.NewBlogPostgresRepository(*f.Db)
@@ -95,17 +119,4 @@ func NewFiberServer(db *gorm.DB, cfg *configs.Config) Server {
 		Db:  db,
 		Cfg: cfg,
 	}
-}
-
-func (f *fiberServer) Start() {
-	f.App.Use(cors.New(cors.ConfigDefault))
-	f.InitAuthHttpHandlers()
-	f.InitTagHttpHandlers()
-	f.InitGlobalBlogHttpHandlers()
-	f.App.Use(middlewares.JwtAuthentication())
-	f.InitBlogHttpHandlers()
-	f.InitUserHttpHandlers()
-	// Moderator Authorization still hasn't used
-	serverURL := fmt.Sprintf(":%d", f.Cfg.App.Port)
-	f.App.Listen(serverURL)
 }

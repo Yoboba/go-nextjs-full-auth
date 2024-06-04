@@ -9,6 +9,16 @@ type userPostgresRepository struct {
 	db *gorm.DB
 }
 
+// FindUsers implements UserRepository.
+func (u *userPostgresRepository) FindUsers() ([]models.User, error) {
+	var users []models.User
+	result := u.db.Preload("Role").Find(&users)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return users, nil
+}
+
 func NewUserPostgresRepository(db *gorm.DB) UserRepository {
 	return &userPostgresRepository{db: db}
 }

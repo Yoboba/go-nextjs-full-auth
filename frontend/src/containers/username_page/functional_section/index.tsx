@@ -2,9 +2,7 @@ import {
     IconMessageShare,
     IconCubePlus,
 } from "@tabler/icons-react";
-import Line from "@/components/ui/line";
 import BlogDrawer from "@/containers/username_page/functional_section/blog_drawer";
-import SearchBar from "./searchbar";
 import Filter from "./filter";
 import { Separator } from "@/components/ui/separator";
 

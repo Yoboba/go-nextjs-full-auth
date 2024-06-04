@@ -1,8 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-
-import { Button } from "../ui/button";
 import { IconMoonFilled, IconSunFilled } from "@tabler/icons-react";
 
 export default function ThemeSwitcher() {
@@ -18,7 +16,7 @@ export default function ThemeSwitcher() {
   }
 
   return (
-    <div
+    <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       className="w-full h-full cursor-pointer px-[2px] py-[2px] text-g2   flex items-center justify-center"
     >
@@ -34,6 +32,6 @@ export default function ThemeSwitcher() {
           <h2 className="font-semibold">Light</h2>
         </div>
       )}
-    </div>
+    </button>
   );
 }

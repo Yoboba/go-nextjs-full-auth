@@ -29,15 +29,14 @@ export default async function Blog(props: Readonly<BlogProps>) {
     const username = getCookie("username")
     const token = getCookie("jwt")
     const date = new Date(props.dateTime)
-    // TODO :  fetch tag from blog id
 
     return (
-        <div className="flex w-[1000px] h-[250px]  items-center p-8  rounded-xl transition-all border gap-2">
-            <div className="flex flex-col justify-between w-full h-full ">
+        <div className="flex w-[1000px] h-[250px] justify-between items-center p-8  rounded-xl transition-all border gap-2">
+            <div className="flex flex-col justify-between w-3/4 h-full ">
                 <BlogAvatar username={props.author}/>
-                <main>
-                    <Link href={`/blog/${props.id}`} className="text-3xl font-semibold text-g1 hover:text-g3 rounded-xl w-fit transition-all cursor-pointer">{props.title}</Link>
-                    <p className=" text-sm">{props.caption}</p>
+                <main className="w-full">
+                    <Link href={`/blog/${props.id}`} className="text-2xl font-semibold text-g1 hover:text-g3 rounded-xl w-fit transition-all cursor-pointer">{props.title}</Link>
+                    <p className=" text-sm truncate">{props.caption}</p>
                 </main>
                 <div className="flex items-center gap-5 text-sm">
                     <p>{months[date.getMonth()]} {date.getDate()}</p>
