@@ -45,10 +45,10 @@ func (f *fiberServer) Start() {
 // InitGlobalUserHttpHandlers implements Server.
 func (f *fiberServer) InitGlobalUserHttpHandlers() {
 	userRepository := userRepositories.NewUserPostgresRepository(f.Db)
-	userUsecase := userUseCases.NewUserUseCaseImpl(userRepository)
-	userHttpHandler := userHandlers.NewUserHttpHandler(userUsecase)
+	userUseCase := userUseCases.NewUserUseCaseImpl(userRepository)
+	userHttpHandler := userHandlers.NewUserHttpHandler(userUseCase)
 
-	v1 := f.App.Group("/v1/users")
+	v1 := f.App.Group("/v1/global/users")
 	v1.Get("", userHttpHandler.GetUsers)
 }
 
