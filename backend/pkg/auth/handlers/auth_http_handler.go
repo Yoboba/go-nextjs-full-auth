@@ -14,6 +14,30 @@ type authHttpHandler struct {
 	usecase usecases.AuthUseCase
 }
 
+// ForgotPassword implements AuthHandler.
+func (a *authHttpHandler) ForgotPassword(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "ForgotPassword")
+
+	type Body struct {
+		Email string `json:"email"`
+	}
+
+	var body Body
+	parseErr := c.BodyParser(&body)
+	if parseErr != nil {
+		return common.Response(c, nil, "cannot parse body", fiber.StatusBadRequest, parseErr.Error())
+	}
+	validateEmailErr := a.usecase.ValidateEmail(body.Email)
+	if validateEmailErr != nil {
+		return common.Response(c, nil, "your email wrong", fiber.StatusBadRequest, validateEmailErr.Error())
+	}
+	sendEmailErr := a.usecase.SendEmail(body.Email)
+	if sendEmailErr != nil {
+		return common.Response(c, nil, "cannot send the email", fiber.StatusInternalServerError, sendEmailErr.Error())
+	}
+	return common.Response(c, nil, "successfully send the email", fiber.StatusOK, "")
+}
+
 // SignOut implements AuthHandler.
 func (a *authHttpHandler) SignOut(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "SignOut")

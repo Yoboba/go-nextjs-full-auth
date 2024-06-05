@@ -1,5 +1,5 @@
 package common
 
 const (
-	ParseError = "cannot parse"
+	ParseIntError = "cannot parse to Integer"
 )

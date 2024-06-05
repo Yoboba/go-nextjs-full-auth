@@ -24,9 +24,6 @@ export default function BlogOption(props: BlogOptionProps) {
   const router = useRouter();
   const { toast } = useToast();
 
-  useEffect(() => {
-    console.log("author :" + props.author, "username" + props.username);
-  }, []);
   async function deleteBlog() {
     const response = await fetch(url.server.DeleteBlogById + props.blogId, {
       method: "DELETE",

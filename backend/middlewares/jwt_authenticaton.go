@@ -12,7 +12,7 @@ import (
 func JwtAuthentication() fiber.Handler {
 	godotenv.Load()
 	return jwtware.New(jwtware.Config{
-		SigningKey:   jwtware.SigningKey{Key: []byte(os.Getenv("jwtSecret"))},
+		SigningKey:   jwtware.SigningKey{Key: []byte(os.Getenv("JWT_SECRET"))},
 		ErrorHandler: jwtError,
 	})
 }

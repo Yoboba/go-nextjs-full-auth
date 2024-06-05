@@ -20,7 +20,7 @@ func (b *blogHttpHandler) GetBlogById(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "GetBlogById")
 	blogId, parseErr := strconv.ParseInt(c.Params("blogId"), 10, 64)
 	if parseErr != nil {
-		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, parseErr.Error())
+		return common.Response(c, nil, common.ParseIntError, fiber.StatusBadRequest, parseErr.Error())
 	}
 	blogs, err := b.usecase.GetFromId(uint(blogId))
 	if err != nil {
@@ -46,7 +46,7 @@ func (b *blogHttpHandler) DeletelikeByUserIdAndBlogId(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "DeletelikeByUserIdAndBlogId")
 	blogId, parseErr := strconv.ParseInt(c.Params("blogId"), 10, 64)
 	if parseErr != nil {
-		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, parseErr.Error())
+		return common.Response(c, nil, common.ParseIntError, fiber.StatusBadRequest, parseErr.Error())
 	}
 	token := c.Locals("user").(*jwt.Token)
 	userId := token.Claims.(jwt.MapClaims)["user_id"]
@@ -63,7 +63,7 @@ func (b *blogHttpHandler) CreatelikeByUserIdAndBlogId(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "CreatelikeByUserIdAndBlogId")
 	blogId, parseErr := strconv.ParseInt(c.Params("blogId"), 10, 64)
 	if parseErr != nil {
-		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, parseErr.Error())
+		return common.Response(c, nil, common.ParseIntError, fiber.StatusBadRequest, parseErr.Error())
 	}
 	token := c.Locals("user").(*jwt.Token)
 	userId := token.Claims.(jwt.MapClaims)["user_id"]
@@ -80,7 +80,7 @@ func (b *blogHttpHandler) DeleteBlog(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "DeleteBlog")
 	blog_id, err := strconv.ParseInt(c.Params("blogId"), 10, 64)
 	if err != nil {
-		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, err.Error())
+		return common.Response(c, nil, common.ParseIntError, fiber.StatusBadRequest, err.Error())
 	}
 	err1 := b.usecase.DeleteBlog(uint(blog_id))
 	if err1 != nil {
@@ -94,7 +94,7 @@ func (b *blogHttpHandler) UpdateBlog(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "UpdateBlog")
 	blogId, parseErr := strconv.ParseInt(c.Params("blogId"), 10, 64)
 	if parseErr != nil {
-		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, parseErr.Error())
+		return common.Response(c, nil, common.ParseIntError, fiber.StatusBadRequest, parseErr.Error())
 	}
 	var blog entities.Blog
 	err := c.BodyParser(&blog)
@@ -146,7 +146,7 @@ func (b *blogHttpHandler) GetLikeStatusByUsernameAndBlogId(c *fiber.Ctx) error {
 
 	id, err := strconv.ParseInt(q["blogId"], 10, 64)
 	if err != nil {
-		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, err.Error())
+		return common.Response(c, nil, common.ParseIntError, fiber.StatusBadRequest, err.Error())
 	}
 
 	status, err := b.usecase.GetLikeStatusFromUsernameAndBlogId(q["username"], uint(id))
@@ -161,7 +161,7 @@ func (b *blogHttpHandler) GetLikeByBlogId(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "GetLikeByBlogId")
 	blog_id, err := strconv.ParseInt(c.Params("blogId"), 10, 64)
 	if err != nil {
-		return common.Response(c, nil, common.ParseError, fiber.StatusBadRequest, err.Error())
+		return common.Response(c, nil, common.ParseIntError, fiber.StatusBadRequest, err.Error())
 	}
 	like, err := b.usecase.GetLikeFromBlogId(uint(blog_id))
 	if err != nil {

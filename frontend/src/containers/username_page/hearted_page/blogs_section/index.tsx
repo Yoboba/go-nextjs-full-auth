@@ -16,7 +16,6 @@ export default async function BlogSection() {
     return data;
   }
   const res = await getBlogByLike();
-  console.log(res);
   if (res.data === null) {
     return (
       <section className="h-full w-full bg-white flex flex-col items-center justify-center overflow-y-auto gap-5 pl-8 pr-8 pb-8 pt-8">
