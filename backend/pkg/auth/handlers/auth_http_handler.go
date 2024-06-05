@@ -14,20 +14,41 @@ type authHttpHandler struct {
 	usecase usecases.AuthUseCase
 }
 
+// SignOut implements AuthHandler.
+func (a *authHttpHandler) SignOut(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "SignOut")
+	c.Cookie(&fiber.Cookie{
+		Name:     "jwt",
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour),
+		HTTPOnly: true,
+		SameSite: "None",
+	})
+	c.Cookie(&fiber.Cookie{
+		Name:     "username",
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour),
+		HTTPOnly: true,
+		SameSite: "None",
+	})
+	return common.Response(c, nil, "successfully sign out", fiber.StatusOK, "")
+}
+
 // SignIn implements AuthHandler.
 func (a *authHttpHandler) SignIn(c *fiber.Ctx) error {
-	var user entities.User
-	err := c.BodyParser(&user)
+	fmt.Println(c.Path(), "SignIn")
+	var signInInfo entities.User
+	err := c.BodyParser(&signInInfo)
 	if err != nil {
 		return common.Response(c, nil, "some information missing", fiber.StatusBadRequest, err.Error())
 	}
 
-	token, err := a.usecase.ValidateUser(user)
+	token, err := a.usecase.ValidateUser(signInInfo)
 	if err != nil {
 		return common.Response(c, nil, "validate failed", fiber.StatusUnauthorized, err.Error())
 	}
 
-	user1, err := a.usecase.GetUserByEmail(user.Email)
+	user, err := a.usecase.GetUserByEmail(signInInfo.Email)
 	if err != nil {
 		return common.Response(c, nil, "user not found", fiber.StatusNotFound, err.Error())
 	}
@@ -41,18 +62,19 @@ func (a *authHttpHandler) SignIn(c *fiber.Ctx) error {
 	})
 	c.Cookie(&fiber.Cookie{
 		Name:     "username",
-		Value:    user1.Username,
+		Value:    user.Username,
 		Expires:  time.Now().Add(time.Minute * 5), // 5 minutes
 		HTTPOnly: true,
 		SameSite: "None",
 	})
 
 	fmt.Println(c.Path(), "SignIn")
-	return common.Response(c, "jwt token sent via cookie", "token generated", fiber.StatusOK, "")
+	return common.Response(c, user.Username, "token generated", fiber.StatusOK, "")
 }
 
 // SignUp implements AuthHandler.
 func (a *authHttpHandler) SignUp(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "SignUp")
 	tmp := new(entities.User)
 	err := c.BodyParser(tmp)
 	if err != nil {

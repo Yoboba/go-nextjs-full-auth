@@ -7,14 +7,18 @@ import { useEffect, useState } from "react";
 export default function SearchBar() {
   const [search, setSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [filteredUsers, setFilteredUsers] = useState([{
-    id : "",
-    username : ""
-  }]);
-  const [users, setUsers] = useState([{
-    id : "",
-    username : ""
-  }]);
+  const [filteredUsers, setFilteredUsers] = useState([
+    {
+      id: "",
+      username: "",
+    },
+  ]);
+  const [users, setUsers] = useState([
+    {
+      id: "",
+      username: "",
+    },
+  ]);
 
   async function getUsers() {
     const response = await fetch(url.client.GetUsers, {
@@ -24,7 +28,6 @@ export default function SearchBar() {
       },
     });
     const data = await response.json();
-    console.log(data);
     return data;
   }
 
@@ -38,17 +41,23 @@ export default function SearchBar() {
       });
   }, []);
 
+  useEffect(() => {
+    if (search === "") {
+      setFilteredUsers([]);
+    } else {
+      const filtered = users.filter((user) =>
+        user.username.toLowerCase().includes(search),
+      );
+      setFilteredUsers(filtered);
+    }
+  }, [search]);
+
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value.toLowerCase());
-    const filtered = users.filter((user) =>
-      user.username.toLowerCase().includes(search),
-    );
-    setFilteredUsers(filtered);
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(search);
   }
 
   return (
@@ -66,10 +75,15 @@ export default function SearchBar() {
         />
       </form>
       {isOpen && (
-        <div className="w-96 top-16 absolute h-[200px] bg-white drop-shadow-xl rounded-xl p-8">
-          <p>people...</p>
+        <div className="w-96 top-16 -ml-1 absolute h-fit bg-white drop-shadow-xl rounded-md p-4">
+          <h2 className=" text-gray-400 font-normal">PEOPLE</h2>
           {filteredUsers.map((user) => (
-            <p key={user.id}>{user.username}</p>
+            <p
+              className="pt-2 font-semibold cursor-pointer hover:underline"
+              key={user.id}
+            >
+              {user.username}
+            </p>
           ))}
         </div>
       )}

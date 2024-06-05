@@ -28,7 +28,7 @@ func (b *blogPostgresRepository) FindFromId(id uint) (models.Blog, error) {
 func (b *blogPostgresRepository) FindFromLike(id uint) ([]models.Blog, error) {
 	var user entities.User
 	var blogs []models.Blog
-	result := b.db.Where("id = ?", id).Preload("Blogs").Find(&user)
+	result := b.db.Where("id = ?", id).Preload("Blogs.User").Find(&user)
 	if result.Error != nil {
 		return nil, result.Error
 	}

@@ -89,6 +89,7 @@ func (f *fiberServer) InitAuthHttpHandlers() {
 	v1 := f.App.Group("/v1/auth")
 	v1.Post("/sign-up", authHttpHandler.SignUp)
 	v1.Post("/sign-in", authHttpHandler.SignIn)
+	v1.Post("/sign-out", authHttpHandler.SignOut)
 }
 
 // InitTagHttpHandlers implements Server.
