@@ -34,7 +34,7 @@ export default function SignInForm() {
     },
   });
   async function onSubmit(values: z.infer<typeof signInFormSchema>) {
-    const response = await fetch(url.client.signIn, {
+    const response = await fetch(url.client.SignIn, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

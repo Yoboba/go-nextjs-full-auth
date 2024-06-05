@@ -1,9 +1,12 @@
 const url = {
   client: {
-    getTag: "/api/v1/tag",
-    signIn: "/api/v1/auth/sign-in",
-    signUp: "/api/v1/auth/sign-up",
-    signOut: "/api/v1/auth/sign-out",
+    GetTag: "/api/v1/tag",
+    SignIn: "/api/v1/auth/sign-in",
+    SignUp: "/api/v1/auth/sign-up",
+    SignOut: "/api/v1/auth/sign-out",
+    ForgotPassword: "/api/v1/auth/forgot-password",
+    ResetPassword: "/api/v1/auth/reset-password",
+    TokenCheck: "/api/v1/auth/token-check",
     GetLike: "/api/v1/global/blog/like/", // one parameter : blog_id
     GetLikeStatus: "/api/v1/blog/like/status?", // two query parameter : username , blogId // need auth
     DeleteLike: "/api/v1/blog/like/", // one parameter : blog_id // need auth

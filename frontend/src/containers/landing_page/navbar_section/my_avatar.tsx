@@ -40,7 +40,7 @@ export default function MyAvatar(props: MyAvatarProps) {
   const router = useRouter();
 
   async function signOut() {
-    const response = await fetch(url.client.signOut, {
+    const response = await fetch(url.client.SignOut, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
