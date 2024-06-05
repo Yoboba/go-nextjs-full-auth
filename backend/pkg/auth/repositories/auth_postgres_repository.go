@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"github.com/Yoboba/GNA/pkg/entities"
+	"github.com/Yoboba/GNA/pkg/models"
 	"gorm.io/gorm"
 )
 
@@ -9,10 +10,34 @@ type authPostgresRepository struct {
 	db *gorm.DB
 }
 
-// ValidateEmail implements AuthRepository.
-func (a *authPostgresRepository) ValidateEmail(email string) error {
+// UpdatePassword implements AuthRepository.
+func (a *authPostgresRepository) UpdatePassword(userId uint, newPassword string) error {
 	var user entities.User
-	result := a.db.Where("email = ?", email).First(&user)
+	result := a.db.Where("id = ?", userId).First(&user)
+	if result.Error != nil {
+		return result.Error
+	}
+	user.Password = newPassword
+	updateResult := a.db.Save(&user)
+	if updateResult.Error != nil {
+		return updateResult.Error
+	}
+	return nil
+}
+
+// FindMatchToken implements AuthRepository.
+func (a *authPostgresRepository) FindMatchToken(userToken string) (entities.PasswordResetToken, error) {
+	var token entities.PasswordResetToken
+	result := a.db.Where("token = ?", userToken).First(&token)
+	if result.Error != nil {
+		return token, result.Error
+	}
+	return token, nil
+}
+
+// SavePasswordResetToken implements AuthRepository.
+func (a *authPostgresRepository) SavePasswordResetToken(token entities.PasswordResetToken) error {
+	result := a.db.Create(&token)
 	if result.Error != nil {
 		return result.Error
 	}
@@ -20,12 +45,12 @@ func (a *authPostgresRepository) ValidateEmail(email string) error {
 }
 
 // FindUserByEmail implements AuthRepository.
-func (a *authPostgresRepository) FindUserByEmail(email string) (entities.User, error) {
-	var user entities.User
+func (a *authPostgresRepository) FindUserByEmail(email string) (models.User, error) {
+	var user models.User
 
 	result := a.db.Where("email = ?", email).First(&user)
 	if result.Error != nil {
-		return entities.User{}, result.Error
+		return models.User{}, result.Error
 	}
 	return user, nil
 }
@@ -40,14 +65,14 @@ func (a *authPostgresRepository) SaveUser(user entities.User) error {
 }
 
 // ValidateEmailAndGetPassword implements AuthRepository.
-func (a *authPostgresRepository) ValidateEmailAndGetPassword(email string) (uint, string, error) {
+func (a *authPostgresRepository) ValidateEmailAndGetUser(email string) (entities.User, error) {
 	var user entities.User
 
 	result := a.db.Where("email = ?", email).First(&user)
 	if result.Error != nil {
-		return 0, "", result.Error
+		return user, result.Error
 	}
-	return user.ID, user.Password, nil
+	return user, nil
 }
 
 func NewAuthPostgresRepository(db *gorm.DB) AuthRepository {

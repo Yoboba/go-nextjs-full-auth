@@ -15,7 +15,7 @@ var roles = []entities.Role{
 var users = []entities.User{
 	{
 		Username: "Yobubble",
-		Email:    "Thanachot.onl@gmail.com",
+		Email:    "Thanachot.onlamoon@gmail.com",
 		Password: "$2a$10$DdB6INzHJegaH6FP3cAoN.gyYWhsf5FteT2lcpNa0pmCr3QtP2LK.",
 		RoleID:   1,
 	}, // password : yobuza007

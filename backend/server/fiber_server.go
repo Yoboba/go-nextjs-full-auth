@@ -91,6 +91,8 @@ func (f *fiberServer) InitAuthHttpHandlers() {
 	v1.Post("/sign-in", authHttpHandler.SignIn)
 	v1.Post("/sign-out", authHttpHandler.SignOut)
 	v1.Post("/forgot-password", authHttpHandler.ForgotPassword)
+	v1.Post("/token-check", authHttpHandler.PasswordResetTokenCheck)
+	v1.Post("/reset-password", authHttpHandler.ResetPassword)
 }
 
 // InitTagHttpHandlers implements Server.

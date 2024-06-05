@@ -21,11 +21,13 @@ func (p *postgresMigration) Reset() error {
 	p.db.GetDB().Migrator().DropTable(&entities.Role{})
 	p.db.GetDB().Migrator().DropTable("blog_tags")
 	p.db.GetDB().Migrator().DropTable("user_blogs_like")
+	p.db.GetDB().Migrator().DropTable(&entities.PasswordResetToken{})
 	// Add empty tables
 	p.db.GetDB().AutoMigrate(&entities.Role{})
 	p.db.GetDB().AutoMigrate(&entities.Tag{})
 	p.db.GetDB().AutoMigrate(&entities.User{})
 	p.db.GetDB().AutoMigrate(&entities.Blog{})
+	p.db.GetDB().AutoMigrate(&entities.PasswordResetToken{})
 	return nil
 }
 

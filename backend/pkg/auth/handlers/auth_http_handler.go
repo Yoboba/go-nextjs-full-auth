@@ -14,6 +14,44 @@ type authHttpHandler struct {
 	usecase usecases.AuthUseCase
 }
 
+// ResetPassword implements AuthHandler.
+func (a *authHttpHandler) ResetPassword(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "ResetPassword")
+	type Body struct {
+		UserId      uint   `json:"user_id"`
+		Token       string `json:"token"`
+		NewPassword string `json:"new_password"`
+	}
+	var body Body
+	parseErr := c.BodyParser(&body)
+	if parseErr != nil {
+		return common.Response(c, nil, "cannot parse body", fiber.StatusBadRequest, parseErr.Error())
+	}
+	resetPasswordErr := a.usecase.ResetPassword(body.Token, body.UserId, body.NewPassword)
+	if resetPasswordErr != nil {
+		return common.Response(c, nil, "reset password password error", fiber.StatusInternalServerError, resetPasswordErr.Error())
+	}
+	return common.Response(c, nil, "successfully reset password", fiber.StatusOK, "")
+}
+
+// CodeCheck implements AuthHandler.
+func (a *authHttpHandler) PasswordResetTokenCheck(c *fiber.Ctx) error {
+	fmt.Println(c.Path(), "PasswordResetTokenCheck")
+	type Body struct {
+		Code string `json:"code"`
+	}
+	var body Body
+	parseErr := c.BodyParser(&body)
+	if parseErr != nil {
+		return common.Response(c, nil, "cannot parse body", fiber.StatusBadRequest, parseErr.Error())
+	}
+	userId, verifyErr := a.usecase.VerifyToken(body.Code)
+	if verifyErr != nil {
+		return common.Response(c, nil, "Token incorrect", fiber.StatusBadRequest, verifyErr.Error())
+	}
+	return common.Response(c, userId, "token matched", fiber.StatusOK, "")
+}
+
 // ForgotPassword implements AuthHandler.
 func (a *authHttpHandler) ForgotPassword(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "ForgotPassword")
@@ -31,7 +69,11 @@ func (a *authHttpHandler) ForgotPassword(c *fiber.Ctx) error {
 	if validateEmailErr != nil {
 		return common.Response(c, nil, "your email wrong", fiber.StatusBadRequest, validateEmailErr.Error())
 	}
-	sendEmailErr := a.usecase.SendEmail(body.Email)
+	user, getUserErr := a.usecase.GetUserByEmail(body.Email)
+	if getUserErr != nil {
+		return common.Response(c, nil, "cannot retreive user info from email", fiber.StatusInternalServerError, getUserErr.Error())
+	}
+	sendEmailErr := a.usecase.SendEmail(user)
 	if sendEmailErr != nil {
 		return common.Response(c, nil, "cannot send the email", fiber.StatusInternalServerError, sendEmailErr.Error())
 	}

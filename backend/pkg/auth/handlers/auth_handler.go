@@ -7,4 +7,6 @@ type AuthHandler interface {
 	SignIn(c *fiber.Ctx) error
 	SignOut(c *fiber.Ctx) error
 	ForgotPassword(c *fiber.Ctx) error
+	PasswordResetTokenCheck(c *fiber.Ctx) error
+	ResetPassword(c *fiber.Ctx) error
 }
