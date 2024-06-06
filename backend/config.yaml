@@ -7,5 +7,5 @@ database:
   port: 5432
   user: myuser
   password: mypassword
-  dbname: TEST
+  dbname: mydb
   sslmode: disable
