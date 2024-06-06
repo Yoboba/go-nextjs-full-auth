@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import url from "@/constants/url";
 import { useToast } from "@/hooks/use-toast";
-import { messages } from "@/constants/messages";
+import { toastMessages } from "@/constants/messages";
 import { useRouter } from "next/navigation";
 import { routes } from "@/constants/routes";
 
@@ -58,15 +58,15 @@ export default function SetNewPasswordForm(props: SetNewPasswordFormProps) {
     if (res.status !== 200) {
       toast({
         variant: "destructive",
-        title: messages.errorMessage,
-        description: messages.resetPasswordFailedDescription,
+        title: toastMessages.errorMessage,
+        description: toastMessages.resetPasswordFailedDescription,
       });
       console.log(body);
       console.log(res);
     } else {
       toast({
-        title: messages.resetPasswordSucceedTitle,
-        description: messages.resetPasswordSucceedDescription,
+        title: toastMessages.resetPasswordSucceedTitle,
+        description: toastMessages.resetPasswordSucceedDescription,
       });
       router.push(routes.SIGN_IN);
       console.log(body);

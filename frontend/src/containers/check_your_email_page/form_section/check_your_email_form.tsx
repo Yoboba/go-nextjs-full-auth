@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import url from "@/constants/url";
 import { useToast } from "@/hooks/use-toast";
-import { messages } from "@/constants/messages";
+import { toastMessages } from "@/constants/messages";
 
 export default function CheckYourEmailForm() {
   const router = useRouter();
@@ -40,8 +40,8 @@ export default function CheckYourEmailForm() {
     if (res.status !== 200) {
       toast({
         variant: "destructive",
-        title: messages.errorMessage,
-        description: messages.tokenCheckFailedDescription,
+        title: toastMessages.errorMessage,
+        description: toastMessages.tokenCheckFailedDescription,
       });
     } else {
       router.push(`/set-new-password/${values.code}/${res.data}`);

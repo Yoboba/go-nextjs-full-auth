@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { routes } from "@/constants/routes";
 import { useToast } from "@/hooks/use-toast";
-import { messages } from "@/constants/messages";
+import { toastMessages } from "@/constants/messages";
 
 interface BlogHeartProps {
   username: string | undefined;
@@ -45,10 +45,16 @@ export default function BlogHeart(props: Readonly<BlogHeartProps>) {
     return data;
   }
   async function getLikeStatus() {
-    const response = await fetch(url.client.GetLikeStatus + "username=" + props.username + "&blogId=" + props.blog_id, {
+    const response = await fetch(
+      url.client.GetLikeStatus +
+        "username=" +
+        props.username +
+        "&blogId=" +
+        props.blog_id,
+      {
         method: "GET",
         headers: {
-          "Authorization" : `Bearer ${props.token}`,
+          Authorization: `Bearer ${props.token}`,
           "Content-Type": "application/json",
         },
       },
@@ -59,59 +65,59 @@ export default function BlogHeart(props: Readonly<BlogHeartProps>) {
 
   async function deleteLike() {
     const response = await fetch(url.client.DeleteLike + props.blog_id, {
-      method : "DELETE",
-      headers : {
-        "Authorization" : `Bearer ${props.token}`,
-        "Content-Type" : "application/json"
-      }
-    })
-    const data = await response.json()
-    return data
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${props.token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    return data;
   }
-  
+
   async function createLike() {
     const response = await fetch(url.client.CreateLike + props.blog_id, {
-      method : "POST",
-      headers : {
-        "Authorization" : `Bearer ${props.token}`,
-        "Content-Type" : "application/json"
-      }
-    })
-    const data = await response.json()
-    return data
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${props.token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    return data;
   }
 
   async function handleLike() {
     if (props.username === undefined && props.token === undefined) {
       router.push(routes.SIGN_IN);
       toast({
-        variant : "destructive",
-        title: messages.errorMessage,
-        description: messages.likeFailedDescription,
+        variant: "destructive",
+        title: toastMessages.errorMessage,
+        description: toastMessages.likeFailedDescription,
       });
     } else {
-      if (liked === true ) {
-        const res = await deleteLike()
-        if (res.status !== 200) { 
+      if (liked === true) {
+        const res = await deleteLike();
+        if (res.status !== 200) {
           toast({
-            variant : "destructive",
-            title: messages.errorMessage,
-            description: messages.likeFailedDescription,
-          })
-          router.replace(routes.SIGN_IN)
+            variant: "destructive",
+            title: toastMessages.errorMessage,
+            description: toastMessages.likeFailedDescription,
+          });
+          router.replace(routes.SIGN_IN);
         }
       } else {
-        const res = await createLike()
-        if (res.status !== 200) { 
+        const res = await createLike();
+        if (res.status !== 200) {
           toast({
-            variant : "destructive",
-            title: messages.errorMessage,
-            description: messages.likeFailedDescription,
-          })
-          router.replace(routes.SIGN_IN)
+            variant: "destructive",
+            title: toastMessages.errorMessage,
+            description: toastMessages.likeFailedDescription,
+          });
+          router.replace(routes.SIGN_IN);
         }
       }
-      setLiked(!liked)
+      setLiked(!liked);
     }
   }
 

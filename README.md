@@ -1,13 +1,17 @@
-# Full Authentication System using GO and Next.js
+# Simple Blog Web Application (Medium.com inspired)
 
-a simple blog application focuses on utilizing JWT for authentication.. **WIP**
+Tech Stack
+- Languages Used : GO, Typescript
+- Frontend Frameworks : React.js, Next.js, Shadcn/ui, TailwindCSS
+- Backend Frameworks : GO Fiber, GORM
+- Database : Postgres (docker)
+
+Project structure : Clean Architecture
 
 Configuration step
-- postgres docker
-- JwtSecret
-- Server port
-- Database
-- server url
+- Run docker compose to open mock PostgreSQL server
+- .env file (JWT_SECRET, sender email, google app password)
+- server config.yaml
 
 #### Setup Instruction
 1. Clone
@@ -19,5 +23,4 @@ git clone https://github.com/Yoboba/go-nextjs-full-auth.git
 cd frontend
 npm install
 ```
-3. Setup environment variable for PostgreSQL and PgMyAdmin  
- 
+3. Setup environment variable for PostgreSQL and PgMyAdmin

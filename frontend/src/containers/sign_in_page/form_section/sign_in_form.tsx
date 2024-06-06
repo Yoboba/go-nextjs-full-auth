@@ -14,7 +14,7 @@ import MyButton from "@/components/my_ui/my_button";
 import { routes } from "../../../constants/routes";
 import url from "../../../constants/url";
 import { useToast } from "@/hooks/use-toast";
-import { messages } from "@/constants/messages";
+import { toastMessages } from "@/constants/messages";
 
 export default function SignInForm() {
   const { toast } = useToast();
@@ -45,13 +45,13 @@ export default function SignInForm() {
     if (res.status !== 200) {
       toast({
         variant: "destructive",
-        title: messages.errorMessage,
-        description: messages.signInFailedDescription,
+        title: toastMessages.errorMessage,
+        description: toastMessages.signInFailedDescription,
       });
     } else {
       toast({
-        title: messages.signInSucceedTitle,
-        description: messages.signInSucceedDescription,
+        title: toastMessages.signInSucceedTitle,
+        description: toastMessages.signInSucceedDescription,
       });
       router.push(`/${res.data}`);
       router.refresh();

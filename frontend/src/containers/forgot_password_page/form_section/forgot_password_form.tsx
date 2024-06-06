@@ -10,7 +10,7 @@ import * as z from "zod";
 import { routes } from "@/constants/routes";
 import url from "@/constants/url";
 import { useToast } from "@/hooks/use-toast";
-import { messages } from "@/constants/messages";
+import { toastMessages } from "@/constants/messages";
 
 export default function ForgotPasswordForm() {
   const router = useRouter();
@@ -38,13 +38,13 @@ export default function ForgotPasswordForm() {
     if (res.status !== 200) {
       toast({
         variant: "destructive",
-        title: messages.errorMessage,
-        description: messages.forgotPasswordFailedDescription,
+        title: toastMessages.errorMessage,
+        description: toastMessages.forgotPasswordFailedDescription,
       });
     } else {
       toast({
-        title: messages.forgotPasswordSucceedTitle,
-        description: messages.forgotPasswordSucceedDescription,
+        title: toastMessages.forgotPasswordSucceedTitle,
+        description: toastMessages.forgotPasswordSucceedDescription,
       });
       router.push(routes.CHECK_YOUR_EMAIL);
       console.log(values);

@@ -15,7 +15,7 @@ import * as z from "zod";
 import url from "@/constants/url";
 import { routes } from "@/constants/routes";
 import { useToast } from "@/hooks/use-toast";
-import { messages } from "@/constants/messages";
+import { toastMessages } from "@/constants/messages";
 
 export default function SignUpForm() {
   const router = useRouter();
@@ -74,13 +74,13 @@ export default function SignUpForm() {
     if (res.status !== 200) {
       toast({
         variant: "destructive",
-        title: messages.errorMessage,
-        description: messages.signUpFailedDescription,
+        title: toastMessages.errorMessage,
+        description: toastMessages.signUpFailedDescription,
       });
     } else {
       toast({
-        title: messages.signUpSucceedTitle,
-        description: messages.signUpSucceedDescription,
+        title: toastMessages.signUpSucceedTitle,
+        description: toastMessages.signUpSucceedDescription,
       });
       router.push(routes.SIGN_IN);
     }

@@ -1,6 +1,8 @@
 package repositories
 
 import (
+	"fmt"
+
 	"github.com/Yoboba/GNA/pkg/entities"
 	"github.com/Yoboba/GNA/pkg/models"
 	"gorm.io/gorm"
@@ -68,6 +70,7 @@ func (a *authPostgresRepository) SaveUser(user entities.User) error {
 func (a *authPostgresRepository) ValidateEmailAndGetUser(email string) (entities.User, error) {
 	var user entities.User
 
+	fmt.Println("at database " + email)
 	result := a.db.Where("email = ?", email).First(&user)
 	if result.Error != nil {
 		return user, result.Error

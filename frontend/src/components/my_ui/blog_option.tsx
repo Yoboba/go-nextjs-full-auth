@@ -11,8 +11,7 @@ import { IconDots } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
-import { messages } from "@/constants/messages";
-import { useEffect } from "react";
+import { toastMessages } from "@/constants/messages";
 
 interface BlogOptionProps {
   username: string | undefined;
@@ -41,13 +40,13 @@ export default function BlogOption(props: BlogOptionProps) {
     if (res.status !== 200) {
       toast({
         variant: "destructive",
-        title: messages.errorMessage,
-        description: messages.deleteBlogFailedDescription,
+        title: toastMessages.errorMessage,
+        description: toastMessages.deleteBlogFailedDescription,
       });
     } else {
       toast({
-        title: messages.deleteBlogSucceedTitle,
-        description: messages.deleteBlogSucceedDescription,
+        title: toastMessages.deleteBlogSucceedTitle,
+        description: toastMessages.deleteBlogSucceedDescription,
       });
     }
     router.refresh();

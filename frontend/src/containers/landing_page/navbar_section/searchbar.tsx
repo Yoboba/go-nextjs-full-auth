@@ -75,7 +75,7 @@ export default function SearchBar() {
         />
       </form>
       {isOpen && (
-        <div className="w-96 top-16 -ml-1 absolute h-fit bg-white drop-shadow-xl rounded-md p-4">
+        <div className="z-50 w-96 top-16 -ml-1 absolute h-fit bg-white drop-shadow-xl rounded-md p-4">
           <h2 className=" text-gray-400 font-normal">PEOPLE</h2>
           {filteredUsers.map((user) => (
             <p

@@ -1,34 +1,34 @@
-export const messages = {
+export const toastMessages = {
   errorMessage: "Something went wrong...",
   likeFailedDescription: "refresh or user might forgot to sign in",
-  deleteBlogFailedDescription: "refresh or user might forgot to sign in",
+  deleteBlogFailedDescription: "user might forgot to sign in",
   deleteBlogSucceedTitle: "Successfully delete the blog!",
-  deleteBlogSucceedDescription: "refresh to update the page",
+  deleteBlogSucceedDescription: "",
   updateBlogSucceedTitle: "Successfully update the blog!",
-  updateBlogSucceedDescription: "refresh to update the page",
+  updateBlogSucceedDescription: "",
   updateBlogFailedDescription:
-    "user might not be the author of this blog or please try again",
+    "user might not be the author of this blog or please contact the project owner",
   createBlogSucceedTitle: "Successfully create the blog!",
-  createBlogSucceedDescription: "refresh to update the page",
+  createBlogSucceedDescription: "",
   createBlogFailedDescription:
-    "please refresh and check either the session isnr't expired",
-  signInFailedDescription: "check either your email or password correctness",
+    "refresh or check if the session isn't expired already",
+  signInFailedDescription: "check your email or password correctness",
   signInSucceedTitle: "Successfully sign in, Welcome back!",
   signInSucceedDescription:
-    "I hope you enjoy exploring this simple Blog Web Application!",
-  signUpFailedDescription: "there might be some errors in the server side",
+    "Glad to see you again! Please to enjoy exploring this Blog Web Application!",
+  signUpFailedDescription:
+    "there might be some errors in the server side, please contact project owner",
   signUpSucceedTitle: "Successfully sign up, Welcome!",
   signUpSucceedDescription: "please Sign In with your email and password",
   tokenUndefined: "Token Undefined, please Sign In or Sign Up",
-  forgotPasswordFailedDescription:
-    "the email might be incorrect or inform the web owner",
+  forgotPasswordFailedDescription: "incorrect email",
   forgotPasswordSucceedTitle: "Email Sent!",
   forgotPasswordSucceedDescription:
-    "please check your code in the email and putting in the box",
+    "please check your email and putting the code in the box",
   tokenCheckFailedDescription:
     "wrong or expired code, please request for the code again",
   resetPasswordFailedDescription:
-    "your token might be wrong or inform the web owner",
-  resetPasswordSucceedTitle: "Successfully updated the password",
+    "your token might be wrong or please contact the project owner",
+  resetPasswordSucceedTitle: "Successfully updated the password!",
   resetPasswordSucceedDescription: "try sign in again with your new password",
 };

@@ -93,7 +93,7 @@ func (a *authUseCaseImpl) SendEmail(user models.User) error {
 
 // GetUserByEmail implements AuthUseCase.
 func (a *authUseCaseImpl) GetUserByEmail(email string) (models.User, error) {
-	return a.repo.FindUserByEmail(email)
+	return a.repo.FindUserByEmail(strings.ToLower(email))
 }
 
 // CreateUser implements AuthUseCase.
@@ -110,7 +110,8 @@ func (a *authUseCaseImpl) CreateUser(user entities.User) error {
 
 // ValidateUser implements AuthUseCase.
 func (a *authUseCaseImpl) ValidateUser(user entities.User) (string, error) {
-	serverUser, validateEmailErr := a.repo.ValidateEmailAndGetUser(user.Email)
+	fmt.Println(strings.ToLower(user.Email))
+	serverUser, validateEmailErr := a.repo.ValidateEmailAndGetUser(strings.ToLower(user.Email))
 	if validateEmailErr != nil {
 		return "", validateEmailErr
 	}

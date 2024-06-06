@@ -47,8 +47,10 @@ export default function MyAvatar(props: MyAvatarProps) {
       },
     });
     const data = await response.json();
+    router.push(routes.ROOT);
     router.refresh();
   }
+
   function profileImageOnChange(acceptedFiles: any) {
     setProfileImage(acceptedFiles);
   }
