@@ -7,16 +7,18 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { routes } from "@/constants/routes";
 import url from "@/constants/url";
+import { useToast } from "@/hooks/use-toast";
+import { messages } from "@/constants/messages";
 
 export default function CheckYourEmailForm() {
   const router = useRouter();
+  const { toast } = useToast();
   const checkYourEmailFormSchema = z.object({
     code: z
       .string()
       .min(2, { message: "Code should be at least 2 characters" })
-      .max(10, { message: "Code should be less than 10 characters" }),
+      .max(15, { message: "Code should be less than 15 characters" }),
   });
 
   const form = useForm<z.infer<typeof checkYourEmailFormSchema>>({
@@ -32,12 +34,17 @@ export default function CheckYourEmailForm() {
       headers: {
         "Content-type": "application/json",
       },
+      body: JSON.stringify(values),
     });
     const res = await response.json();
     if (res.status !== 200) {
-      // TODO : handle error
+      toast({
+        variant: "destructive",
+        title: messages.errorMessage,
+        description: messages.tokenCheckFailedDescription,
+      });
     } else {
-      router.push(routes.SET_NEW_PASSWORD);
+      router.push(`/set-new-password/${values.code}/${res.data}`);
       console.log(values);
     }
   }

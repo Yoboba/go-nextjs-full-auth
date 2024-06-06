@@ -9,9 +9,12 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { routes } from "@/constants/routes";
 import url from "@/constants/url";
+import { useToast } from "@/hooks/use-toast";
+import { messages } from "@/constants/messages";
 
 export default function ForgotPasswordForm() {
   const router = useRouter();
+  const { toast } = useToast();
   const forgotPasswordFormSchema = z.object({
     email: z.string().email({ message: "Invalid Email" }),
   });
@@ -29,11 +32,20 @@ export default function ForgotPasswordForm() {
       headers: {
         "Content-type": "application/json",
       },
+      body: JSON.stringify(values),
     });
     const res = await response.json();
     if (res.status !== 200) {
-      // TODO : handle error
+      toast({
+        variant: "destructive",
+        title: messages.errorMessage,
+        description: messages.forgotPasswordFailedDescription,
+      });
     } else {
+      toast({
+        title: messages.forgotPasswordSucceedTitle,
+        description: messages.forgotPasswordSucceedDescription,
+      });
       router.push(routes.CHECK_YOUR_EMAIL);
       console.log(values);
     }

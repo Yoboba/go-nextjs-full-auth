@@ -6,8 +6,20 @@ import MyButton from "@/components/my_ui/my_button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import url from "@/constants/url";
+import { useToast } from "@/hooks/use-toast";
+import { messages } from "@/constants/messages";
+import { useRouter } from "next/navigation";
+import { routes } from "@/constants/routes";
 
-export default function SetNewPasswordForm() {
+interface SetNewPasswordFormProps {
+  userId: string;
+  token: string;
+}
+
+export default function SetNewPasswordForm(props: SetNewPasswordFormProps) {
+  const router = useRouter();
+  const { toast } = useToast();
   const setNewPasswordFormSchema = z
     .object({
       password: z
@@ -29,8 +41,36 @@ export default function SetNewPasswordForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof setNewPasswordFormSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof setNewPasswordFormSchema>) {
+    const body = {
+      user_id: parseInt(props.userId, 10),
+      token: props.token,
+      new_password: values.password,
+    };
+    const response = await fetch(url.client.ResetPassword, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    const res = await response.json();
+    if (res.status !== 200) {
+      toast({
+        variant: "destructive",
+        title: messages.errorMessage,
+        description: messages.resetPasswordFailedDescription,
+      });
+      console.log(body);
+      console.log(res);
+    } else {
+      toast({
+        title: messages.resetPasswordSucceedTitle,
+        description: messages.resetPasswordSucceedDescription,
+      });
+      router.push(routes.SIGN_IN);
+      console.log(body);
+    }
   }
 
   return (

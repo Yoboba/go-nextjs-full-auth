@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/smtp"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/Yoboba/GNA/pkg/auth/repositories"
@@ -97,6 +98,7 @@ func (a *authUseCaseImpl) GetUserByEmail(email string) (models.User, error) {
 
 // CreateUser implements AuthUseCase.
 func (a *authUseCaseImpl) CreateUser(user entities.User) error {
+	user.Email = strings.ToLower(user.Email)
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
 		return err
@@ -124,7 +126,7 @@ func (a *authUseCaseImpl) ValidateUser(user entities.User) (string, error) {
 	claims["user_id"] = serverUser.ID
 	claims["exp"] = time.Now().Add(time.Minute * 5).Unix() // <- 5 minutes
 
-	t, err := token.SignedString([]byte(os.Getenv("jwtSecret"))) // <- from .env
+	t, err := token.SignedString([]byte(os.Getenv("JWT_SECRET"))) // <- from .env
 	if err != nil {
 		return "", err
 	}

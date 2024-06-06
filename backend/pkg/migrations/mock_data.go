@@ -15,19 +15,19 @@ var roles = []entities.Role{
 var users = []entities.User{
 	{
 		Username: "Yobubble",
-		Email:    "Thanachot.onlamoon@gmail.com",
+		Email:    "thanachot.onlamoon@gmail.com", // TODO : will need to delete this since its the real email
 		Password: "$2a$10$DdB6INzHJegaH6FP3cAoN.gyYWhsf5FteT2lcpNa0pmCr3QtP2LK.",
 		RoleID:   1,
 	}, // password : yobuza007
 	{
 		Username: "Prisma",
-		Email:    "Nanthapat.wat@gmail.com",
+		Email:    "nanthapat.wat@gmail.com",
 		Password: "$2a$10$PnRt9tWH93bC/95k5510m.fFeARX8XqvDVsVeNOYzDbQ7F/brz3ii",
 		RoleID:   2,
 	}, // password : guideza007
 	{
 		Username: "DEVN",
-		Email:    "Phoonawit.ler@gmail.com",
+		Email:    "phoonawit.ler@gmail.com",
 		Password: "$2a$10$ojwVltOCkQkbKzxO1UGt8OJhKqhPMvRVIYsVJPg3niqK.b8uM.UA2",
 		RoleID:   1,
 	}, // password : devnza007

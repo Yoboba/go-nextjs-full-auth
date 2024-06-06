@@ -18,7 +18,7 @@ type authHttpHandler struct {
 func (a *authHttpHandler) ResetPassword(c *fiber.Ctx) error {
 	fmt.Println(c.Path(), "ResetPassword")
 	type Body struct {
-		UserId      uint   `json:"user_id"`
+		UserId      int    `json:"user_id"`
 		Token       string `json:"token"`
 		NewPassword string `json:"new_password"`
 	}
@@ -27,7 +27,7 @@ func (a *authHttpHandler) ResetPassword(c *fiber.Ctx) error {
 	if parseErr != nil {
 		return common.Response(c, nil, "cannot parse body", fiber.StatusBadRequest, parseErr.Error())
 	}
-	resetPasswordErr := a.usecase.ResetPassword(body.Token, body.UserId, body.NewPassword)
+	resetPasswordErr := a.usecase.ResetPassword(body.Token, uint(body.UserId), body.NewPassword)
 	if resetPasswordErr != nil {
 		return common.Response(c, nil, "reset password password error", fiber.StatusInternalServerError, resetPasswordErr.Error())
 	}
