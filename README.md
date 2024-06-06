@@ -13,8 +13,8 @@ A simple blog web application inspired by [Medium](https://medium.com).
 ## Setup Instructions
 1. **Run Docker Compose** to start the mock PostgreSQL server.
 2. **Customize server and database configuration** (optional):
-
     ```yaml
+    # backend/config.yaml
     app:
       server:
         port: 7070  # server port
@@ -24,7 +24,7 @@ A simple blog web application inspired by [Medium](https://medium.com).
       port: 5432
       user: myuser  # database user
       password: mypassword  # database password
-      dbname: TEST  # database name
+      dbname: mydb  # database name
       sslmode: disable
     ```
 
@@ -59,3 +59,6 @@ Find the API documentation on [Postman](https://www.postman.com/altimetry-cosmol
 - Profile Search
 - Tag Search
 - Profile Image Change
+
+## Preview
+![Landing Page](./landing.png)
