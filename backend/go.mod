@@ -1,4 +1,4 @@
-module github.com/Yoboba/GNA
+module github.com/Yoboba/BWA
 
 go 1.22.0
 
