@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"github.com/Yoboba/GNA/pkg/models"
+	"github.com/Yoboba/BWA/pkg/models"
 	"gorm.io/gorm"
 )
 

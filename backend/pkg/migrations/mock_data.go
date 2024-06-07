@@ -1,7 +1,7 @@
 package migrations
 
 import (
-	"github.com/Yoboba/GNA/pkg/entities"
+	"github.com/Yoboba/BWA/pkg/entities"
 )
 
 var roles = []entities.Role{

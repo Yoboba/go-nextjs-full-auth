@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/Yoboba/GNA/pkg/common"
-	"github.com/Yoboba/GNA/pkg/entities"
-	"github.com/Yoboba/GNA/pkg/tag/usecases"
+	"github.com/Yoboba/BWA/pkg/common"
+	"github.com/Yoboba/BWA/pkg/entities"
+	"github.com/Yoboba/BWA/pkg/tag/usecases"
 	"github.com/gofiber/fiber/v2"
 )
 

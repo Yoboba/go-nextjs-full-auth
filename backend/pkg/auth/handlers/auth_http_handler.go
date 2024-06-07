@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Yoboba/GNA/pkg/auth/usecases"
-	"github.com/Yoboba/GNA/pkg/common"
-	"github.com/Yoboba/GNA/pkg/entities"
+	"github.com/Yoboba/BWA/pkg/auth/usecases"
+	"github.com/Yoboba/BWA/pkg/common"
+	"github.com/Yoboba/BWA/pkg/entities"
 	"github.com/gofiber/fiber/v2"
 )
 

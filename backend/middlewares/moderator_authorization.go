@@ -1,9 +1,9 @@
 package middlewares
 
 import (
-	"github.com/Yoboba/GNA/configs"
-	"github.com/Yoboba/GNA/database"
-	"github.com/Yoboba/GNA/pkg/common"
+	"github.com/Yoboba/BWA/configs"
+	"github.com/Yoboba/BWA/database"
+	"github.com/Yoboba/BWA/pkg/common"
 	"github.com/gofiber/fiber/v2"
 )
 

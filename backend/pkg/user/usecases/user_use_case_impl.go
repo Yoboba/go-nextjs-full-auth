@@ -1,8 +1,8 @@
 package usecases
 
 import (
-	"github.com/Yoboba/GNA/pkg/models"
-	"github.com/Yoboba/GNA/pkg/user/repositories"
+	"github.com/Yoboba/BWA/pkg/models"
+	"github.com/Yoboba/BWA/pkg/user/repositories"
 )
 
 type userUseCaseImpl struct {

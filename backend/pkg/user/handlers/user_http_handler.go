@@ -3,8 +3,8 @@ package handlers
 import (
 	"fmt"
 
-	"github.com/Yoboba/GNA/pkg/common"
-	"github.com/Yoboba/GNA/pkg/user/usecases"
+	"github.com/Yoboba/BWA/pkg/common"
+	"github.com/Yoboba/BWA/pkg/user/usecases"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
 )

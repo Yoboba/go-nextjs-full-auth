@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/Yoboba/GNA/configs"
-	"github.com/Yoboba/GNA/database"
-	"github.com/Yoboba/GNA/pkg/migrations"
-	"github.com/Yoboba/GNA/server"
+	"github.com/Yoboba/BWA/configs"
+	"github.com/Yoboba/BWA/database"
+	"github.com/Yoboba/BWA/pkg/migrations"
+	"github.com/Yoboba/BWA/server"
 	_ "github.com/lib/pq"
 )
 

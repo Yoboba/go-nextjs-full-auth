@@ -3,8 +3,8 @@ package migrations
 import (
 	"fmt"
 
-	"github.com/Yoboba/GNA/database"
-	"github.com/Yoboba/GNA/pkg/entities"
+	"github.com/Yoboba/BWA/database"
+	"github.com/Yoboba/BWA/pkg/entities"
 	"gorm.io/gorm"
 )
 

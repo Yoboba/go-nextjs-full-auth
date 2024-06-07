@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/Yoboba/GNA/configs"
+	"github.com/Yoboba/BWA/configs"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

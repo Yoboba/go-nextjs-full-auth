@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/Yoboba/GNA/pkg/blog/usecases"
-	"github.com/Yoboba/GNA/pkg/common"
-	"github.com/Yoboba/GNA/pkg/entities"
+	"github.com/Yoboba/BWA/pkg/blog/usecases"
+	"github.com/Yoboba/BWA/pkg/common"
+	"github.com/Yoboba/BWA/pkg/entities"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
 )

@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/Yoboba/GNA/pkg/entities"
+	"github.com/Yoboba/BWA/pkg/entities"
 )
 
 type User struct {

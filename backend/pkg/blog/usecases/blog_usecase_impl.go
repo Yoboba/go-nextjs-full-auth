@@ -1,9 +1,9 @@
 package usecases
 
 import (
-	"github.com/Yoboba/GNA/pkg/blog/repositories"
-	"github.com/Yoboba/GNA/pkg/entities"
-	"github.com/Yoboba/GNA/pkg/models"
+	"github.com/Yoboba/BWA/pkg/blog/repositories"
+	"github.com/Yoboba/BWA/pkg/entities"
+	"github.com/Yoboba/BWA/pkg/models"
 )
 
 type blogUseCaseImpl struct {

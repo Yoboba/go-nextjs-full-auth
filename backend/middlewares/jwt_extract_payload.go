@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"github.com/Yoboba/GNA/pkg/entities"
+	"github.com/Yoboba/BWA/pkg/entities"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
 	"gorm.io/gorm"
