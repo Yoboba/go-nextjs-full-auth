@@ -1,6 +1,10 @@
 # Blog Web Application (Block)
 A simple blog web application inspired by [Medium](https://medium.com).
 
+> **Author's Note**
+>
+> This is one of my practice projects to expand my knowledge of GO and overall > web application. Therefore, I apologize for any mistakes. 😅
+
 ## Tech Stack
 - **Languages Used:** GO, Typescript
 - **Frontend Frameworks:** React.js, Next.js, Shadcn/ui, TailwindCSS
